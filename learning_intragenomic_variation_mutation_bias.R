@@ -3,6 +3,9 @@
 library(seqinr)
 library(data.table)
 
+# Making a directory in R, use command 
+dir.create()
+
 # Checking content
 fasta_file <- "Data/Expression/candida_albicans.max.cds"
 fasta_content <- readLines(fasta_file)
@@ -29,11 +32,11 @@ median(data$Score) #calculate median
 sd(data$Score) #calculate standard deviation 
 ls -la #list all files w details 
 ls -a #list all files including hidden ones 
-
 #check structure of data 
 str(data) #structure
 colnames(data) #column names
 names(data) #list column names with index positions
+
 
 # DATA CLEANING 
 # Check for missing values
@@ -58,7 +61,16 @@ print(summary_data)
 
 
 # PERFORMING ROC ANALYSIS
+#help
+#needed libraries? 
+install.packages("ggplot2")
+install.packages("plotROC")
+library(plotROC)
+shiny_plotROC()
 
+#unzipping the .gz files maybe??
+#in bash: 
+gunzip mias_intragenomic_variation_mutation_bias/fasta/revisit_cds_data/*.gz
 
 
 # PLOTTING
@@ -88,6 +100,7 @@ ggplot(data_long, aes(x = Species, y = MaxValue)) +
   labs(title = "Maximum Expression Levels by Species",
        x = "Species", y = "Maximum Value")
 
+
 # INDIVIDUAL DATA SETS
 # install packages & load 
 library("pROC")
@@ -97,6 +110,7 @@ file_path <- "Data/Expression/Individual_datasets/candida_albicans.max.cds/SRR76
 #read into data frame 
 data <- read.delim(file_path, header = TRUE, sep = "\t")
 
+
 # CREATING A SYMLINK 
 # in the bash terminal, navigate to the directory where you would like the symlink to be located. 
 cd /repositories/mias_intragenomic_variation_mutation_bias/fasta
@@ -105,5 +119,10 @@ ln -s /~/revisit_Cope-and-Shah_2022_yeast-analysis/data/cds
 # check to confirm that the link was created successfully 
 ls -l 
 
+
 # ENTERING AND EXITING PYTHON
 exit() #to leave 
+
+
+
+

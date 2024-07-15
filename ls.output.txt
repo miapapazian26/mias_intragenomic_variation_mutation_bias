@@ -1,0 +1,65 @@
+-rw-r--r--  1 miapapazian  staff   3.2K Jun 10 13:56 README.md
+-rw-r--r--  1 miapapazian  staff    10K Jun 10 13:56 ctg_leu.txt
+-rw-r--r--  1 miapapazian  staff   3.8K Jun 10 13:56 ctg_ser.txt
+-rw-r--r--  1 miapapazian  staff    72K Jun 10 13:56 predicting_phi.Rmd
+-rw-r--r--  1 miapapazian  staff   877B Jun 10 20:38 mias_intragenomic_variation_mutation_bias.Rmd
+-rw-r--r--  1 miapapazian  staff   955B Jun 24 12:17 roc_analysis.py
+-rw-r--r--  1 miapapazian  staff   2.4K Jun 25 10:03 roc_analysis_bash_revisit.R
+-rw-r--r--  1 miapapazian  staff     0B Jun 25 19:58 sortFile.txt
+-rw-r--r--@ 1 miapapazian  staff   3.3K Jun 28 12:59 learning_intragenomic_variation_mutation_bias.R
+-rwxr-xr-x  1 miapapazian  staff   337B Jul  2 11:09 runRoc_parallel.sh
+-rw-r--r--@ 1 miapapazian  staff   205B Jul  3 11:17 mias_intragenomic_variation_mutation_bias.Rproj
+
+Data:
+total 88
+drwxr-xr-x  51 miapapazian  staff   1.6K Jun 10 13:56 Bottom5_phi
+drwxr-xr-x  52 miapapazian  staff   1.6K Jun 10 13:56 Expression
+drwxr-xr-x  51 miapapazian  staff   1.6K Jun 10 13:56 GC
+drwxr-xr-x   3 miapapazian  staff    96B Jun 10 13:56 Orthologs
+drwxr-xr-x  51 miapapazian  staff   1.6K Jun 10 13:56 Top5_phi
+-rw-r--r--   1 miapapazian  staff    19K Jun 10 13:56 clades.txt
+drwxr-xr-x   4 miapapazian  staff   128B Jun 10 13:56 gff
+drwxr-xr-x  49 miapapazian  staff   1.5K Jun 10 13:56 gtf
+-rw-r--r--   1 miapapazian  staff    22K Jun 10 13:56 tree_with_cds_labels.nwk
+
+Figures:
+total 24152
+-rw-r--r--@ 1 miapapazian  staff   2.6M Jun 10 13:56 Figure_1.pdf
+-rw-r--r--  1 miapapazian  staff   7.3M Jun 10 13:56 Figure_2.pdf
+-rw-r--r--  1 miapapazian  staff    68K Jun 10 13:56 Figure_3.pdf
+-rw-r--r--  1 miapapazian  staff    22K Jun 10 13:56 Figure_4.pdf
+-rw-r--r--  1 miapapazian  staff    12K Jun 10 13:56 Figure_5.pdf
+-rw-r--r--  1 miapapazian  staff   900K Jun 10 13:56 Supplementary_Figure_1.pdf
+-rw-r--r--  1 miapapazian  staff    65K Jun 10 13:56 Supplementary_Figure_10.pdf
+-rw-r--r--  1 miapapazian  staff    84K Jun 10 13:56 Supplementary_Figure_11.pdf
+-rw-r--r--  1 miapapazian  staff    49K Jun 10 13:56 Supplementary_Figure_12.pdf
+-rw-r--r--  1 miapapazian  staff   8.4K Jun 10 13:56 Supplementary_Figure_13.pdf
+-rw-r--r--  1 miapapazian  staff   8.3K Jun 10 13:56 Supplementary_Figure_14.pdf
+-rw-r--r--  1 miapapazian  staff    70K Jun 10 13:56 Supplementary_Figure_15.pdf
+-rw-r--r--  1 miapapazian  staff    75K Jun 10 13:56 Supplementary_Figure_16.pdf
+-rw-r--r--  1 miapapazian  staff    24K Jun 10 13:56 Supplementary_Figure_2.pdf
+-rw-r--r--  1 miapapazian  staff    46K Jun 10 13:56 Supplementary_Figure_3.pdf
+-rw-r--r--  1 miapapazian  staff    78K Jun 10 13:56 Supplementary_Figure_4.pdf
+-rw-r--r--  1 miapapazian  staff    89K Jun 10 13:56 Supplementary_Figure_5.pdf
+-rw-r--r--  1 miapapazian  staff    92K Jun 10 13:56 Supplementary_Figure_6.pdf
+-rw-r--r--  1 miapapazian  staff    89K Jun 10 13:56 Supplementary_Figure_7.pdf
+-rw-r--r--  1 miapapazian  staff    79K Jun 10 13:56 Supplementary_Figure_8.pdf
+-rw-r--r--  1 miapapazian  staff    68K Jun 10 13:56 Supplementary_Figure_9.pdf
+
+Scripts:
+total 40
+-rw-r--r--  1 miapapazian  staff   1.7K Jun 10 13:56 ca.R
+-rw-r--r--  1 miapapazian  staff    14K Jun 10 13:56 rocAnalysis.R
+
+Results:
+total 0
+drwxr-xr-x   51 miapapazian  staff   1.6K Jun 10 13:56 Clustering
+drwxr-xr-x  123 miapapazian  staff   3.8K Jun 10 13:56 Clustering_k_3
+drwxr-xr-x   53 miapapazian  staff   1.7K Jun 10 13:56 CodonW
+drwxr-xr-x   51 miapapazian  staff   1.6K Jun 10 13:56 VarMut
+drwxr-xr-x    7 miapapazian  staff   224B Jun 10 13:56 VarMut_3
+drwxr-xr-x   54 miapapazian  staff   1.7K Jul  3 11:47 ConstMut
+
+fasta:
+total 0
+lrwxr-xr-x  1 miapapazian  staff    82B Jun 28 12:54 revisit_cds_data -> /Users/miapapazian/repositories/revisit_Cope-and-Shah_2022_yeast-analysis/data/cds

@@ -1,0 +1,88 @@
+$adapt
+[1] 20
+
+$codon_table
+[1] 1
+
+$dEta
+NULL
+
+$dM
+NULL
+
+$development
+[1] FALSE
+
+$div
+[1] 0
+
+$est_csp
+[1] TRUE
+
+$est_hyp
+[1] TRUE
+
+$est_mix
+[1] FALSE
+
+$est_phi
+[1] TRUE
+
+$fix_dEta
+[1] FALSE
+
+$fix_dM
+[1] FALSE
+
+$init_sphi
+NULL
+
+$input
+[1] "mias_intragenomic_variation_mutation_bias/fasta/revisit_cds_data/candida_apicola.max.cds.gz"
+
+$max_num_runs
+[1] 2
+
+$mixture_assignment
+NULL
+
+$obs_phi
+NULL
+
+$output
+[1] "Results/ConstMut"
+
+$phi
+NULL
+
+$prior_from_gc
+NULL
+
+$restart_file
+NULL
+
+$samp
+[1] 20000
+
+$thin
+[1] 5
+
+$threads
+[1] 8
+
+$with_phi
+[1] FALSE
+
+Loading required package: Rcpp
+Loading required package: VGAM
+Loading required package: stats4
+Loading required package: splines
+Loading required package: mvtnorm
+ERROR: Error in Genome::readFasta: Can not open Fasta file mias_intragenomic_variation_mutation_bias/fasta/revisit_cds_data/candida_apicola.max.cds.gz
+Warning message:
+In dir.create(directory) : 'Results/ConstMut' already exists
+Error in genes[[i]] : subscript out of bounds
+Calls: initializeParameterObject ... ncol -> getObservedSynthesisRateSet -> lapply -> FUN
+In addition: Warning message:
+In max(gene.assignment) : no non-missing arguments to max; returning -Inf
+Execution halted
