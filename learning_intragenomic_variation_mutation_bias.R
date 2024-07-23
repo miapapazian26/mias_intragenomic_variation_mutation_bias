@@ -61,16 +61,40 @@ print(summary_data)
 
 
 # PERFORMING ROC ANALYSIS
-#help
-#needed libraries? 
-install.packages("ggplot2")
-install.packages("plotROC")
-library(plotROC)
-shiny_plotROC()
+#correct input from runRoc_parallel.sh script to address the correct genome
+#let the analysis finish running before continuing
 
-#unzipping the .gz files maybe??
+#must unzip the .gz files to ensure the input is recognized correctly.
 #in bash: 
 gunzip mias_intragenomic_variation_mutation_bias/fasta/revisit_cds_data/*.gz
+#use script runRoc_parallel and edit for which species needed to analyze 
+
+#LOOPING 
+
+
+
+
+
+#geweke score: a stats test used to asses the convergence of MCMC simulations
+#ensures that the posterior samples are representative of the true posterior distribution
+
+#PLAYING WITH AnaCoDa's PLOTTING FUNCTIONS 
+
+#analyzing a second genome 
+#saved all results to its own personal folder 
+
+#comparing parameter estimates 
+
+#handling orthologous genes? 
+
+#using blast 
+#types 
+blastn #compares a nucleotide query sequence against a nucleotide sequence database.
+blastp #compares an amino acid query sequence against a protein sequence database.
+blastx #compares a nucleotide query sequence translated in all reading frames against a protein sequence database.
+tblastn #compares a protein query sequence against a nucleotide sequence database translated in all reading frames.
+tblastx #compares the six-frame translations of a nucleotide query sequence against the six-frame translations of a nucleotide sequence database.
+
 
 
 # PLOTTING
@@ -123,6 +147,10 @@ ls -l
 # ENTERING AND EXITING PYTHON
 exit() #to leave 
 
-
+#MAKING COMMITS IN BASH
+#to make commits: 
+git status 
+git add . #adds all changes  
+git commit -m #makes commits and adds a message 
 
 

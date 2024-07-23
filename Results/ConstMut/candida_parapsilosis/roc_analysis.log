@@ -50,7 +50,7 @@ $obs_phi
 NULL
 
 $output
-[1] "Results/ConstMut/candida_parapsilosis_20240723_115052"
+[1] "Results/ConstMut/candida_parapsilosis"
 
 $phi
 NULL
@@ -80,7 +80,7 @@ Loading required package: splines
 Loading required package: mvtnorm
 Warning message:
 In dir.create(directory) :
-  'Results/ConstMut/candida_parapsilosis_20240723_115052' already exists
+  'Results/ConstMut/candida_parapsilosis' already exists
 Allowing divergence from initial conditions for 0 iterations.
 
 maxGrouping: 22
@@ -95,34 +95,34 @@ Begin saving restart file(s) at sample (iteration): 20 (100)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 20 (100)
-	 current logPosterior: -2.82978e+06 
-	 current logLikelihood: -2.82611e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.51248
+	 current logPosterior: -2.82963e+06 
+	 current logLikelihood: -2.82603e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.4923
 	 current stdDevSynthesisRate proposal width: 0.1
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.03
-	C:	0.15
-	D:	0.02
-	E:	0.08
-	F:	0.04
-	G:	0.04
-	H:	0.13
-	I:	0.07
-	K:	0.04
-	L:	0
-	N:	0.03
-	P:	0.01
-	Q:	0.11
-	R:	0.07
-	S:	0.01
-	T:	0.02
+	A:	0.05
+	C:	0.14
+	D:	0.03
+	E:	0.05
+	F:	0.05
+	G:	0.02
+	H:	0.04
+	I:	0.08
+	K:	0.05
+	L:	0.02
+	N:	0.02
+	P:	0.02
+	Q:	0.08
+	R:	0.02
+	S:	0.02
+	T:	0.03
 	V:	0.03
 	Y:	0.05
-	Z:	0.08
+	Z:	0.05
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
@@ -132,1013 +132,1431 @@ Begin saving restart file(s) at sample (iteration): 40 (200)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 40 (200)
-	 current logPosterior: -2.82797e+06 
-	 current logLikelihood: -2.82398e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.52752
+	 current logPosterior: -2.82762e+06 
+	 current logLikelihood: -2.82378e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.49756
 	 current stdDevSynthesisRate proposal width: 0.08
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.05
-	C:	0.2
-	D:	0.01
-	E:	0.05
+	A:	0.02
+	C:	0.16
+	D:	0.04
+	E:	0.07
 	F:	0.03
-	G:	0.03
-	H:	0.09
-	I:	0.06
-	K:	0.02
-	L:	0.13
-	N:	0.06
-	P:	0.04
-	Q:	0.12
-	R:	0.03
-	S:	0.04
-	T:	0.03
-	V:	0.06
-	Y:	0.02
-	Z:	0.09
+	G:	0.07
+	H:	0.07
+	I:	0.04
+	K:	0.07
+	L:	0.1
+	N:	0.01
+	P:	0.03
+	Q:	0.1
+	R:	0.05
+	S:	0.02
+	T:	0.02
+	V:	0.03
+	Y:	0.08
+	Z:	0.13
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
 	 acceptance rates below lower target of 0.225: 0
-	 acceptance rate above upper target of 0.325: 5280
+	 acceptance rate above upper target of 0.325: 5279
 Begin saving restart file(s) at sample (iteration): 60 (300)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 60 (300)
-	 current logPosterior: -2.82781e+06 
-	 current logLikelihood: -2.82336e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.48359
+	 current logPosterior: -2.82714e+06 
+	 current logLikelihood: -2.82315e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.47069
 	 current stdDevSynthesisRate proposal width: 0.064
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.02
-	C:	0.29
-	D:	0.03
-	E:	0.07
-	F:	0.06
-	G:	0.02
-	H:	0.12
-	I:	0.01
-	K:	0.03
-	L:	0.06
-	N:	0.06
-	P:	0.05
-	Q:	0.16
-	R:	0.04
-	S:	0.03
-	T:	0
+	A:	0.04
+	C:	0.25
+	D:	0.05
+	E:	0.02
+	F:	0.03
+	G:	0.06
+	H:	0.13
+	I:	0.02
+	K:	0.06
+	L:	0.01
+	N:	0.11
+	P:	0.03
+	Q:	0.14
+	R:	0.05
+	S:	0.02
+	T:	0.01
 	V:	0.02
-	Y:	0.1
-	Z:	0.15
+	Y:	0.13
+	Z:	0.23
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
 	 acceptance rates below lower target of 0.225: 0
-	 acceptance rate above upper target of 0.325: 5279
+	 acceptance rate above upper target of 0.325: 5277
 Begin saving restart file(s) at sample (iteration): 80 (400)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 80 (400)
-	 current logPosterior: -2.82756e+06 
-	 current logLikelihood: -2.82289e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.44609
+	 current logPosterior: -2.82697e+06 
+	 current logLikelihood: -2.82276e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.45022
 	 current stdDevSynthesisRate proposal width: 0.0512
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.01
-	C:	0.26
-	D:	0.08
-	E:	0.13
-	F:	0.16
-	G:	0.07
-	H:	0.15
-	I:	0.05
-	K:	0.06
-	L:	0.03
-	N:	0.2
-	P:	0.06
-	Q:	0.14
-	R:	0.06
-	S:	0
+	A:	0.02
+	C:	0.23
+	D:	0.16
+	E:	0.19
+	F:	0.26
+	G:	0.06
+	H:	0.24
+	I:	0.03
+	K:	0.15
+	L:	0.04
+	N:	0.17
+	P:	0.02
+	Q:	0.27
+	R:	0.03
+	S:	0.03
 	T:	0.01
-	V:	0
-	Y:	0.17
-	Z:	0.35
+	V:	0.05
+	Y:	0.19
+	Z:	0.16
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1
-	 acceptance rate above upper target of 0.325: 5271
+	 acceptance rates below lower target of 0.225: 0
+	 acceptance rate above upper target of 0.325: 5265
 Begin saving restart file(s) at sample (iteration): 100 (500)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 100 (500)
-	 current logPosterior: -2.82774e+06 
-	 current logLikelihood: -2.82265e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.32092
-	 current stdDevSynthesisRate proposal width: 0.0512
+	 current logPosterior: -2.82712e+06 
+	 current logLikelihood: -2.82274e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.40038
+	 current stdDevSynthesisRate proposal width: 0.04096
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.03
-	C:	0.18
-	D:	0.19
-	E:	0.21
-	F:	0.24
-	G:	0.03
-	H:	0.28
-	I:	0.09
-	K:	0.14
+	A:	0.04
+	C:	0.33
+	D:	0.18
+	E:	0.16
+	F:	0.19
+	G:	0.09
+	H:	0.35
+	I:	0.1
+	K:	0.12
 	L:	0.05
-	N:	0.22
-	P:	0.1
-	Q:	0.39
-	R:	0.09
-	S:	0.06
-	T:	0.13
-	V:	0.08
-	Y:	0.25
-	Z:	0.31
+	N:	0.17
+	P:	0.07
+	Q:	0.32
+	R:	0.05
+	S:	0.01
+	T:	0.06
+	V:	0.01
+	Y:	0.21
+	Z:	0.23
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1
+	 acceptance rates below lower target of 0.225: 7
 	 acceptance rate above upper target of 0.325: 5225
 Begin saving restart file(s) at sample (iteration): 120 (600)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 120 (600)
-	 current logPosterior: -2.82779e+06 
-	 current logLikelihood: -2.82248e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.25637
-	 current stdDevSynthesisRate proposal width: 0.0512
+	 current logPosterior: -2.82721e+06 
+	 current logLikelihood: -2.82263e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.33842
+	 current stdDevSynthesisRate proposal width: 0.04096
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.07
-	C:	0.21
-	D:	0.35
-	E:	0.28
-	F:	0.13
-	G:	0.09
-	H:	0.35
-	I:	0.17
-	K:	0.17
-	L:	0.02
-	N:	0.25
-	P:	0.13
-	Q:	0.32
-	R:	0.08
-	S:	0.06
-	T:	0.1
-	V:	0.1
-	Y:	0.2
-	Z:	0.34
+	A:	0.08
+	C:	0.35
+	D:	0.3
+	E:	0.31
+	F:	0.2
+	G:	0.04
+	H:	0.32
+	I:	0.07
+	K:	0.26
+	L:	0.04
+	N:	0.33
+	P:	0.19
+	Q:	0.17
+	R:	0.11
+	S:	0.07
+	T:	0.16
+	V:	0.07
+	Y:	0.28
+	Z:	0.24
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 15
-	 acceptance rate above upper target of 0.325: 5060
+	 acceptance rates below lower target of 0.225: 17
+	 acceptance rate above upper target of 0.325: 5071
 Begin saving restart file(s) at sample (iteration): 140 (700)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 140 (700)
-	 current logPosterior: -2.82794e+06 
-	 current logLikelihood: -2.82251e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.15341
-	 current stdDevSynthesisRate proposal width: 0.04096
+	 current logPosterior: -2.82733e+06 
+	 current logLikelihood: -2.82249e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.21673
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.17
+	C:	0.39
+	D:	0.19
+	E:	0.27
+	F:	0.18
+	G:	0.2
+	H:	0.35
+	I:	0.28
+	K:	0.23
+	L:	0.09
+	N:	0.31
+	P:	0.17
+	Q:	0.26
+	R:	0.18
+	S:	0.16
+	T:	0.11
+	V:	0.23
+	Y:	0.36
+	Z:	0.25
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 49
+	 acceptance rate above upper target of 0.325: 4848
+Begin saving restart file(s) at sample (iteration): 160 (800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 160 (800)
+	 current logPosterior: -2.8275e+06 
+	 current logLikelihood: -2.82243e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.15173
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.17
+	C:	0.36
+	D:	0.35
+	E:	0.3
+	F:	0.36
+	G:	0.19
+	H:	0.33
+	I:	0.22
+	K:	0.19
+	L:	0.07
+	N:	0.36
+	P:	0.21
+	Q:	0.26
+	R:	0.09
+	S:	0.24
+	T:	0.22
+	V:	0.21
+	Y:	0.45
+	Z:	0.32
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 115
+	 acceptance rate above upper target of 0.325: 4478
+Begin saving restart file(s) at sample (iteration): 180 (900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 180 (900)
+	 current logPosterior: -2.82757e+06 
+	 current logLikelihood: -2.82237e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.07479
+	 current stdDevSynthesisRate proposal width: 0.0393216
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.26
+	C:	0.4
+	D:	0.38
+	E:	0.24
+	F:	0.4
+	G:	0.28
+	H:	0.44
+	I:	0.25
+	K:	0.32
+	L:	0.21
+	N:	0.43
+	P:	0.22
+	Q:	0.28
+	R:	0.14
+	S:	0.27
+	T:	0.24
+	V:	0.18
+	Y:	0.34
+	Z:	0.34
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 233
+	 acceptance rate above upper target of 0.325: 4018
+Begin saving restart file(s) at sample (iteration): 200 (1000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 200 (1000)
+	 current logPosterior: -2.82749e+06 
+	 current logLikelihood: -2.8223e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.07889
+	 current stdDevSynthesisRate proposal width: 0.0314573
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.25
+	C:	0.44
+	D:	0.47
+	E:	0.26
+	F:	0.44
+	G:	0.11
+	H:	0.43
+	I:	0.31
+	K:	0.29
+	L:	0.07
+	N:	0.45
+	P:	0.25
+	Q:	0.35
+	R:	0.15
+	S:	0.16
+	T:	0.19
+	V:	0.24
+	Y:	0.35
+	Z:	0.37
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 357
+	 acceptance rate above upper target of 0.325: 3545
+Begin saving restart file(s) at sample (iteration): 220 (1100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 220 (1100)
+	 current logPosterior: -2.82753e+06 
+	 current logLikelihood: -2.82233e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.0306
+	 current stdDevSynthesisRate proposal width: 0.0314573
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.26
+	C:	0.35
+	D:	0.44
+	E:	0.29
+	F:	0.39
+	G:	0.29
+	H:	0.34
+	I:	0.31
+	K:	0.36
+	L:	0.28
+	N:	0.39
+	P:	0.14
+	Q:	0.37
+	R:	0.22
+	S:	0.42
+	T:	0.18
+	V:	0.2
+	Y:	0.51
+	Z:	0.39
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 474
+	 acceptance rate above upper target of 0.325: 2977
+Begin saving restart file(s) at sample (iteration): 240 (1200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 240 (1200)
+	 current logPosterior: -2.82758e+06 
+	 current logLikelihood: -2.8223e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.04256
+	 current stdDevSynthesisRate proposal width: 0.0314573
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.27
+	C:	0.52
+	D:	0.38
+	E:	0.21
+	F:	0.37
+	G:	0.29
+	H:	0.43
+	I:	0.26
+	K:	0.39
+	L:	0.2
+	N:	0.42
+	P:	0.3
+	Q:	0.43
+	R:	0.19
+	S:	0.28
+	T:	0.35
+	V:	0.25
+	Y:	0.33
+	Z:	0.4
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 661
+	 acceptance rate above upper target of 0.325: 2191
+Begin saving restart file(s) at sample (iteration): 260 (1300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 260 (1300)
+	 current logPosterior: -2.82752e+06 
+	 current logLikelihood: -2.82225e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.02792
+	 current stdDevSynthesisRate proposal width: 0.0314573
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.28
+	C:	0.45
+	D:	0.34
+	E:	0.29
+	F:	0.47
+	G:	0.29
+	H:	0.49
+	I:	0.28
+	K:	0.36
+	L:	0.25
+	N:	0.43
+	P:	0.37
+	Q:	0.44
+	R:	0.16
+	S:	0.27
+	T:	0.24
+	V:	0.19
+	Y:	0.36
+	Z:	0.39
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 848
+	 acceptance rate above upper target of 0.325: 1419
+Begin saving restart file(s) at sample (iteration): 280 (1400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 280 (1400)
+	 current logPosterior: -2.82761e+06 
+	 current logLikelihood: -2.82226e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.995579
+	 current stdDevSynthesisRate proposal width: 0.0377487
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.26
+	C:	0.41
+	D:	0.37
+	E:	0.35
+	F:	0.51
+	G:	0.3
+	H:	0.44
+	I:	0.35
+	K:	0.45
+	L:	0.24
+	N:	0.33
+	P:	0.2
+	Q:	0.43
+	R:	0.32
+	S:	0.33
+	T:	0.21
+	V:	0.28
+	Y:	0.58
+	Z:	0.47
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1181
+	 acceptance rate above upper target of 0.325: 951
+Begin saving restart file(s) at sample (iteration): 300 (1500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 300 (1500)
+	 current logPosterior: -2.82755e+06 
+	 current logLikelihood: -2.82225e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.960545
+	 current stdDevSynthesisRate proposal width: 0.0377487
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
 	A:	0.2
-	C:	0.42
-	D:	0.31
-	E:	0.27
-	F:	0.34
-	G:	0.17
-	H:	0.33
-	I:	0.12
-	K:	0.25
-	L:	0.04
-	N:	0.22
-	P:	0.21
-	Q:	0.33
-	R:	0.04
-	S:	0.15
-	T:	0.09
-	V:	0.16
-	Y:	0.41
-	Z:	0.36
+	C:	0.44
+	D:	0.53
+	E:	0.44
+	F:	0.46
+	G:	0.22
+	H:	0.38
+	I:	0.24
+	K:	0.48
+	L:	0.13
+	N:	0.48
+	P:	0.3
+	Q:	0.53
+	R:	0.31
+	S:	0.28
+	T:	0.22
+	V:	0.29
+	Y:	0.64
+	Z:	0.39
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 43
-	 acceptance rate above upper target of 0.325: 4823
-Begin saving restart file(s) at sample (iteration): 160 (800)
+	 acceptance rates below lower target of 0.225: 1239
+	 acceptance rate above upper target of 0.325: 857
+Begin saving restart file(s) at sample (iteration): 320 (1600)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 160 (800)
-	 current logPosterior: -2.82781e+06 
-	 current logLikelihood: -2.82234e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.10533
-	 current stdDevSynthesisRate proposal width: 0.04096
+Status at thinned sample (iteration): 320 (1600)
+	 current logPosterior: -2.82749e+06 
+	 current logLikelihood: -2.82226e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.986291
+	 current stdDevSynthesisRate proposal width: 0.0377487
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.24
-	C:	0.39
-	D:	0.38
-	E:	0.27
-	F:	0.3
-	G:	0.15
-	H:	0.49
-	I:	0.29
-	K:	0.41
-	L:	0.13
-	N:	0.32
-	P:	0.25
-	Q:	0.33
-	R:	0.14
-	S:	0.19
-	T:	0.14
-	V:	0.13
-	Y:	0.28
+	A:	0.26
+	C:	0.47
+	D:	0.47
+	E:	0.43
+	F:	0.43
+	G:	0.29
+	H:	0.43
+	I:	0.35
+	K:	0.51
+	L:	0.26
+	N:	0.38
+	P:	0.34
+	Q:	0.38
+	R:	0.32
+	S:	0.31
+	T:	0.23
+	V:	0.26
+	Y:	0.51
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1238
+	 acceptance rate above upper target of 0.325: 855
+Begin saving restart file(s) at sample (iteration): 340 (1700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 340 (1700)
+	 current logPosterior: -2.82747e+06 
+	 current logLikelihood: -2.82226e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.979056
+	 current stdDevSynthesisRate proposal width: 0.0452985
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.29
+	C:	0.43
+	D:	0.41
+	E:	0.46
+	F:	0.4
+	G:	0.21
+	H:	0.4
+	I:	0.23
+	K:	0.47
+	L:	0.18
+	N:	0.34
+	P:	0.31
+	Q:	0.28
+	R:	0.25
+	S:	0.21
+	T:	0.3
+	V:	0.17
+	Y:	0.52
+	Z:	0.44
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1172
+	 acceptance rate above upper target of 0.325: 975
+Begin saving restart file(s) at sample (iteration): 360 (1800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 360 (1800)
+	 current logPosterior: -2.82736e+06 
+	 current logLikelihood: -2.82221e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.97217
+	 current stdDevSynthesisRate proposal width: 0.0452985
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.3
+	C:	0.48
+	D:	0.46
+	E:	0.5
+	F:	0.5
+	G:	0.24
+	H:	0.51
+	I:	0.22
+	K:	0.54
+	L:	0.29
+	N:	0.53
+	P:	0.24
+	Q:	0.35
+	R:	0.29
+	S:	0.21
+	T:	0.34
+	V:	0.35
+	Y:	0.47
+	Z:	0.42
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1240
+	 acceptance rate above upper target of 0.325: 878
+Begin saving restart file(s) at sample (iteration): 380 (1900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 380 (1900)
+	 current logPosterior: -2.82735e+06 
+	 current logLikelihood: -2.82222e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.960722
+	 current stdDevSynthesisRate proposal width: 0.0452985
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.2
+	C:	0.54
+	D:	0.41
+	E:	0.47
+	F:	0.46
+	G:	0.25
+	H:	0.37
+	I:	0.34
+	K:	0.48
+	L:	0.29
+	N:	0.47
+	P:	0.31
+	Q:	0.38
+	R:	0.25
+	S:	0.22
+	T:	0.28
+	V:	0.23
+	Y:	0.5
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1307
+	 acceptance rate above upper target of 0.325: 814
+Begin saving restart file(s) at sample (iteration): 400 (2000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 400 (2000)
+	 current logPosterior: -2.8274e+06 
+	 current logLikelihood: -2.82221e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.975898
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.23
+	C:	0.44
+	D:	0.36
+	E:	0.4
+	F:	0.53
+	G:	0.28
+	H:	0.56
+	I:	0.36
+	K:	0.42
+	L:	0.32
+	N:	0.38
+	P:	0.21
+	Q:	0.34
+	R:	0.3
+	S:	0.28
+	T:	0.23
+	V:	0.3
+	Y:	0.55
+	Z:	0.3
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1162
+	 acceptance rate above upper target of 0.325: 946
+Begin saving restart file(s) at sample (iteration): 420 (2100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 420 (2100)
+	 current logPosterior: -2.82747e+06 
+	 current logLikelihood: -2.82228e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.957909
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.31
+	C:	0.5
+	D:	0.46
+	E:	0.44
+	F:	0.38
+	G:	0.26
+	H:	0.43
+	I:	0.41
+	K:	0.42
+	L:	0.3
+	N:	0.39
+	P:	0.36
+	Q:	0.46
+	R:	0.18
+	S:	0.36
+	T:	0.27
+	V:	0.37
+	Y:	0.34
+	Z:	0.28
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1167
+	 acceptance rate above upper target of 0.325: 937
+Begin saving restart file(s) at sample (iteration): 440 (2200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 440 (2200)
+	 current logPosterior: -2.82739e+06 
+	 current logLikelihood: -2.82219e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.939279
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.25
+	C:	0.48
+	D:	0.43
+	E:	0.43
+	F:	0.48
+	G:	0.25
+	H:	0.5
+	I:	0.32
+	K:	0.45
+	L:	0.38
+	N:	0.55
+	P:	0.28
+	Q:	0.47
+	R:	0.17
+	S:	0.28
+	T:	0.22
+	V:	0.32
+	Y:	0.41
+	Z:	0.43
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1268
+	 acceptance rate above upper target of 0.325: 874
+Begin saving restart file(s) at sample (iteration): 460 (2300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 460 (2300)
+	 current logPosterior: -2.8274e+06 
+	 current logLikelihood: -2.82225e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.965703
+	 current stdDevSynthesisRate proposal width: 0.0434865
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.39
+	C:	0.44
+	D:	0.41
+	E:	0.48
+	F:	0.34
+	G:	0.28
+	H:	0.45
+	I:	0.31
+	K:	0.5
+	L:	0.18
+	N:	0.52
+	P:	0.32
+	Q:	0.38
+	R:	0.28
+	S:	0.32
+	T:	0.29
+	V:	0.31
+	Y:	0.48
+	Z:	0.37
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1181
+	 acceptance rate above upper target of 0.325: 877
+Begin saving restart file(s) at sample (iteration): 480 (2400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 480 (2400)
+	 current logPosterior: -2.8274e+06 
+	 current logLikelihood: -2.82223e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.956398
+	 current stdDevSynthesisRate proposal width: 0.0347892
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.25
+	C:	0.37
+	D:	0.33
+	E:	0.4
+	F:	0.46
+	G:	0.22
+	H:	0.45
+	I:	0.34
+	K:	0.48
+	L:	0.16
+	N:	0.48
+	P:	0.27
+	Q:	0.48
+	R:	0.21
+	S:	0.24
+	T:	0.32
+	V:	0.25
+	Y:	0.46
 	Z:	0.4
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 134
-	 acceptance rate above upper target of 0.325: 4506
-Begin saving restart file(s) at sample (iteration): 180 (900)
+	 acceptance rates below lower target of 0.225: 983
+	 acceptance rate above upper target of 0.325: 1130
+Begin saving restart file(s) at sample (iteration): 500 (2500)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 180 (900)
-	 current logPosterior: -2.82792e+06 
-	 current logLikelihood: -2.82241e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.05752
-	 current stdDevSynthesisRate proposal width: 0.04096
+Status at thinned sample (iteration): 500 (2500)
+	 current logPosterior: -2.82738e+06 
+	 current logLikelihood: -2.82224e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.956869
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.2
+	C:	0.44
+	D:	0.48
+	E:	0.41
+	F:	0.44
+	G:	0.31
+	H:	0.49
+	I:	0.31
+	K:	0.47
+	L:	0.23
+	N:	0.4
+	P:	0.21
+	Q:	0.52
+	R:	0.23
+	S:	0.21
+	T:	0.29
+	V:	0.36
+	Y:	0.54
+	Z:	0.31
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1089
+	 acceptance rate above upper target of 0.325: 1013
+Begin saving restart file(s) at sample (iteration): 520 (2600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 520 (2600)
+	 current logPosterior: -2.82732e+06 
+	 current logLikelihood: -2.82224e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.992631
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.23
+	C:	0.45
+	D:	0.47
+	E:	0.4
+	F:	0.49
+	G:	0.22
+	H:	0.5
+	I:	0.37
+	K:	0.43
+	L:	0.21
+	N:	0.4
+	P:	0.26
+	Q:	0.5
+	R:	0.27
+	S:	0.35
+	T:	0.32
+	V:	0.28
+	Y:	0.47
+	Z:	0.42
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1142
+	 acceptance rate above upper target of 0.325: 974
+Begin saving restart file(s) at sample (iteration): 540 (2700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 540 (2700)
+	 current logPosterior: -2.82735e+06 
+	 current logLikelihood: -2.8223e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.975059
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.21
+	C:	0.36
+	D:	0.45
+	E:	0.52
+	F:	0.55
+	G:	0.31
+	H:	0.41
+	I:	0.33
+	K:	0.42
+	L:	0.27
+	N:	0.46
+	P:	0.29
+	Q:	0.35
+	R:	0.31
+	S:	0.3
+	T:	0.28
+	V:	0.28
+	Y:	0.53
+	Z:	0.42
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1075
+	 acceptance rate above upper target of 0.325: 1029
+Begin saving restart file(s) at sample (iteration): 560 (2800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 560 (2800)
+	 current logPosterior: -2.82731e+06 
+	 current logLikelihood: -2.82224e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.988005
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.21
+	C:	0.4
+	D:	0.51
+	E:	0.48
+	F:	0.48
+	G:	0.32
+	H:	0.59
+	I:	0.38
+	K:	0.36
+	L:	0.19
+	N:	0.52
+	P:	0.22
+	Q:	0.41
+	R:	0.25
+	S:	0.18
+	T:	0.2
+	V:	0.29
+	Y:	0.42
+	Z:	0.34
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 889
+	 acceptance rate above upper target of 0.325: 1189
+Begin saving restart file(s) at sample (iteration): 580 (2900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 580 (2900)
+	 current logPosterior: -2.82732e+06 
+	 current logLikelihood: -2.82218e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.99081
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.2
+	C:	0.4
+	D:	0.52
+	E:	0.4
+	F:	0.48
+	G:	0.3
+	H:	0.42
+	I:	0.4
+	K:	0.46
+	L:	0.19
+	N:	0.43
+	P:	0.3
+	Q:	0.46
+	R:	0.33
+	S:	0.37
+	T:	0.28
+	V:	0.29
+	Y:	0.51
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 972
+	 acceptance rate above upper target of 0.325: 1178
+Begin saving restart file(s) at sample (iteration): 600 (3000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 600 (3000)
+	 current logPosterior: -2.82734e+06 
+	 current logLikelihood: -2.82223e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.996741
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.2
+	C:	0.31
+	D:	0.52
+	E:	0.55
+	F:	0.51
+	G:	0.37
+	H:	0.45
+	I:	0.36
+	K:	0.47
+	L:	0.26
+	N:	0.48
+	P:	0.32
+	Q:	0.46
+	R:	0.33
+	S:	0.28
+	T:	0.28
+	V:	0.27
+	Y:	0.51
+	Z:	0.33
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1038
+	 acceptance rate above upper target of 0.325: 1113
+Begin saving restart file(s) at sample (iteration): 620 (3100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 620 (3100)
+	 current logPosterior: -2.82734e+06 
+	 current logLikelihood: -2.82221e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 1.0017
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.29
+	C:	0.37
+	D:	0.57
+	E:	0.45
+	F:	0.48
+	G:	0.31
+	H:	0.45
+	I:	0.22
+	K:	0.5
+	L:	0.18
+	N:	0.37
+	P:	0.24
+	Q:	0.42
+	R:	0.32
+	S:	0.31
+	T:	0.31
+	V:	0.3
+	Y:	0.54
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 913
+	 acceptance rate above upper target of 0.325: 1180
+Begin saving restart file(s) at sample (iteration): 640 (3200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 640 (3200)
+	 current logPosterior: -2.82739e+06 
+	 current logLikelihood: -2.8223e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.977254
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.23
+	C:	0.48
+	D:	0.44
+	E:	0.4
+	F:	0.43
+	G:	0.4
+	H:	0.53
+	I:	0.3
+	K:	0.49
+	L:	0.19
+	N:	0.38
+	P:	0.33
+	Q:	0.37
+	R:	0.24
+	S:	0.27
+	T:	0.3
+	V:	0.31
+	Y:	0.51
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1042
+	 acceptance rate above upper target of 0.325: 1070
+Begin saving restart file(s) at sample (iteration): 660 (3300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 660 (3300)
+	 current logPosterior: -2.82715e+06 
+	 current logLikelihood: -2.82209e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.968809
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.19
+	C:	0.36
+	D:	0.36
+	E:	0.37
+	F:	0.53
+	G:	0.42
+	H:	0.5
+	I:	0.36
+	K:	0.37
+	L:	0.17
+	N:	0.38
+	P:	0.27
+	Q:	0.45
+	R:	0.21
+	S:	0.25
+	T:	0.31
+	V:	0.36
+	Y:	0.45
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1036
+	 acceptance rate above upper target of 0.325: 1001
+Begin saving restart file(s) at sample (iteration): 680 (3400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 680 (3400)
+	 current logPosterior: -2.8273e+06 
+	 current logLikelihood: -2.82224e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.948279
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.23
+	C:	0.36
+	D:	0.51
+	E:	0.51
+	F:	0.46
+	G:	0.32
+	H:	0.45
+	I:	0.33
+	K:	0.49
+	L:	0.21
+	N:	0.52
+	P:	0.28
+	Q:	0.46
+	R:	0.28
+	S:	0.26
+	T:	0.27
+	V:	0.27
+	Y:	0.51
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1192
+	 acceptance rate above upper target of 0.325: 909
+Begin saving restart file(s) at sample (iteration): 700 (3500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 700 (3500)
+	 current logPosterior: -2.82716e+06 
+	 current logLikelihood: -2.8221e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.93551
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.21
+	C:	0.4
+	D:	0.48
+	E:	0.41
+	F:	0.51
+	G:	0.26
+	H:	0.46
+	I:	0.34
+	K:	0.54
+	L:	0.17
+	N:	0.51
+	P:	0.29
+	Q:	0.46
+	R:	0.27
+	S:	0.37
+	T:	0.27
+	V:	0.36
+	Y:	0.47
+	Z:	0.33
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1288
+	 acceptance rate above upper target of 0.325: 845
+Begin saving restart file(s) at sample (iteration): 720 (3600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 720 (3600)
+	 current logPosterior: -2.82721e+06 
+	 current logLikelihood: -2.82216e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.949058
+	 current stdDevSynthesisRate proposal width: 0.0417471
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.25
+	C:	0.41
+	D:	0.5
+	E:	0.45
+	F:	0.44
+	G:	0.36
+	H:	0.47
+	I:	0.33
+	K:	0.42
+	L:	0.26
+	N:	0.49
+	P:	0.35
+	Q:	0.43
+	R:	0.38
+	S:	0.19
+	T:	0.27
+	V:	0.28
+	Y:	0.42
+	Z:	0.45
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1383
+	 acceptance rate above upper target of 0.325: 777
+Begin saving restart file(s) at sample (iteration): 740 (3700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 740 (3700)
+	 current logPosterior: -2.82726e+06 
+	 current logLikelihood: -2.82223e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.917765
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
 	A:	0.16
-	C:	0.44
-	D:	0.25
-	E:	0.27
-	F:	0.34
-	G:	0.26
-	H:	0.43
-	I:	0.35
-	K:	0.34
-	L:	0.14
-	N:	0.29
-	P:	0.24
-	Q:	0.42
-	R:	0.14
-	S:	0.25
-	T:	0.24
-	V:	0.24
-	Y:	0.37
-	Z:	0.42
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 245
-	 acceptance rate above upper target of 0.325: 3994
-Begin saving restart file(s) at sample (iteration): 200 (1000)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 200 (1000)
-	 current logPosterior: -2.8279e+06 
-	 current logLikelihood: -2.82235e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.01056
-	 current stdDevSynthesisRate proposal width: 0.04096
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.21
-	C:	0.46
-	D:	0.37
-	E:	0.34
-	F:	0.51
-	G:	0.24
-	H:	0.51
-	I:	0.39
-	K:	0.42
-	L:	0.12
-	N:	0.36
-	P:	0.15
-	Q:	0.53
-	R:	0.19
-	S:	0.27
-	T:	0.29
-	V:	0.38
-	Y:	0.37
-	Z:	0.47
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 375
-	 acceptance rate above upper target of 0.325: 3498
-Begin saving restart file(s) at sample (iteration): 220 (1100)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 220 (1100)
-	 current logPosterior: -2.8278e+06 
-	 current logLikelihood: -2.82227e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.05036
-	 current stdDevSynthesisRate proposal width: 0.04096
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.22
-	C:	0.42
+	C:	0.49
 	D:	0.36
-	E:	0.28
-	F:	0.33
-	G:	0.25
-	H:	0.45
-	I:	0.26
-	K:	0.44
-	L:	0.22
-	N:	0.38
-	P:	0.35
-	Q:	0.43
-	R:	0.2
-	S:	0.32
-	T:	0.24
-	V:	0.33
-	Y:	0.48
-	Z:	0.39
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 432
-	 acceptance rate above upper target of 0.325: 3035
-Begin saving restart file(s) at sample (iteration): 240 (1200)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 240 (1200)
-	 current logPosterior: -2.8278e+06 
-	 current logLikelihood: -2.82235e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.04976
-	 current stdDevSynthesisRate proposal width: 0.04096
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.33
-	C:	0.44
-	D:	0.45
-	E:	0.31
-	F:	0.57
-	G:	0.36
-	H:	0.42
-	I:	0.32
-	K:	0.35
-	L:	0.3
-	N:	0.42
-	P:	0.24
-	Q:	0.4
-	R:	0.15
-	S:	0.26
-	T:	0.25
-	V:	0.32
-	Y:	0.31
-	Z:	0.41
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 544
-	 acceptance rate above upper target of 0.325: 2458
-Begin saving restart file(s) at sample (iteration): 260 (1300)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 260 (1300)
-	 current logPosterior: -2.82784e+06 
-	 current logLikelihood: -2.82236e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.0262
-	 current stdDevSynthesisRate proposal width: 0.032768
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.28
-	C:	0.44
-	D:	0.47
-	E:	0.29
-	F:	0.5
-	G:	0.3
+	E:	0.52
+	F:	0.58
+	G:	0.28
 	H:	0.55
-	I:	0.25
-	K:	0.51
-	L:	0.27
-	N:	0.41
-	P:	0.37
-	Q:	0.45
-	R:	0.31
-	S:	0.24
-	T:	0.15
-	V:	0.21
-	Y:	0.46
-	Z:	0.44
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 826
-	 acceptance rate above upper target of 0.325: 1510
-Begin saving restart file(s) at sample (iteration): 280 (1400)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 280 (1400)
-	 current logPosterior: -2.8278e+06 
-	 current logLikelihood: -2.82229e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.01002
-	 current stdDevSynthesisRate proposal width: 0.032768
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.21
-	C:	0.39
-	D:	0.42
-	E:	0.28
-	F:	0.42
-	G:	0.21
-	H:	0.38
-	I:	0.27
-	K:	0.53
-	L:	0.23
-	N:	0.46
-	P:	0.28
-	Q:	0.42
-	R:	0.26
-	S:	0.32
-	T:	0.44
-	V:	0.25
-	Y:	0.55
-	Z:	0.4
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1020
-	 acceptance rate above upper target of 0.325: 1087
-Begin saving restart file(s) at sample (iteration): 300 (1500)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 300 (1500)
-	 current logPosterior: -2.82777e+06 
-	 current logLikelihood: -2.8223e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.01348
-	 current stdDevSynthesisRate proposal width: 0.032768
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.24
-	C:	0.44
-	D:	0.45
-	E:	0.36
-	F:	0.51
-	G:	0.37
-	H:	0.53
-	I:	0.24
-	K:	0.5
-	L:	0.28
-	N:	0.51
-	P:	0.32
-	Q:	0.54
-	R:	0.29
-	S:	0.25
-	T:	0.31
-	V:	0.35
-	Y:	0.5
-	Z:	0.44
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1178
-	 acceptance rate above upper target of 0.325: 944
-Begin saving restart file(s) at sample (iteration): 320 (1600)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 320 (1600)
-	 current logPosterior: -2.82766e+06 
-	 current logLikelihood: -2.82231e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 1.01761
-	 current stdDevSynthesisRate proposal width: 0.0393216
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.31
-	C:	0.35
-	D:	0.42
-	E:	0.35
-	F:	0.35
-	G:	0.16
-	H:	0.44
-	I:	0.3
-	K:	0.44
-	L:	0.3
-	N:	0.4
-	P:	0.2
-	Q:	0.36
-	R:	0.36
-	S:	0.24
-	T:	0.15
-	V:	0.29
-	Y:	0.42
-	Z:	0.43
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1157
-	 acceptance rate above upper target of 0.325: 947
-Begin saving restart file(s) at sample (iteration): 340 (1700)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 340 (1700)
-	 current logPosterior: -2.82772e+06 
-	 current logLikelihood: -2.82236e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.997117
-	 current stdDevSynthesisRate proposal width: 0.0393216
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.24
-	C:	0.44
-	D:	0.37
-	E:	0.5
-	F:	0.42
-	G:	0.27
-	H:	0.44
-	I:	0.37
-	K:	0.48
-	L:	0.22
-	N:	0.47
-	P:	0.28
-	Q:	0.47
-	R:	0.27
-	S:	0.27
-	T:	0.32
-	V:	0.31
-	Y:	0.49
-	Z:	0.43
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1118
-	 acceptance rate above upper target of 0.325: 969
-Begin saving restart file(s) at sample (iteration): 360 (1800)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 360 (1800)
-	 current logPosterior: -2.82766e+06 
-	 current logLikelihood: -2.82228e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.973437
-	 current stdDevSynthesisRate proposal width: 0.0393216
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.38
-	C:	0.4
-	D:	0.55
-	E:	0.42
-	F:	0.5
-	G:	0.27
-	H:	0.59
-	I:	0.2
-	K:	0.32
-	L:	0.28
-	N:	0.48
-	P:	0.28
-	Q:	0.34
-	R:	0.32
-	S:	0.25
+	I:	0.4
+	K:	0.34
+	L:	0.16
+	N:	0.49
+	P:	0.29
+	Q:	0.43
+	R:	0.3
+	S:	0.36
 	T:	0.31
 	V:	0.23
-	Y:	0.53
-	Z:	0.56
+	Y:	0.35
+	Z:	0.32
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1304
-	 acceptance rate above upper target of 0.325: 858
-Begin saving restart file(s) at sample (iteration): 380 (1900)
+	 acceptance rates below lower target of 0.225: 1351
+	 acceptance rate above upper target of 0.325: 790
+Begin saving restart file(s) at sample (iteration): 760 (3800)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 380 (1900)
-	 current logPosterior: -2.82763e+06 
-	 current logLikelihood: -2.82231e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.975363
-	 current stdDevSynthesisRate proposal width: 0.0393216
+Status at thinned sample (iteration): 760 (3800)
+	 current logPosterior: -2.82714e+06 
+	 current logLikelihood: -2.82217e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.941316
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
 	A:	0.19
-	C:	0.42
-	D:	0.42
-	E:	0.47
-	F:	0.57
-	G:	0.27
-	H:	0.56
-	I:	0.35
-	K:	0.3
-	L:	0.28
-	N:	0.39
-	P:	0.27
-	Q:	0.41
-	R:	0.21
-	S:	0.21
-	T:	0.3
-	V:	0.15
-	Y:	0.47
-	Z:	0.45
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1212
-	 acceptance rate above upper target of 0.325: 916
-Begin saving restart file(s) at sample (iteration): 400 (2000)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 400 (2000)
-	 current logPosterior: -2.82757e+06 
-	 current logLikelihood: -2.82236e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.97775
-	 current stdDevSynthesisRate proposal width: 0.0471859
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.26
-	C:	0.38
-	D:	0.41
-	E:	0.41
-	F:	0.39
-	G:	0.24
+	C:	0.37
+	D:	0.51
+	E:	0.5
+	F:	0.48
+	G:	0.39
 	H:	0.48
-	I:	0.43
-	K:	0.4
-	L:	0.35
-	N:	0.42
-	P:	0.32
-	Q:	0.41
-	R:	0.27
-	S:	0.33
-	T:	0.33
-	V:	0.34
-	Y:	0.38
-	Z:	0.45
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1356
-	 acceptance rate above upper target of 0.325: 767
-Begin saving restart file(s) at sample (iteration): 420 (2100)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 420 (2100)
-	 current logPosterior: -2.82758e+06 
-	 current logLikelihood: -2.82234e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.964527
-	 current stdDevSynthesisRate proposal width: 0.0377487
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.19
-	C:	0.42
-	D:	0.44
-	E:	0.47
-	F:	0.36
-	G:	0.26
-	H:	0.59
-	I:	0.33
-	K:	0.32
-	L:	0.2
-	N:	0.48
-	P:	0.35
+	I:	0.29
+	K:	0.42
+	L:	0.26
+	N:	0.46
+	P:	0.36
 	Q:	0.42
-	R:	0.3
-	S:	0.28
-	T:	0.25
-	V:	0.27
-	Y:	0.37
-	Z:	0.39
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1280
-	 acceptance rate above upper target of 0.325: 802
-Begin saving restart file(s) at sample (iteration): 440 (2200)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 440 (2200)
-	 current logPosterior: -2.82754e+06 
-	 current logLikelihood: -2.82236e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.978239
-	 current stdDevSynthesisRate proposal width: 0.0377487
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.22
-	C:	0.51
-	D:	0.39
-	E:	0.41
-	F:	0.4
-	G:	0.35
-	H:	0.47
-	I:	0.35
-	K:	0.41
-	L:	0.23
-	N:	0.45
-	P:	0.29
-	Q:	0.41
 	R:	0.2
-	S:	0.26
-	T:	0.21
-	V:	0.26
-	Y:	0.56
+	S:	0.28
+	T:	0.28
+	V:	0.3
+	Y:	0.45
 	Z:	0.36
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1223
-	 acceptance rate above upper target of 0.325: 912
-Begin saving restart file(s) at sample (iteration): 460 (2300)
+	 acceptance rates below lower target of 0.225: 1495
+	 acceptance rate above upper target of 0.325: 713
+Begin saving restart file(s) at sample (iteration): 780 (3900)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 460 (2300)
-	 current logPosterior: -2.8275e+06 
-	 current logLikelihood: -2.82232e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.962309
-	 current stdDevSynthesisRate proposal width: 0.0377487
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.3
-	C:	0.38
-	D:	0.42
-	E:	0.48
-	F:	0.37
-	G:	0.28
-	H:	0.48
-	I:	0.36
-	K:	0.43
-	L:	0.3
-	N:	0.48
-	P:	0.24
-	Q:	0.38
-	R:	0.2
-	S:	0.24
-	T:	0.28
-	V:	0.28
-	Y:	0.52
-	Z:	0.42
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1151
-	 acceptance rate above upper target of 0.325: 980
-Begin saving restart file(s) at sample (iteration): 480 (2400)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 480 (2400)
-	 current logPosterior: -2.82752e+06 
-	 current logLikelihood: -2.82228e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.968563
-	 current stdDevSynthesisRate proposal width: 0.030199
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.27
-	C:	0.4
-	D:	0.41
-	E:	0.35
-	F:	0.42
-	G:	0.29
-	H:	0.48
-	I:	0.42
-	K:	0.37
-	L:	0.19
-	N:	0.48
-	P:	0.35
-	Q:	0.41
-	R:	0.19
-	S:	0.38
-	T:	0.31
-	V:	0.27
-	Y:	0.51
-	Z:	0.43
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1134
-	 acceptance rate above upper target of 0.325: 948
-Begin saving restart file(s) at sample (iteration): 500 (2500)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 500 (2500)
-	 current logPosterior: -2.8275e+06 
-	 current logLikelihood: -2.82235e+06
-	 current stdDevSynthesisRate estimate for selection category 0: 0.986262
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.32
-	C:	0.45
-	D:	0.44
-	E:	0.45
-	F:	0.46
-	G:	0.26
-	H:	0.39
-	I:	0.33
-	K:	0.49
-	L:	0.24
-	N:	0.41
-	P:	0.34
-	Q:	0.35
-	R:	0.12
-	S:	0.27
-	T:	0.35
-	V:	0.29
-	Y:	0.55
-	Z:	0.39
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1157
-	 acceptance rate above upper target of 0.325: 941
-Begin saving restart file(s) at sample (iteration): 520 (2600)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 520 (2600)
-	 current logPosterior: -2.82735e+06 
-	 current logLikelihood: -2.82219e+06
+Status at thinned sample (iteration): 780 (3900)
+	 current logPosterior: -2.82715e+06 
+	 current logLikelihood: -2.82218e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.980898
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.26
-	C:	0.41
-	D:	0.4
-	E:	0.44
-	F:	0.42
-	G:	0.34
-	H:	0.38
-	I:	0.36
-	K:	0.49
-	L:	0.26
-	N:	0.48
-	P:	0.43
-	Q:	0.43
-	R:	0.23
-	S:	0.25
-	T:	0.18
-	V:	0.21
-	Y:	0.38
-	Z:	0.48
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1205
-	 acceptance rate above upper target of 0.325: 933
-Begin saving restart file(s) at sample (iteration): 540 (2700)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 540 (2700)
-	 current logPosterior: -2.82737e+06 
-	 current logLikelihood: -2.82224e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.929711
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.31
-	C:	0.35
-	D:	0.41
-	E:	0.4
-	F:	0.54
-	G:	0.23
-	H:	0.39
-	I:	0.35
-	K:	0.32
-	L:	0.24
-	N:	0.41
-	P:	0.2
-	Q:	0.37
-	R:	0.31
-	S:	0.21
-	T:	0.23
-	V:	0.19
-	Y:	0.49
-	Z:	0.37
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1303
-	 acceptance rate above upper target of 0.325: 786
-Begin saving restart file(s) at sample (iteration): 560 (2800)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 560 (2800)
-	 current logPosterior: -2.82744e+06 
-	 current logLikelihood: -2.82232e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.929194
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.930913
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
 	A:	0.24
-	C:	0.51
-	D:	0.45
-	E:	0.4
-	F:	0.48
-	G:	0.31
-	H:	0.49
-	I:	0.34
-	K:	0.33
-	L:	0.18
-	N:	0.49
-	P:	0.25
-	Q:	0.43
-	R:	0.29
-	S:	0.29
-	T:	0.17
-	V:	0.27
-	Y:	0.47
-	Z:	0.42
+	C:	0.4
+	D:	0.31
+	E:	0.45
+	F:	0.52
+	G:	0.38
+	H:	0.51
+	I:	0.23
+	K:	0.38
+	L:	0.16
+	N:	0.48
+	P:	0.28
+	Q:	0.4
+	R:	0.24
+	S:	0.33
+	T:	0.28
+	V:	0.37
+	Y:	0.49
+	Z:	0.43
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1429
-	 acceptance rate above upper target of 0.325: 750
-Begin saving restart file(s) at sample (iteration): 580 (2900)
+	 acceptance rates below lower target of 0.225: 1522
+	 acceptance rate above upper target of 0.325: 691
+Begin saving restart file(s) at sample (iteration): 800 (4000)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 580 (2900)
-	 current logPosterior: -2.82727e+06 
-	 current logLikelihood: -2.82219e+06
+Status at thinned sample (iteration): 800 (4000)
+	 current logPosterior: -2.8271e+06 
+	 current logLikelihood: -2.8222e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.971937
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.926532
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
@@ -1146,828 +1564,410 @@ Adjustment range: < 0.225 or > 0.325
 	AA	Acc.Rat
 	A:	0.21
 	C:	0.37
-	D:	0.43
-	E:	0.4
-	F:	0.46
-	G:	0.27
-	H:	0.45
-	I:	0.32
-	K:	0.42
-	L:	0.18
-	N:	0.58
-	P:	0.3
-	Q:	0.49
-	R:	0.23
-	S:	0.24
-	T:	0.25
-	V:	0.31
-	Y:	0.46
-	Z:	0.46
+	D:	0.46
+	E:	0.46
+	F:	0.56
+	G:	0.28
+	H:	0.4
+	I:	0.26
+	K:	0.36
+	L:	0.12
+	N:	0.49
+	P:	0.23
+	Q:	0.4
+	R:	0.27
+	S:	0.37
+	T:	0.27
+	V:	0.27
+	Y:	0.43
+	Z:	0.53
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1439
-	 acceptance rate above upper target of 0.325: 748
-Begin saving restart file(s) at sample (iteration): 600 (3000)
+	 acceptance rates below lower target of 0.225: 1452
+	 acceptance rate above upper target of 0.325: 746
+Begin saving restart file(s) at sample (iteration): 820 (4100)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 600 (3000)
-	 current logPosterior: -2.82732e+06 
-	 current logLikelihood: -2.82224e+06
+Status at thinned sample (iteration): 820 (4100)
+	 current logPosterior: -2.82715e+06 
+	 current logLikelihood: -2.82215e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.941085
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.928089
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
 	A:	0.25
-	C:	0.41
-	D:	0.53
-	E:	0.32
-	F:	0.45
-	G:	0.29
-	H:	0.45
-	I:	0.35
-	K:	0.48
-	L:	0.19
-	N:	0.35
-	P:	0.21
-	Q:	0.36
-	R:	0.31
-	S:	0.24
-	T:	0.23
-	V:	0.26
-	Y:	0.43
-	Z:	0.45
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1352
-	 acceptance rate above upper target of 0.325: 762
-Begin saving restart file(s) at sample (iteration): 620 (3100)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 620 (3100)
-	 current logPosterior: -2.82727e+06 
-	 current logLikelihood: -2.82222e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.967547
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.28
-	C:	0.41
-	D:	0.5
-	E:	0.47
-	F:	0.41
-	G:	0.26
-	H:	0.45
-	I:	0.37
-	K:	0.45
-	L:	0.19
-	N:	0.49
-	P:	0.25
-	Q:	0.38
-	R:	0.29
-	S:	0.28
-	T:	0.29
-	V:	0.28
-	Y:	0.45
-	Z:	0.48
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1373
-	 acceptance rate above upper target of 0.325: 781
-Begin saving restart file(s) at sample (iteration): 640 (3200)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 640 (3200)
-	 current logPosterior: -2.82715e+06 
-	 current logLikelihood: -2.82222e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.974145
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.28
-	C:	0.41
-	D:	0.59
-	E:	0.37
-	F:	0.47
-	G:	0.28
-	H:	0.49
-	I:	0.43
-	K:	0.44
-	L:	0.27
-	N:	0.46
-	P:	0.28
-	Q:	0.38
-	R:	0.31
-	S:	0.3
-	T:	0.26
-	V:	0.23
-	Y:	0.49
-	Z:	0.49
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1273
-	 acceptance rate above upper target of 0.325: 822
-Begin saving restart file(s) at sample (iteration): 660 (3300)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 660 (3300)
-	 current logPosterior: -2.82715e+06 
-	 current logLikelihood: -2.82219e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.987267
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.32
-	C:	0.4
-	D:	0.44
-	E:	0.4
-	F:	0.31
-	G:	0.22
-	H:	0.48
-	I:	0.39
-	K:	0.49
-	L:	0.28
-	N:	0.42
-	P:	0.33
-	Q:	0.52
-	R:	0.4
-	S:	0.25
-	T:	0.18
-	V:	0.25
-	Y:	0.53
-	Z:	0.48
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1259
-	 acceptance rate above upper target of 0.325: 836
-Begin saving restart file(s) at sample (iteration): 680 (3400)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 680 (3400)
-	 current logPosterior: -2.82732e+06 
-	 current logLikelihood: -2.82232e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.986683
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.22
-	C:	0.45
-	D:	0.41
-	E:	0.41
-	F:	0.43
-	G:	0.27
+	C:	0.37
+	D:	0.38
+	E:	0.5
+	F:	0.48
+	G:	0.3
 	H:	0.46
-	I:	0.51
-	K:	0.36
-	L:	0.33
-	N:	0.56
-	P:	0.26
-	Q:	0.44
-	R:	0.22
-	S:	0.35
-	T:	0.22
-	V:	0.24
-	Y:	0.38
-	Z:	0.41
+	I:	0.38
+	K:	0.41
+	L:	0.18
+	N:	0.43
+	P:	0.25
+	Q:	0.47
+	R:	0.34
+	S:	0.28
+	T:	0.33
+	V:	0.27
+	Y:	0.45
+	Z:	0.39
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1275
-	 acceptance rate above upper target of 0.325: 821
-Begin saving restart file(s) at sample (iteration): 700 (3500)
+	 acceptance rates below lower target of 0.225: 1421
+	 acceptance rate above upper target of 0.325: 749
+Begin saving restart file(s) at sample (iteration): 840 (4200)
 Begin writing restart file
 End writing restart file
-Status at thinned sample (iteration): 700 (3500)
-	 current logPosterior: -2.82724e+06 
-	 current logLikelihood: -2.82222e+06
+Status at thinned sample (iteration): 840 (4200)
+	 current logPosterior: -2.82719e+06 
+	 current logLikelihood: -2.82226e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.970802
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.960223
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
 	A:	0.2
-	C:	0.34
-	D:	0.53
-	E:	0.35
-	F:	0.45
-	G:	0.29
-	H:	0.45
-	I:	0.32
-	K:	0.39
-	L:	0.31
-	N:	0.49
-	P:	0.33
-	Q:	0.39
-	R:	0.29
-	S:	0.3
-	T:	0.21
-	V:	0.24
-	Y:	0.46
-	Z:	0.44
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1224
-	 acceptance rate above upper target of 0.325: 808
-Begin saving restart file(s) at sample (iteration): 720 (3600)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 720 (3600)
-	 current logPosterior: -2.82716e+06 
-	 current logLikelihood: -2.8222e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.955947
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.19
-	C:	0.43
-	D:	0.35
-	E:	0.43
-	F:	0.43
-	G:	0.25
-	H:	0.45
-	I:	0.26
-	K:	0.56
-	L:	0.28
-	N:	0.47
-	P:	0.31
-	Q:	0.48
-	R:	0.25
-	S:	0.15
-	T:	0.19
-	V:	0.36
-	Y:	0.56
-	Z:	0.52
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1292
-	 acceptance rate above upper target of 0.325: 842
-Begin saving restart file(s) at sample (iteration): 740 (3700)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 740 (3700)
-	 current logPosterior: -2.82725e+06 
-	 current logLikelihood: -2.8222e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.962217
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.24
-	C:	0.47
-	D:	0.49
-	E:	0.39
-	F:	0.42
-	G:	0.3
-	H:	0.46
-	I:	0.39
-	K:	0.53
-	L:	0.23
-	N:	0.5
-	P:	0.33
-	Q:	0.45
-	R:	0.32
-	S:	0.25
-	T:	0.27
-	V:	0.28
-	Y:	0.55
-	Z:	0.51
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1378
-	 acceptance rate above upper target of 0.325: 759
-Begin saving restart file(s) at sample (iteration): 760 (3800)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 760 (3800)
-	 current logPosterior: -2.82728e+06 
-	 current logLikelihood: -2.82227e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.924101
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.3
-	C:	0.43
-	D:	0.45
-	E:	0.51
-	F:	0.4
-	G:	0.3
-	H:	0.42
-	I:	0.43
-	K:	0.38
-	L:	0.21
-	N:	0.5
-	P:	0.29
-	Q:	0.36
-	R:	0.3
-	S:	0.39
-	T:	0.31
-	V:	0.2
-	Y:	0.47
-	Z:	0.53
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1435
-	 acceptance rate above upper target of 0.325: 744
-Begin saving restart file(s) at sample (iteration): 780 (3900)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 780 (3900)
-	 current logPosterior: -2.8273e+06 
-	 current logLikelihood: -2.82224e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.928032
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.21
-	C:	0.34
-	D:	0.45
-	E:	0.38
-	F:	0.53
-	G:	0.28
-	H:	0.43
-	I:	0.42
-	K:	0.37
-	L:	0.2
-	N:	0.5
-	P:	0.33
-	Q:	0.47
-	R:	0.2
-	S:	0.28
-	T:	0.27
-	V:	0.27
-	Y:	0.49
-	Z:	0.51
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1545
-	 acceptance rate above upper target of 0.325: 675
-Begin saving restart file(s) at sample (iteration): 800 (4000)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 800 (4000)
-	 current logPosterior: -2.82727e+06 
-	 current logLikelihood: -2.82222e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.947389
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.27
 	C:	0.35
-	D:	0.44
-	E:	0.4
-	F:	0.45
-	G:	0.43
-	H:	0.46
-	I:	0.42
-	K:	0.42
-	L:	0.22
-	N:	0.46
-	P:	0.27
-	Q:	0.47
-	R:	0.26
-	S:	0.37
-	T:	0.29
-	V:	0.32
-	Y:	0.47
-	Z:	0.34
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1386
-	 acceptance rate above upper target of 0.325: 714
-Begin saving restart file(s) at sample (iteration): 820 (4100)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 820 (4100)
-	 current logPosterior: -2.82728e+06 
-	 current logLikelihood: -2.82231e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.935424
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.25
-	C:	0.46
-	D:	0.5
-	E:	0.37
-	F:	0.51
-	G:	0.24
-	H:	0.55
-	I:	0.38
-	K:	0.51
+	D:	0.42
+	E:	0.43
+	F:	0.52
+	G:	0.38
+	H:	0.5
+	I:	0.28
+	K:	0.41
 	L:	0.28
 	N:	0.48
-	P:	0.33
-	Q:	0.43
-	R:	0.29
-	S:	0.27
-	T:	0.19
-	V:	0.32
-	Y:	0.43
-	Z:	0.43
+	P:	0.24
+	Q:	0.39
+	R:	0.36
+	S:	0.26
+	T:	0.28
+	V:	0.23
+	Y:	0.39
+	Z:	0.4
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1533
-	 acceptance rate above upper target of 0.325: 696
-Begin saving restart file(s) at sample (iteration): 840 (4200)
-Begin writing restart file
-End writing restart file
-Status at thinned sample (iteration): 840 (4200)
-	 current logPosterior: -2.82721e+06 
-	 current logLikelihood: -2.82218e+06
-No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.940482
-	 current stdDevSynthesisRate proposal width: 0.0362388
-	 current Mixture element probability for element 0: 1
-Acceptance rates for Codon Specific Parameters
-Target range: 0.175-0.375 
-Adjustment range: < 0.225 or > 0.325 
-	AA	Acc.Rat
-	A:	0.33
-	C:	0.34
-	D:	0.46
-	E:	0.55
-	F:	0.41
-	G:	0.22
-	H:	0.48
-	I:	0.39
-	K:	0.41
-	L:	0.18
-	N:	0.39
-	P:	0.31
-	Q:	0.45
-	R:	0.26
-	S:	0.25
-	T:	0.23
-	V:	0.32
-	Y:	0.54
-	Z:	0.5
-Acceptance rate for synthesis rate:
-Target range: 0.225-0.325 
-Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1464
-	 acceptance rate above upper target of 0.325: 708
+	 acceptance rates below lower target of 0.225: 1403
+	 acceptance rate above upper target of 0.325: 762
 Begin saving restart file(s) at sample (iteration): 860 (4300)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 860 (4300)
-	 current logPosterior: -2.82714e+06 
-	 current logLikelihood: -2.82217e+06
+	 current logPosterior: -2.82712e+06 
+	 current logLikelihood: -2.82219e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.940843
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.916018
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.26
-	C:	0.31
-	D:	0.45
-	E:	0.42
-	F:	0.45
-	G:	0.2
-	H:	0.49
-	I:	0.44
-	K:	0.44
-	L:	0.24
-	N:	0.41
-	P:	0.24
-	Q:	0.4
-	R:	0.27
+	A:	0.2
+	C:	0.33
+	D:	0.36
+	E:	0.51
+	F:	0.52
+	G:	0.3
+	H:	0.53
+	I:	0.27
+	K:	0.38
+	L:	0.15
+	N:	0.4
+	P:	0.29
+	Q:	0.36
+	R:	0.22
 	S:	0.27
-	T:	0.3
-	V:	0.26
-	Y:	0.46
-	Z:	0.54
+	T:	0.23
+	V:	0.17
+	Y:	0.44
+	Z:	0.4
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1471
-	 acceptance rate above upper target of 0.325: 686
+	 acceptance rates below lower target of 0.225: 1379
+	 acceptance rate above upper target of 0.325: 816
 Begin saving restart file(s) at sample (iteration): 880 (4400)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 880 (4400)
-	 current logPosterior: -2.82719e+06 
-	 current logLikelihood: -2.82229e+06
+	 current logPosterior: -2.82725e+06 
+	 current logLikelihood: -2.82225e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.938039
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.950157
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.26
-	C:	0.37
-	D:	0.49
-	E:	0.46
-	F:	0.58
-	G:	0.24
-	H:	0.41
-	I:	0.36
-	K:	0.42
-	L:	0.23
-	N:	0.43
+	A:	0.23
+	C:	0.4
+	D:	0.45
+	E:	0.44
+	F:	0.5
+	G:	0.37
+	H:	0.57
+	I:	0.34
+	K:	0.46
+	L:	0.2
+	N:	0.45
 	P:	0.33
-	Q:	0.35
-	R:	0.2
-	S:	0.33
-	T:	0.22
-	V:	0.38
-	Y:	0.41
-	Z:	0.51
+	Q:	0.54
+	R:	0.31
+	S:	0.21
+	T:	0.21
+	V:	0.23
+	Y:	0.55
+	Z:	0.44
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1552
-	 acceptance rate above upper target of 0.325: 683
+	 acceptance rates below lower target of 0.225: 1421
+	 acceptance rate above upper target of 0.325: 757
 Begin saving restart file(s) at sample (iteration): 900 (4500)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 900 (4500)
-	 current logPosterior: -2.82709e+06 
-	 current logLikelihood: -2.82211e+06
+	 current logPosterior: -2.82727e+06 
+	 current logLikelihood: -2.82231e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.928639
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.962369
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.28
-	C:	0.36
-	D:	0.43
-	E:	0.42
-	F:	0.43
-	G:	0.33
-	H:	0.34
-	I:	0.36
-	K:	0.47
-	L:	0.13
-	N:	0.48
-	P:	0.38
-	Q:	0.44
-	R:	0.28
-	S:	0.26
-	T:	0.26
-	V:	0.25
-	Y:	0.49
-	Z:	0.5
+	A:	0.22
+	C:	0.51
+	D:	0.48
+	E:	0.44
+	F:	0.5
+	G:	0.32
+	H:	0.44
+	I:	0.33
+	K:	0.41
+	L:	0.28
+	N:	0.51
+	P:	0.24
+	Q:	0.42
+	R:	0.25
+	S:	0.2
+	T:	0.23
+	V:	0.24
+	Y:	0.47
+	Z:	0.38
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1677
-	 acceptance rate above upper target of 0.325: 595
+	 acceptance rates below lower target of 0.225: 1287
+	 acceptance rate above upper target of 0.325: 788
 Begin saving restart file(s) at sample (iteration): 920 (4600)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 920 (4600)
-	 current logPosterior: -2.82709e+06 
-	 current logLikelihood: -2.82216e+06
+	 current logPosterior: -2.8271e+06 
+	 current logLikelihood: -2.82224e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.917916
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.956692
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.28
-	C:	0.4
-	D:	0.36
-	E:	0.44
-	F:	0.38
-	G:	0.34
-	H:	0.5
-	I:	0.4
-	K:	0.38
-	L:	0.32
-	N:	0.59
-	P:	0.31
-	Q:	0.47
-	R:	0.3
-	S:	0.27
+	A:	0.14
+	C:	0.31
+	D:	0.47
+	E:	0.51
+	F:	0.39
+	G:	0.33
+	H:	0.45
+	I:	0.34
+	K:	0.39
+	L:	0.13
+	N:	0.48
+	P:	0.32
+	Q:	0.46
+	R:	0.2
+	S:	0.4
 	T:	0.2
-	V:	0.25
-	Y:	0.49
-	Z:	0.31
+	V:	0.26
+	Y:	0.52
+	Z:	0.39
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1715
-	 acceptance rate above upper target of 0.325: 557
+	 acceptance rates below lower target of 0.225: 1302
+	 acceptance rate above upper target of 0.325: 851
 Begin saving restart file(s) at sample (iteration): 940 (4700)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 940 (4700)
-	 current logPosterior: -2.82712e+06 
-	 current logLikelihood: -2.82221e+06
+	 current logPosterior: -2.8271e+06 
+	 current logLikelihood: -2.82222e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.922256
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.968815
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.31
-	C:	0.41
-	D:	0.47
-	E:	0.35
-	F:	0.46
-	G:	0.33
-	H:	0.34
-	I:	0.43
-	K:	0.39
-	L:	0.19
-	N:	0.5
-	P:	0.3
-	Q:	0.44
-	R:	0.29
-	S:	0.28
-	T:	0.25
-	V:	0.33
-	Y:	0.47
+	A:	0.2
+	C:	0.36
+	D:	0.44
+	E:	0.41
+	F:	0.47
+	G:	0.39
+	H:	0.46
+	I:	0.25
+	K:	0.49
+	L:	0.15
+	N:	0.55
+	P:	0.34
+	Q:	0.32
+	R:	0.36
+	S:	0.3
+	T:	0.29
+	V:	0.31
+	Y:	0.46
 	Z:	0.43
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1681
-	 acceptance rate above upper target of 0.325: 599
+	 acceptance rates below lower target of 0.225: 1346
+	 acceptance rate above upper target of 0.325: 826
 Begin saving restart file(s) at sample (iteration): 960 (4800)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 960 (4800)
-	 current logPosterior: -2.82715e+06 
-	 current logLikelihood: -2.82219e+06
+	 current logPosterior: -2.82718e+06 
+	 current logLikelihood: -2.82226e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.902153
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.963261
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.34
-	C:	0.37
-	D:	0.43
-	E:	0.36
-	F:	0.46
-	G:	0.29
-	H:	0.53
-	I:	0.37
-	K:	0.5
-	L:	0.32
-	N:	0.6
-	P:	0.28
-	Q:	0.49
-	R:	0.25
-	S:	0.27
-	T:	0.25
-	V:	0.27
-	Y:	0.48
-	Z:	0.46
+	A:	0.2
+	C:	0.47
+	D:	0.44
+	E:	0.48
+	F:	0.45
+	G:	0.37
+	H:	0.56
+	I:	0.28
+	K:	0.43
+	L:	0.28
+	N:	0.47
+	P:	0.38
+	Q:	0.31
+	R:	0.26
+	S:	0.21
+	T:	0.27
+	V:	0.28
+	Y:	0.42
+	Z:	0.41
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1706
-	 acceptance rate above upper target of 0.325: 590
+	 acceptance rates below lower target of 0.225: 1216
+	 acceptance rate above upper target of 0.325: 920
 Begin saving restart file(s) at sample (iteration): 980 (4900)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 980 (4900)
-	 current logPosterior: -2.82706e+06 
-	 current logLikelihood: -2.82217e+06
+	 current logPosterior: -2.82708e+06 
+	 current logLikelihood: -2.82215e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.920261
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.973853
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.3
-	C:	0.46
-	D:	0.47
-	E:	0.39
-	F:	0.44
-	G:	0.28
-	H:	0.42
-	I:	0.4
-	K:	0.4
+	A:	0.29
+	C:	0.37
+	D:	0.51
+	E:	0.6
+	F:	0.4
+	G:	0.34
+	H:	0.41
+	I:	0.25
+	K:	0.33
 	L:	0.21
-	N:	0.56
-	P:	0.41
-	Q:	0.41
-	R:	0.27
-	S:	0.27
-	T:	0.25
-	V:	0.2
-	Y:	0.44
+	N:	0.53
+	P:	0.21
+	Q:	0.49
+	R:	0.35
+	S:	0.35
+	T:	0.23
+	V:	0.31
+	Y:	0.49
 	Z:	0.46
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1814
-	 acceptance rate above upper target of 0.325: 528
+	 acceptance rates below lower target of 0.225: 1180
+	 acceptance rate above upper target of 0.325: 865
 Begin saving restart file(s) at sample (iteration): 1000 (5000)
 Begin writing restart file
 End writing restart file
 Status at thinned sample (iteration): 1000 (5000)
-	 current logPosterior: -2.82714e+06 
-	 current logLikelihood: -2.82214e+06
+	 current logPosterior: -2.82707e+06 
+	 current logLikelihood: -2.82213e+06
 No longer adapting
-	 current stdDevSynthesisRate estimate for selection category 0: 0.912719
-	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current stdDevSynthesisRate estimate for selection category 0: 0.943245
+	 current stdDevSynthesisRate proposal width: 0.0417471
 	 current Mixture element probability for element 0: 1
 Acceptance rates for Codon Specific Parameters
 Target range: 0.175-0.375 
 Adjustment range: < 0.225 or > 0.325 
 	AA	Acc.Rat
-	A:	0.27
-	C:	0.38
-	D:	0.45
-	E:	0.35
-	F:	0.49
-	G:	0.32
+	A:	0.2
+	C:	0.41
+	D:	0.48
+	E:	0.5
+	F:	0.54
+	G:	0.31
 	H:	0.5
-	I:	0.4
-	K:	0.36
-	L:	0.22
-	N:	0.52
+	I:	0.41
+	K:	0.37
+	L:	0.24
+	N:	0.49
 	P:	0.33
-	Q:	0.47
-	R:	0.22
-	S:	0.33
-	T:	0.22
-	V:	0.37
-	Y:	0.49
-	Z:	0.5
+	Q:	0.33
+	R:	0.26
+	S:	0.28
+	T:	0.3
+	V:	0.35
+	Y:	0.51
+	Z:	0.47
 Acceptance rate for synthesis rate:
 Target range: 0.225-0.325 
 Adjustment range: < 0.225 or > 0.325 
-	 acceptance rates below lower target of 0.225: 1724
-	 acceptance rate above upper target of 0.325: 586
+	 acceptance rates below lower target of 0.225: 1381
+	 acceptance rate above upper target of 0.325: 842
 ##################################################
-Geweke Score after 5000 iterations: 0.947731
+Geweke Score after 5000 iterations: 0.963708
 ##################################################
 Stopping run based on convergence after 5000 iterations
 
@@ -1976,5 +1976,5 @@ End writing restart file
 leaving MCMC loop
 Error in loadNamespace(x) : there is no package called ‘Hmisc’
 Calls: plot ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-In addition: There were 27 warnings (use warnings() to see them)
+In addition: There were 32 warnings (use warnings() to see them)
 Execution halted
