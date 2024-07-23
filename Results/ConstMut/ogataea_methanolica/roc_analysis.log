@@ -1,0 +1,3534 @@
+$adapt
+[1] 20
+
+$codon_table
+[1] 1
+
+$dEta
+NULL
+
+$dM
+NULL
+
+$development
+[1] FALSE
+
+$div
+[1] 0
+
+$est_csp
+[1] TRUE
+
+$est_hyp
+[1] TRUE
+
+$est_mix
+[1] FALSE
+
+$est_phi
+[1] TRUE
+
+$fix_dEta
+[1] FALSE
+
+$fix_dM
+[1] FALSE
+
+$init_sphi
+NULL
+
+$input
+[1] "fasta/revisit_cds_data/ogataea_methanolica.max.cds"
+
+$max_num_runs
+[1] 2
+
+$mixture_assignment
+NULL
+
+$obs_phi
+NULL
+
+$output
+[1] "Results/ConstMut/ogataea_methanolica"
+
+$phi
+NULL
+
+$prior_from_gc
+NULL
+
+$restart_file
+NULL
+
+$samp
+[1] 1000
+
+$thin
+[1] 5
+
+$threads
+[1] 8
+
+$with_phi
+[1] FALSE
+
+Loading required package: Rcpp
+Loading required package: VGAM
+Loading required package: stats4
+Loading required package: splines
+Loading required package: mvtnorm
+WARNING: Codon RCG not recognized!
+ Codon will be ignored!
+WARNING: Codon YCA not recognized!
+ Codon will be ignored!
+WARNING: Codon ARC not recognized!
+ Codon will be ignored!
+WARNING: Codon TGR not recognized!
+ Codon will be ignored!
+WARNING: Codon AYA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316310|dbj|BCKW01000027.1|-processed-gene-0.0-mRNA-1 
+Bad codons found!
+WARNING: Codon CRA not recognized!
+ Codon will be ignored!
+WARNING: Codon CAK not recognized!
+ Codon will be ignored!
+WARNING: Codon ATM not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316312|dbj|BCKW01000025.1|-processed-gene-0.1-mRNA-1 
+Bad codons found!
+WARNING: Codon TCS not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316314|dbj|BCKW01000023.1|-processed-gene-0.0-mRNA-1 
+Bad codons found!
+WARNING: Codon KTA not recognized!
+ Codon will be ignored!
+WARNING: Codon TYT not recognized!
+ Codon will be ignored!
+WARNING: Codon TCR not recognized!
+ Codon will be ignored!
+WARNING: Codon ATY not recognized!
+ Codon will be ignored!
+WARNING: Codon ACR not recognized!
+ Codon will be ignored!
+WARNING: Codon ATY not recognized!
+ Codon will be ignored!
+WARNING: Codon GTK not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon ACW not recognized!
+ Codon will be ignored!
+WARNING: Codon GYC not recognized!
+ Codon will be ignored!
+WARNING: Codon CTW not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316315|dbj|BCKW01000022.1|-processed-gene-0.2-mRNA-1 
+Bad codons found!
+WARNING: Codon CCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon CCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TCY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316317|dbj|BCKW01000020.1|-processed-gene-0.9-mRNA-1 
+Bad codons found!
+WARNING: Codon ACM not recognized!
+ Codon will be ignored!
+WARNING: Codon GGS not recognized!
+ Codon will be ignored!
+WARNING: Codon AMA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316317|dbj|BCKW01000020.1|-processed-gene-0.8-mRNA-1 
+Bad codons found!
+WARNING: Codon WTC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316317|dbj|BCKW01000020.1|-processed-gene-0.10-mRNA-1 
+Bad codons found!
+WARNING: Codon CAS not recognized!
+ Codon will be ignored!
+WARNING: Codon ARS not recognized!
+ Codon will be ignored!
+WARNING: Codon SGT not recognized!
+ Codon will be ignored!
+WARNING: Codon ARR not recognized!
+ Codon will be ignored!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGK not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon AYT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316318|dbj|BCKW01000019.1|-processed-gene-0.10-mRNA-1 
+Bad codons found!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon RCG not recognized!
+ Codon will be ignored!
+WARNING: Codon CAY not recognized!
+ Codon will be ignored!
+WARNING: Codon MAT not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon CAM not recognized!
+ Codon will be ignored!
+WARNING: Codon ARY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316318|dbj|BCKW01000019.1|-processed-gene-0.11-mRNA-1 
+Bad codons found!
+WARNING: Codon RGA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316319|dbj|BCKW01000018.1|-processed-gene-0.1-mRNA-1 
+Bad codons found!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GRA not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GCW not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon AYC not recognized!
+ Codon will be ignored!
+WARNING: Codon GTS not recognized!
+ Codon will be ignored!
+WARNING: Codon AGY not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon ARC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316319|dbj|BCKW01000018.1|-processed-gene-0.4-mRNA-1 
+Bad codons found!
+WARNING: Codon GYG not recognized!
+ Codon will be ignored!
+WARNING: Codon TRG not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316320|dbj|BCKW01000017.1|-processed-gene-0.16-mRNA-1 
+Bad codons found!
+WARNING: Codon CKC not recognized!
+ Codon will be ignored!
+WARNING: Codon YCT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RAC not recognized!
+ Codon will be ignored!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon RAT not recognized!
+ Codon will be ignored!
+WARNING: Codon ARA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316320|dbj|BCKW01000017.1|-processed-gene-0.20-mRNA-1 
+Bad codons found!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GRA not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GCW not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon AYC not recognized!
+ Codon will be ignored!
+WARNING: Codon GTS not recognized!
+ Codon will be ignored!
+WARNING: Codon AGY not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon ARC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316320|dbj|BCKW01000017.1|-processed-gene-0.22-mRNA-1 
+Bad codons found!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon RCS not recognized!
+ Codon will be ignored!
+WARNING: Codon TCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon RCT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon ACR not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon YTG not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316322|dbj|BCKW01000015.1|-augustus-gene-0.0-mRNA-1 
+Bad codons found!
+WARNING: Codon GAY not recognized!
+ Codon will be ignored!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Codon AGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon RAA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.19-mRNA-1 
+Bad codons found!
+WARNING: Codon ACM not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GRG not recognized!
+ Codon will be ignored!
+WARNING: Codon TCW not recognized!
+ Codon will be ignored!
+WARNING: Codon GYR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.27-mRNA-1 
+Bad codons found!
+WARNING: Codon KAG not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.28-mRNA-1 
+Bad codons found!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Codon AMC not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon YTG not recognized!
+ Codon will be ignored!
+WARNING: Codon CGR not recognized!
+ Codon will be ignored!
+WARNING: Codon GGS not recognized!
+ Codon will be ignored!
+WARNING: Codon GYA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon RAA not recognized!
+ Codon will be ignored!
+WARNING: Codon CSA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.21-mRNA-1 
+Bad codons found!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TRG not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GYC not recognized!
+ Codon will be ignored!
+WARNING: Codon CAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGR not recognized!
+ Codon will be ignored!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Codon GTK not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.29-mRNA-1 
+Bad codons found!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon TCW not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GWC not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TRA not recognized!
+ Codon will be ignored!
+WARNING: Codon TKG not recognized!
+ Codon will be ignored!
+WARNING: Codon CAM not recognized!
+ Codon will be ignored!
+WARNING: Codon GYA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.22-mRNA-1 
+Bad codons found!
+WARNING: Codon AYT not recognized!
+ Codon will be ignored!
+WARNING: Codon CCS not recognized!
+ Codon will be ignored!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon MAA not recognized!
+ Codon will be ignored!
+WARNING: Codon ARC not recognized!
+ Codon will be ignored!
+WARNING: Codon TRC not recognized!
+ Codon will be ignored!
+WARNING: Codon GGR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RSS not recognized!
+ Codon will be ignored!
+WARNING: Codon RAA not recognized!
+ Codon will be ignored!
+WARNING: Codon RSY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316322|dbj|BCKW01000015.1|-augustus-gene-0.1-mRNA-1 
+Bad codons found!
+WARNING: Codon YCA not recognized!
+ Codon will be ignored!
+WARNING: Codon GAY not recognized!
+ Codon will be ignored!
+WARNING: Codon CCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAM not recognized!
+ Codon will be ignored!
+WARNING: Codon ARA not recognized!
+ Codon will be ignored!
+WARNING: Codon MTT not recognized!
+ Codon will be ignored!
+WARNING: Codon CAR not recognized!
+ Codon will be ignored!
+WARNING: Codon ACK not recognized!
+ Codon will be ignored!
+WARNING: Codon GCW not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.23-mRNA-1 
+Bad codons found!
+WARNING: Codon YTG not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.32-mRNA-1 
+Bad codons found!
+WARNING: Codon KCC not recognized!
+ Codon will be ignored!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Codon RCT not recognized!
+ Codon will be ignored!
+WARNING: Codon CRT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316322|dbj|BCKW01000015.1|-processed-gene-0.33-mRNA-1 
+Bad codons found!
+WARNING: Codon TCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGM not recognized!
+ Codon will be ignored!
+WARNING: Codon ACW not recognized!
+ Codon will be ignored!
+WARNING: Codon GCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon RCT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon ATY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon ACR not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon YTG not recognized!
+ Codon will be ignored!
+WARNING: Codon YTG not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon CCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TCR not recognized!
+ Codon will be ignored!
+WARNING: Codon KCT not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316323|dbj|BCKW01000014.1|-augustus-gene-0.29-mRNA-1 
+Bad codons found!
+WARNING: Codon ACM not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GRG not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316323|dbj|BCKW01000014.1|-processed-gene-0.7-mRNA-1 
+Bad codons found!
+WARNING: Codon AYC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316323|dbj|BCKW01000014.1|-processed-gene-0.0-mRNA-1 
+Bad codons found!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TRG not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GYC not recognized!
+ Codon will be ignored!
+WARNING: Codon CAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGR not recognized!
+ Codon will be ignored!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Codon GTK not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316323|dbj|BCKW01000014.1|-processed-gene-0.9-mRNA-1 
+Bad codons found!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316323|dbj|BCKW01000014.1|-processed-gene-0.2-mRNA-1 
+Bad codons found!
+WARNING: Codon ARA not recognized!
+ Codon will be ignored!
+WARNING: Codon MTT not recognized!
+ Codon will be ignored!
+WARNING: Codon CAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316323|dbj|BCKW01000014.1|-processed-gene-0.3-mRNA-1 
+Bad codons found!
+WARNING: Codon KCC not recognized!
+ Codon will be ignored!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316323|dbj|BCKW01000014.1|-processed-gene-0.13-mRNA-1 
+Bad codons found!
+WARNING: Codon CNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316324|dbj|BCKW01000013.1|-processed-gene-0.3-mRNA-1 
+Bad codons found!
+WARNING: Codon ACR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316325|dbj|BCKW01000012.1|-processed-gene-0.51-mRNA-1 
+Bad codons found!
+WARNING: Codon MCT not recognized!
+ Codon will be ignored!
+WARNING: Codon GRT not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon RAT not recognized!
+ Codon will be ignored!
+WARNING: Codon AGY not recognized!
+ Codon will be ignored!
+WARNING: Codon MAT not recognized!
+ Codon will be ignored!
+WARNING: Codon MCA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316326|dbj|BCKW01000011.1|-processed-gene-2.33-mRNA-1 
+Bad codons found!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RTC not recognized!
+ Codon will be ignored!
+WARNING: Codon GTK not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316329|dbj|BCKW01000008.1|-snap-gene-0.86-mRNA-1 
+Bad codons found!
+WARNING: Codon CAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316329|dbj|BCKW01000008.1|-processed-gene-4.79-mRNA-1 
+Bad codons found!
+WARNING: Codon YAT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316330|dbj|BCKW01000007.1|-augustus-gene-2.3-mRNA-1 
+Bad codons found!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316330|dbj|BCKW01000007.1|-processed-gene-2.30-mRNA-1 
+Bad codons found!
+WARNING: Codon GRA not recognized!
+ Codon will be ignored!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon YTG not recognized!
+ Codon will be ignored!
+WARNING: Codon ARG not recognized!
+ Codon will be ignored!
+WARNING: Codon ART not recognized!
+ Codon will be ignored!
+WARNING: Codon RCY not recognized!
+ Codon will be ignored!
+WARNING: Codon ARA not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AKA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316330|dbj|BCKW01000007.1|-processed-gene-2.44-mRNA-1 
+Bad codons found!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene snap_masked-gi|1002316330|dbj|BCKW01000007.1|-processed-gene-4.122-mRNA-1 
+Bad codons found!
+WARNING: Codon CCW not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GSY not recognized!
+ Codon will be ignored!
+WARNING: Codon WTS not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAY not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon RCG not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316330|dbj|BCKW01000007.1|-augustus-gene-6.239-mRNA-1 
+Bad codons found!
+WARNING: Codon ACW not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316330|dbj|BCKW01000007.1|-processed-gene-6.194-mRNA-1 
+Bad codons found!
+WARNING: Codon YCA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316331|dbj|BCKW01000006.1|-processed-gene-6.104-mRNA-1 
+Bad codons found!
+WARNING: Codon ASC not recognized!
+ Codon will be ignored!
+WARNING: Codon GTR not recognized!
+ Codon will be ignored!
+WARNING: Codon GRA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316332|dbj|BCKW01000005.1|-processed-gene-0.31-mRNA-1 
+Bad codons found!
+WARNING: Codon TWC not recognized!
+ Codon will be ignored!
+WARNING: Codon GKT not recognized!
+ Codon will be ignored!
+WARNING: Codon GGR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene snap_masked-gi|1002316332|dbj|BCKW01000005.1|-processed-gene-0.7-mRNA-1 
+Bad codons found!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316332|dbj|BCKW01000005.1|-snap-gene-0.58-mRNA-1 
+Bad codons found!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon KTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316332|dbj|BCKW01000005.1|-augustus-gene-1.34-mRNA-1 
+Bad codons found!
+WARNING: Codon GAY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316332|dbj|BCKW01000005.1|-augustus-gene-1.36-mRNA-1 
+Bad codons found!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon KTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316332|dbj|BCKW01000005.1|-processed-gene-2.1-mRNA-1 
+Bad codons found!
+WARNING: Codon CAN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316332|dbj|BCKW01000005.1|-processed-gene-5.94-mRNA-1 
+Bad codons found!
+WARNING: Codon MCT not recognized!
+ Codon will be ignored!
+WARNING: Codon GRT not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon RAT not recognized!
+ Codon will be ignored!
+WARNING: Codon AGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316332|dbj|BCKW01000005.1|-processed-gene-6.83-mRNA-1 
+Bad codons found!
+WARNING: Codon GTM not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316333|dbj|BCKW01000004.1|-augustus-gene-1.3-mRNA-1 
+Bad codons found!
+WARNING: Codon GAN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316333|dbj|BCKW01000004.1|-processed-gene-3.23-mRNA-1 
+Bad codons found!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-0.108-mRNA-1 
+Bad codons found!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-0.88-mRNA-1 
+Bad codons found!
+WARNING: Codon TCS not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-2.39-mRNA-1 
+Bad codons found!
+WARNING: Codon GCW not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316334|dbj|BCKW01000003.1|-augustus-gene-4.106-mRNA-1 
+Bad codons found!
+WARNING: Codon AYC not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GMA not recognized!
+ Codon will be ignored!
+WARNING: Codon SCA not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-8.14-mRNA-1 
+Bad codons found!
+WARNING: Codon AMC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-13.17-mRNA-1 
+Bad codons found!
+WARNING: Codon CAY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene snap_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-14.129-mRNA-1 
+Bad codons found!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon CCM not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon GAK not recognized!
+ Codon will be ignored!
+WARNING: Codon GGR not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-14.222-mRNA-1 
+Bad codons found!
+WARNING: Codon TYT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TRC not recognized!
+ Codon will be ignored!
+WARNING: Codon TCW not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon GAY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon YCA not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon ACS not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon TCR not recognized!
+ Codon will be ignored!
+WARNING: Codon RMY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GRT not recognized!
+ Codon will be ignored!
+WARNING: Codon AAK not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-14.257-mRNA-1 
+Bad codons found!
+WARNING: Codon TCM not recognized!
+ Codon will be ignored!
+WARNING: Codon ASY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316334|dbj|BCKW01000003.1|-processed-gene-14.225-mRNA-1 
+Bad codons found!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316335|dbj|BCKW01000002.1|-snap-gene-2.3-mRNA-1 
+Bad codons found!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316335|dbj|BCKW01000002.1|-augustus-gene-5.85-mRNA-1 
+Bad codons found!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon CCR not recognized!
+ Codon will be ignored!
+WARNING: Codon MGT not recognized!
+ Codon will be ignored!
+WARNING: Codon SAT not recognized!
+ Codon will be ignored!
+WARNING: Codon KAC not recognized!
+ Codon will be ignored!
+WARNING: Codon AAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAM not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316335|dbj|BCKW01000002.1|-processed-gene-11.33-mRNA-1 
+Bad codons found!
+WARNING: Codon ACM not recognized!
+ Codon will be ignored!
+WARNING: Codon GGK not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon KCT not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316335|dbj|BCKW01000002.1|-processed-gene-14.19-mRNA-1 
+Bad codons found!
+WARNING: Codon CCW not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GSY not recognized!
+ Codon will be ignored!
+WARNING: Codon WTS not recognized!
+ Codon will be ignored!
+WARNING: Codon GAY not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon RCG not recognized!
+ Codon will be ignored!
+WARNING: Codon TGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316335|dbj|BCKW01000002.1|-augustus-gene-17.0-mRNA-1 
+Bad codons found!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon GCS not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TAY not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon CCM not recognized!
+ Codon will be ignored!
+WARNING: Codon GCY not recognized!
+ Codon will be ignored!
+WARNING: Codon ARA not recognized!
+ Codon will be ignored!
+WARNING: Codon GGW not recognized!
+ Codon will be ignored!
+WARNING: Codon GAW not recognized!
+ Codon will be ignored!
+WARNING: Error in gene maker-gi|1002316335|dbj|BCKW01000002.1|-snap-gene-17.2-mRNA-1 
+Bad codons found!
+WARNING: Codon ACM not recognized!
+ Codon will be ignored!
+WARNING: Codon GGK not recognized!
+ Codon will be ignored!
+WARNING: Codon GCR not recognized!
+ Codon will be ignored!
+WARNING: Codon KCT not recognized!
+ Codon will be ignored!
+WARNING: Codon AAR not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316335|dbj|BCKW01000002.1|-processed-gene-18.18-mRNA-1 
+Bad codons found!
+WARNING: Codon ACY not recognized!
+ Codon will be ignored!
+WARNING: Codon GTY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316335|dbj|BCKW01000002.1|-processed-gene-22.88-mRNA-1 
+Bad codons found!
+WARNING: Codon CAN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316335|dbj|BCKW01000002.1|-processed-gene-24.24-mRNA-1 
+Bad codons found!
+WARNING: Codon RAC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316335|dbj|BCKW01000002.1|-processed-gene-28.12-mRNA-1 
+Bad codons found!
+WARNING: Codon WCC not recognized!
+ Codon will be ignored!
+WARNING: Codon TCM not recognized!
+ Codon will be ignored!
+WARNING: Codon ASY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-0.48-mRNA-1 
+Bad codons found!
+WARNING: Codon TYT not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TRC not recognized!
+ Codon will be ignored!
+WARNING: Codon TCW not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TCK not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon YCA not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon ACS not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon YTA not recognized!
+ Codon will be ignored!
+WARNING: Codon TCR not recognized!
+ Codon will be ignored!
+WARNING: Codon RMY not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon GRT not recognized!
+ Codon will be ignored!
+WARNING: Codon AKA not recognized!
+ Codon will be ignored!
+WARNING: Codon AAK not recognized!
+ Codon will be ignored!
+WARNING: Codon YRT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-0.37-mRNA-1 
+Bad codons found!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon CCM not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon GAK not recognized!
+ Codon will be ignored!
+WARNING: Codon GGR not recognized!
+ Codon will be ignored!
+WARNING: Codon AGR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTR not recognized!
+ Codon will be ignored!
+WARNING: Codon GGY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-0.49-mRNA-1 
+Bad codons found!
+WARNING: Codon CAY not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-0.51-mRNA-1 
+Bad codons found!
+WARNING: Codon GYT not recognized!
+ Codon will be ignored!
+WARNING: Codon TKC not recognized!
+ Codon will be ignored!
+WARNING: Error in gene snap_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-19.32-mRNA-1 
+Bad codons found!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon GGN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Codon NNN not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-22.56-mRNA-1 
+Bad codons found!
+WARNING: Codon KAT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene snap_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-22.92-mRNA-1 
+Bad codons found!
+WARNING: Codon TRG not recognized!
+ Codon will be ignored!
+WARNING: Error in gene augustus_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-27.52-mRNA-1 
+Bad codons found!
+WARNING: Codon GGW not recognized!
+ Codon will be ignored!
+WARNING: Codon YTM not recognized!
+ Codon will be ignored!
+WARNING: Codon CCK not recognized!
+ Codon will be ignored!
+WARNING: Codon GAR not recognized!
+ Codon will be ignored!
+WARNING: Codon TTY not recognized!
+ Codon will be ignored!
+WARNING: Codon RTT not recognized!
+ Codon will be ignored!
+WARNING: Error in gene snap_masked-gi|1002316336|dbj|BCKW01000001.1|-processed-gene-35.37-mRNA-1 
+Bad codons found!
+Warning message:
+In dir.create(directory) :
+  'Results/ConstMut/ogataea_methanolica' already exists
+Allowing divergence from initial conditions for 0 iterations.
+
+maxGrouping: 22
+Type: 
+Starting MCMC
+	Estimate Codon Specific Parameters? TRUE 
+	Estimate Hyper Parameters? TRUE 
+	Estimate Synthesis rates? TRUE 
+	Starting MCMC with 5000 iterations
+	Adapting will stop after 2500 steps
+Begin saving restart file(s) at sample (iteration): 20 (100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 20 (100)
+	 current logPosterior: -2.80857e+06 
+	 current logLikelihood: -2.8043e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.49344
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.02
+	C:	0.11
+	D:	0.03
+	E:	0.07
+	F:	0.11
+	G:	0.08
+	H:	0.09
+	I:	0.04
+	K:	0.07
+	L:	0.02
+	N:	0.04
+	P:	0.03
+	Q:	0.08
+	R:	0.02
+	S:	0.02
+	T:	0.03
+	V:	0.08
+	Y:	0.1
+	Z:	0.09
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 0
+	 acceptance rate above upper target of 0.325: 5855
+Begin saving restart file(s) at sample (iteration): 40 (200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 40 (200)
+	 current logPosterior: -2.80645e+06 
+	 current logLikelihood: -2.80217e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.49149
+	 current stdDevSynthesisRate proposal width: 0.08
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.1
+	C:	0.21
+	D:	0.04
+	E:	0.04
+	F:	0.09
+	G:	0.06
+	H:	0.09
+	I:	0.06
+	K:	0.08
+	L:	0.03
+	N:	0.06
+	P:	0.04
+	Q:	0.16
+	R:	0.05
+	S:	0.05
+	T:	0.04
+	V:	0.05
+	Y:	0.09
+	Z:	0.1
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 0
+	 acceptance rate above upper target of 0.325: 5854
+Begin saving restart file(s) at sample (iteration): 60 (300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 60 (300)
+	 current logPosterior: -2.80601e+06 
+	 current logLikelihood: -2.80149e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.43251
+	 current stdDevSynthesisRate proposal width: 0.064
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.02
+	C:	0.16
+	D:	0.09
+	E:	0.1
+	F:	0.08
+	G:	0.03
+	H:	0.13
+	I:	0.01
+	K:	0.06
+	L:	0.01
+	N:	0.04
+	P:	0.03
+	Q:	0.18
+	R:	0.08
+	S:	0.02
+	T:	0.04
+	V:	0.04
+	Y:	0.06
+	Z:	0.18
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1
+	 acceptance rate above upper target of 0.325: 5845
+Begin saving restart file(s) at sample (iteration): 80 (400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 80 (400)
+	 current logPosterior: -2.80579e+06 
+	 current logLikelihood: -2.80101e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.36453
+	 current stdDevSynthesisRate proposal width: 0.0512
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.11
+	C:	0.38
+	D:	0.15
+	E:	0.16
+	F:	0.15
+	G:	0.04
+	H:	0.26
+	I:	0.06
+	K:	0.15
+	L:	0.01
+	N:	0.19
+	P:	0.04
+	Q:	0.19
+	R:	0.03
+	S:	0.02
+	T:	0.02
+	V:	0.08
+	Y:	0.17
+	Z:	0.32
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1
+	 acceptance rate above upper target of 0.325: 5821
+Begin saving restart file(s) at sample (iteration): 100 (500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 100 (500)
+	 current logPosterior: -2.80557e+06 
+	 current logLikelihood: -2.8007e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.24516
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.06
+	C:	0.42
+	D:	0.15
+	E:	0.35
+	F:	0.3
+	G:	0.06
+	H:	0.26
+	I:	0.13
+	K:	0.16
+	L:	0.04
+	N:	0.17
+	P:	0.05
+	Q:	0.3
+	R:	0.1
+	S:	0.04
+	T:	0.05
+	V:	0.07
+	Y:	0.21
+	Z:	0.26
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 13
+	 acceptance rate above upper target of 0.325: 5715
+Begin saving restart file(s) at sample (iteration): 120 (600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 120 (600)
+	 current logPosterior: -2.80557e+06 
+	 current logLikelihood: -2.80056e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.11369
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.09
+	C:	0.4
+	D:	0.4
+	E:	0.29
+	F:	0.18
+	G:	0.11
+	H:	0.37
+	I:	0.11
+	K:	0.24
+	L:	0.07
+	N:	0.33
+	P:	0.17
+	Q:	0.25
+	R:	0.09
+	S:	0.06
+	T:	0.06
+	V:	0.12
+	Y:	0.34
+	Z:	0.34
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 52
+	 acceptance rate above upper target of 0.325: 5399
+Begin saving restart file(s) at sample (iteration): 140 (700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 140 (700)
+	 current logPosterior: -2.80571e+06 
+	 current logLikelihood: -2.80048e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 1.01687
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.13
+	C:	0.42
+	D:	0.43
+	E:	0.26
+	F:	0.25
+	G:	0.1
+	H:	0.28
+	I:	0.24
+	K:	0.24
+	L:	0.08
+	N:	0.22
+	P:	0.23
+	Q:	0.27
+	R:	0.15
+	S:	0.14
+	T:	0.19
+	V:	0.13
+	Y:	0.4
+	Z:	0.33
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 136
+	 acceptance rate above upper target of 0.325: 4958
+Begin saving restart file(s) at sample (iteration): 160 (800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 160 (800)
+	 current logPosterior: -2.80574e+06 
+	 current logLikelihood: -2.80039e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.966352
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.18
+	C:	0.43
+	D:	0.41
+	E:	0.29
+	F:	0.28
+	G:	0.19
+	H:	0.34
+	I:	0.22
+	K:	0.34
+	L:	0.14
+	N:	0.31
+	P:	0.28
+	Q:	0.24
+	R:	0.15
+	S:	0.11
+	T:	0.16
+	V:	0.15
+	Y:	0.54
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 283
+	 acceptance rate above upper target of 0.325: 4358
+Begin saving restart file(s) at sample (iteration): 180 (900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 180 (900)
+	 current logPosterior: -2.80575e+06 
+	 current logLikelihood: -2.80047e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.927386
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.22
+	C:	0.38
+	D:	0.43
+	E:	0.33
+	F:	0.31
+	G:	0.23
+	H:	0.43
+	I:	0.21
+	K:	0.31
+	L:	0.21
+	N:	0.29
+	P:	0.17
+	Q:	0.24
+	R:	0.21
+	S:	0.22
+	T:	0.29
+	V:	0.22
+	Y:	0.45
+	Z:	0.44
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 405
+	 acceptance rate above upper target of 0.325: 3694
+Begin saving restart file(s) at sample (iteration): 200 (1000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 200 (1000)
+	 current logPosterior: -2.80566e+06 
+	 current logLikelihood: -2.80036e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.878297
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.22
+	C:	0.38
+	D:	0.4
+	E:	0.42
+	F:	0.25
+	G:	0.19
+	H:	0.39
+	I:	0.27
+	K:	0.26
+	L:	0.2
+	N:	0.34
+	P:	0.34
+	Q:	0.21
+	R:	0.23
+	S:	0.33
+	T:	0.26
+	V:	0.36
+	Y:	0.35
+	Z:	0.4
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 645
+	 acceptance rate above upper target of 0.325: 2918
+Begin saving restart file(s) at sample (iteration): 220 (1100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 220 (1100)
+	 current logPosterior: -2.8057e+06 
+	 current logLikelihood: -2.80036e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.836877
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.28
+	C:	0.36
+	D:	0.47
+	E:	0.36
+	F:	0.3
+	G:	0.11
+	H:	0.35
+	I:	0.3
+	K:	0.34
+	L:	0.23
+	N:	0.4
+	P:	0.31
+	Q:	0.45
+	R:	0.24
+	S:	0.27
+	T:	0.21
+	V:	0.14
+	Y:	0.42
+	Z:	0.3
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 918
+	 acceptance rate above upper target of 0.325: 1984
+Begin saving restart file(s) at sample (iteration): 240 (1200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 240 (1200)
+	 current logPosterior: -2.80564e+06 
+	 current logLikelihood: -2.80034e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.841531
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.19
+	C:	0.36
+	D:	0.53
+	E:	0.41
+	F:	0.23
+	G:	0.19
+	H:	0.45
+	I:	0.25
+	K:	0.3
+	L:	0.11
+	N:	0.41
+	P:	0.29
+	Q:	0.38
+	R:	0.22
+	S:	0.28
+	T:	0.25
+	V:	0.23
+	Y:	0.42
+	Z:	0.43
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1040
+	 acceptance rate above upper target of 0.325: 1354
+Begin saving restart file(s) at sample (iteration): 260 (1300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 260 (1300)
+	 current logPosterior: -2.80572e+06 
+	 current logLikelihood: -2.80037e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.830723
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.18
+	C:	0.48
+	D:	0.46
+	E:	0.34
+	F:	0.32
+	G:	0.25
+	H:	0.41
+	I:	0.23
+	K:	0.39
+	L:	0.16
+	N:	0.32
+	P:	0.35
+	Q:	0.44
+	R:	0.26
+	S:	0.21
+	T:	0.22
+	V:	0.27
+	Y:	0.41
+	Z:	0.44
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1259
+	 acceptance rate above upper target of 0.325: 1094
+Begin saving restart file(s) at sample (iteration): 280 (1400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 280 (1400)
+	 current logPosterior: -2.8057e+06 
+	 current logLikelihood: -2.80035e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.823633
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.21
+	C:	0.47
+	D:	0.47
+	E:	0.44
+	F:	0.33
+	G:	0.37
+	H:	0.53
+	I:	0.32
+	K:	0.33
+	L:	0.27
+	N:	0.32
+	P:	0.17
+	Q:	0.36
+	R:	0.16
+	S:	0.27
+	T:	0.28
+	V:	0.31
+	Y:	0.42
+	Z:	0.45
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1377
+	 acceptance rate above upper target of 0.325: 997
+Begin saving restart file(s) at sample (iteration): 300 (1500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 300 (1500)
+	 current logPosterior: -2.80558e+06 
+	 current logLikelihood: -2.80028e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.801044
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.33
+	C:	0.46
+	D:	0.42
+	E:	0.41
+	F:	0.43
+	G:	0.31
+	H:	0.46
+	I:	0.22
+	K:	0.55
+	L:	0.3
+	N:	0.34
+	P:	0.21
+	Q:	0.4
+	R:	0.27
+	S:	0.29
+	T:	0.23
+	V:	0.29
+	Y:	0.43
+	Z:	0.36
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1354
+	 acceptance rate above upper target of 0.325: 998
+Begin saving restart file(s) at sample (iteration): 320 (1600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 320 (1600)
+	 current logPosterior: -2.80561e+06 
+	 current logLikelihood: -2.80034e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.807128
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.31
+	C:	0.5
+	D:	0.44
+	E:	0.49
+	F:	0.35
+	G:	0.29
+	H:	0.46
+	I:	0.26
+	K:	0.38
+	L:	0.28
+	N:	0.34
+	P:	0.2
+	Q:	0.37
+	R:	0.27
+	S:	0.2
+	T:	0.25
+	V:	0.16
+	Y:	0.38
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1292
+	 acceptance rate above upper target of 0.325: 986
+Begin saving restart file(s) at sample (iteration): 340 (1700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 340 (1700)
+	 current logPosterior: -2.80552e+06 
+	 current logLikelihood: -2.80027e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.797348
+	 current stdDevSynthesisRate proposal width: 0.0393216
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.26
+	C:	0.42
+	D:	0.5
+	E:	0.55
+	F:	0.56
+	G:	0.27
+	H:	0.42
+	I:	0.34
+	K:	0.41
+	L:	0.23
+	N:	0.48
+	P:	0.44
+	Q:	0.42
+	R:	0.34
+	S:	0.35
+	T:	0.33
+	V:	0.36
+	Y:	0.44
+	Z:	0.39
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1289
+	 acceptance rate above upper target of 0.325: 986
+Begin saving restart file(s) at sample (iteration): 360 (1800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 360 (1800)
+	 current logPosterior: -2.8056e+06 
+	 current logLikelihood: -2.80036e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.81155
+	 current stdDevSynthesisRate proposal width: 0.0471859
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.27
+	C:	0.4
+	D:	0.56
+	E:	0.42
+	F:	0.37
+	G:	0.17
+	H:	0.45
+	I:	0.32
+	K:	0.43
+	L:	0.42
+	N:	0.42
+	P:	0.27
+	Q:	0.37
+	R:	0.22
+	S:	0.24
+	T:	0.25
+	V:	0.43
+	Y:	0.29
+	Z:	0.45
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1260
+	 acceptance rate above upper target of 0.325: 1018
+Begin saving restart file(s) at sample (iteration): 380 (1900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 380 (1900)
+	 current logPosterior: -2.8056e+06 
+	 current logLikelihood: -2.8003e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.800021
+	 current stdDevSynthesisRate proposal width: 0.0566231
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.29
+	C:	0.45
+	D:	0.46
+	E:	0.46
+	F:	0.48
+	G:	0.27
+	H:	0.48
+	I:	0.34
+	K:	0.37
+	L:	0.14
+	N:	0.48
+	P:	0.21
+	Q:	0.4
+	R:	0.22
+	S:	0.33
+	T:	0.27
+	V:	0.16
+	Y:	0.42
+	Z:	0.5
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1285
+	 acceptance rate above upper target of 0.325: 1038
+Begin saving restart file(s) at sample (iteration): 400 (2000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 400 (2000)
+	 current logPosterior: -2.80558e+06 
+	 current logLikelihood: -2.80028e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.785758
+	 current stdDevSynthesisRate proposal width: 0.0566231
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.36
+	C:	0.38
+	D:	0.37
+	E:	0.35
+	F:	0.4
+	G:	0.34
+	H:	0.48
+	I:	0.36
+	K:	0.47
+	L:	0.17
+	N:	0.43
+	P:	0.25
+	Q:	0.43
+	R:	0.21
+	S:	0.3
+	T:	0.24
+	V:	0.31
+	Y:	0.32
+	Z:	0.24
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1296
+	 acceptance rate above upper target of 0.325: 1027
+Begin saving restart file(s) at sample (iteration): 420 (2100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 420 (2100)
+	 current logPosterior: -2.80557e+06 
+	 current logLikelihood: -2.80032e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.792037
+	 current stdDevSynthesisRate proposal width: 0.0452985
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.17
+	C:	0.47
+	D:	0.46
+	E:	0.39
+	F:	0.36
+	G:	0.32
+	H:	0.5
+	I:	0.25
+	K:	0.48
+	L:	0.28
+	N:	0.48
+	P:	0.26
+	Q:	0.34
+	R:	0.2
+	S:	0.2
+	T:	0.25
+	V:	0.43
+	Y:	0.35
+	Z:	0.45
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1261
+	 acceptance rate above upper target of 0.325: 1061
+Begin saving restart file(s) at sample (iteration): 440 (2200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 440 (2200)
+	 current logPosterior: -2.8055e+06 
+	 current logLikelihood: -2.80029e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.796279
+	 current stdDevSynthesisRate proposal width: 0.0452985
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.33
+	C:	0.44
+	D:	0.46
+	E:	0.47
+	F:	0.51
+	G:	0.3
+	H:	0.54
+	I:	0.3
+	K:	0.38
+	L:	0.33
+	N:	0.43
+	P:	0.23
+	Q:	0.58
+	R:	0.18
+	S:	0.26
+	T:	0.2
+	V:	0.23
+	Y:	0.47
+	Z:	0.37
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1270
+	 acceptance rate above upper target of 0.325: 1024
+Begin saving restart file(s) at sample (iteration): 460 (2300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 460 (2300)
+	 current logPosterior: -2.80545e+06 
+	 current logLikelihood: -2.8003e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.778814
+	 current stdDevSynthesisRate proposal width: 0.0452985
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.4
+	C:	0.42
+	D:	0.49
+	E:	0.45
+	F:	0.42
+	G:	0.3
+	H:	0.35
+	I:	0.34
+	K:	0.46
+	L:	0.16
+	N:	0.43
+	P:	0.35
+	Q:	0.48
+	R:	0.13
+	S:	0.21
+	T:	0.21
+	V:	0.28
+	Y:	0.32
+	Z:	0.3
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1404
+	 acceptance rate above upper target of 0.325: 968
+Begin saving restart file(s) at sample (iteration): 480 (2400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 480 (2400)
+	 current logPosterior: -2.80555e+06 
+	 current logLikelihood: -2.80039e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.784742
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.13
+	C:	0.33
+	D:	0.44
+	E:	0.48
+	F:	0.38
+	G:	0.3
+	H:	0.43
+	I:	0.26
+	K:	0.5
+	L:	0.18
+	N:	0.36
+	P:	0.22
+	Q:	0.4
+	R:	0.25
+	S:	0.24
+	T:	0.28
+	V:	0.24
+	Y:	0.44
+	Z:	0.36
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1390
+	 acceptance rate above upper target of 0.325: 936
+Begin saving restart file(s) at sample (iteration): 500 (2500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 500 (2500)
+	 current logPosterior: -2.80554e+06 
+	 current logLikelihood: -2.80032e+06
+	 current stdDevSynthesisRate estimate for selection category 0: 0.810957
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.37
+	C:	0.39
+	D:	0.34
+	E:	0.41
+	F:	0.34
+	G:	0.26
+	H:	0.44
+	I:	0.18
+	K:	0.34
+	L:	0.24
+	N:	0.46
+	P:	0.31
+	Q:	0.37
+	R:	0.25
+	S:	0.35
+	T:	0.24
+	V:	0.28
+	Y:	0.46
+	Z:	0.47
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1199
+	 acceptance rate above upper target of 0.325: 1132
+Begin saving restart file(s) at sample (iteration): 520 (2600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 520 (2600)
+	 current logPosterior: -2.80565e+06 
+	 current logLikelihood: -2.80043e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.806591
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.29
+	C:	0.47
+	D:	0.38
+	E:	0.36
+	F:	0.44
+	G:	0.25
+	H:	0.37
+	I:	0.26
+	K:	0.51
+	L:	0.23
+	N:	0.37
+	P:	0.17
+	Q:	0.43
+	R:	0.15
+	S:	0.26
+	T:	0.25
+	V:	0.31
+	Y:	0.46
+	Z:	0.37
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1177
+	 acceptance rate above upper target of 0.325: 1189
+Begin saving restart file(s) at sample (iteration): 540 (2700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 540 (2700)
+	 current logPosterior: -2.80554e+06 
+	 current logLikelihood: -2.80028e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.801792
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.32
+	C:	0.51
+	D:	0.44
+	E:	0.4
+	F:	0.56
+	G:	0.22
+	H:	0.33
+	I:	0.33
+	K:	0.49
+	L:	0.25
+	N:	0.47
+	P:	0.24
+	Q:	0.48
+	R:	0.15
+	S:	0.33
+	T:	0.29
+	V:	0.22
+	Y:	0.39
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1211
+	 acceptance rate above upper target of 0.325: 1105
+Begin saving restart file(s) at sample (iteration): 560 (2800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 560 (2800)
+	 current logPosterior: -2.8054e+06 
+	 current logLikelihood: -2.80022e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.800016
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.21
+	C:	0.46
+	D:	0.61
+	E:	0.42
+	F:	0.39
+	G:	0.26
+	H:	0.41
+	I:	0.33
+	K:	0.47
+	L:	0.22
+	N:	0.52
+	P:	0.25
+	Q:	0.45
+	R:	0.26
+	S:	0.23
+	T:	0.21
+	V:	0.34
+	Y:	0.43
+	Z:	0.37
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1218
+	 acceptance rate above upper target of 0.325: 1080
+Begin saving restart file(s) at sample (iteration): 580 (2900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 580 (2900)
+	 current logPosterior: -2.80545e+06 
+	 current logLikelihood: -2.80028e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.785649
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.26
+	C:	0.43
+	D:	0.47
+	E:	0.4
+	F:	0.46
+	G:	0.22
+	H:	0.43
+	I:	0.31
+	K:	0.46
+	L:	0.22
+	N:	0.49
+	P:	0.26
+	Q:	0.47
+	R:	0.16
+	S:	0.23
+	T:	0.17
+	V:	0.24
+	Y:	0.4
+	Z:	0.44
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1218
+	 acceptance rate above upper target of 0.325: 1074
+Begin saving restart file(s) at sample (iteration): 600 (3000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 600 (3000)
+	 current logPosterior: -2.80547e+06 
+	 current logLikelihood: -2.80029e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.788593
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.25
+	C:	0.38
+	D:	0.47
+	E:	0.42
+	F:	0.44
+	G:	0.46
+	H:	0.39
+	I:	0.26
+	K:	0.48
+	L:	0.2
+	N:	0.44
+	P:	0.28
+	Q:	0.33
+	R:	0.18
+	S:	0.2
+	T:	0.3
+	V:	0.22
+	Y:	0.42
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1307
+	 acceptance rate above upper target of 0.325: 1060
+Begin saving restart file(s) at sample (iteration): 620 (3100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 620 (3100)
+	 current logPosterior: -2.80539e+06 
+	 current logLikelihood: -2.80026e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.783605
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.2
+	C:	0.45
+	D:	0.38
+	E:	0.35
+	F:	0.51
+	G:	0.31
+	H:	0.46
+	I:	0.3
+	K:	0.57
+	L:	0.25
+	N:	0.36
+	P:	0.26
+	Q:	0.44
+	R:	0.28
+	S:	0.23
+	T:	0.25
+	V:	0.2
+	Y:	0.44
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1411
+	 acceptance rate above upper target of 0.325: 902
+Begin saving restart file(s) at sample (iteration): 640 (3200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 640 (3200)
+	 current logPosterior: -2.80542e+06 
+	 current logLikelihood: -2.80033e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.789004
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.25
+	C:	0.42
+	D:	0.43
+	E:	0.41
+	F:	0.45
+	G:	0.33
+	H:	0.39
+	I:	0.3
+	K:	0.42
+	L:	0.26
+	N:	0.52
+	P:	0.13
+	Q:	0.44
+	R:	0.27
+	S:	0.17
+	T:	0.21
+	V:	0.2
+	Y:	0.43
+	Z:	0.4
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1377
+	 acceptance rate above upper target of 0.325: 922
+Begin saving restart file(s) at sample (iteration): 660 (3300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 660 (3300)
+	 current logPosterior: -2.80529e+06 
+	 current logLikelihood: -2.8002e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.79471
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.24
+	C:	0.51
+	D:	0.55
+	E:	0.38
+	F:	0.41
+	G:	0.35
+	H:	0.31
+	I:	0.31
+	K:	0.48
+	L:	0.29
+	N:	0.44
+	P:	0.38
+	Q:	0.44
+	R:	0.16
+	S:	0.31
+	T:	0.26
+	V:	0.26
+	Y:	0.48
+	Z:	0.46
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1414
+	 acceptance rate above upper target of 0.325: 900
+Begin saving restart file(s) at sample (iteration): 680 (3400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 680 (3400)
+	 current logPosterior: -2.80534e+06 
+	 current logLikelihood: -2.80022e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.771679
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.3
+	C:	0.41
+	D:	0.5
+	E:	0.4
+	F:	0.37
+	G:	0.25
+	H:	0.44
+	I:	0.32
+	K:	0.44
+	L:	0.22
+	N:	0.43
+	P:	0.24
+	Q:	0.44
+	R:	0.25
+	S:	0.31
+	T:	0.2
+	V:	0.24
+	Y:	0.47
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1352
+	 acceptance rate above upper target of 0.325: 949
+Begin saving restart file(s) at sample (iteration): 700 (3500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 700 (3500)
+	 current logPosterior: -2.80529e+06 
+	 current logLikelihood: -2.80023e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.775107
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.3
+	C:	0.35
+	D:	0.43
+	E:	0.49
+	F:	0.42
+	G:	0.31
+	H:	0.44
+	I:	0.3
+	K:	0.44
+	L:	0.35
+	N:	0.49
+	P:	0.29
+	Q:	0.4
+	R:	0.18
+	S:	0.26
+	T:	0.19
+	V:	0.23
+	Y:	0.48
+	Z:	0.39
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1446
+	 acceptance rate above upper target of 0.325: 907
+Begin saving restart file(s) at sample (iteration): 720 (3600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 720 (3600)
+	 current logPosterior: -2.80541e+06 
+	 current logLikelihood: -2.80034e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.801492
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.21
+	C:	0.46
+	D:	0.48
+	E:	0.42
+	F:	0.41
+	G:	0.19
+	H:	0.41
+	I:	0.24
+	K:	0.42
+	L:	0.27
+	N:	0.44
+	P:	0.18
+	Q:	0.48
+	R:	0.15
+	S:	0.24
+	T:	0.2
+	V:	0.22
+	Y:	0.42
+	Z:	0.58
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1362
+	 acceptance rate above upper target of 0.325: 923
+Begin saving restart file(s) at sample (iteration): 740 (3700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 740 (3700)
+	 current logPosterior: -2.8055e+06 
+	 current logLikelihood: -2.8004e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.799124
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.31
+	C:	0.46
+	D:	0.51
+	E:	0.43
+	F:	0.5
+	G:	0.27
+	H:	0.44
+	I:	0.22
+	K:	0.48
+	L:	0.24
+	N:	0.43
+	P:	0.23
+	Q:	0.51
+	R:	0.12
+	S:	0.24
+	T:	0.3
+	V:	0.2
+	Y:	0.38
+	Z:	0.43
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1311
+	 acceptance rate above upper target of 0.325: 964
+Begin saving restart file(s) at sample (iteration): 760 (3800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 760 (3800)
+	 current logPosterior: -2.80542e+06 
+	 current logLikelihood: -2.80029e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.801999
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.37
+	C:	0.41
+	D:	0.54
+	E:	0.46
+	F:	0.4
+	G:	0.27
+	H:	0.45
+	I:	0.25
+	K:	0.45
+	L:	0.22
+	N:	0.44
+	P:	0.26
+	Q:	0.49
+	R:	0.22
+	S:	0.35
+	T:	0.21
+	V:	0.24
+	Y:	0.47
+	Z:	0.42
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1383
+	 acceptance rate above upper target of 0.325: 914
+Begin saving restart file(s) at sample (iteration): 780 (3900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 780 (3900)
+	 current logPosterior: -2.80543e+06 
+	 current logLikelihood: -2.80036e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.787964
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.3
+	C:	0.49
+	D:	0.47
+	E:	0.43
+	F:	0.53
+	G:	0.31
+	H:	0.48
+	I:	0.21
+	K:	0.38
+	L:	0.16
+	N:	0.42
+	P:	0.25
+	Q:	0.45
+	R:	0.24
+	S:	0.37
+	T:	0.16
+	V:	0.19
+	Y:	0.39
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1456
+	 acceptance rate above upper target of 0.325: 959
+Begin saving restart file(s) at sample (iteration): 800 (4000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 800 (4000)
+	 current logPosterior: -2.80539e+06 
+	 current logLikelihood: -2.80023e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.788001
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.27
+	C:	0.44
+	D:	0.56
+	E:	0.46
+	F:	0.39
+	G:	0.27
+	H:	0.41
+	I:	0.28
+	K:	0.61
+	L:	0.25
+	N:	0.41
+	P:	0.26
+	Q:	0.37
+	R:	0.25
+	S:	0.22
+	T:	0.3
+	V:	0.25
+	Y:	0.46
+	Z:	0.38
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1419
+	 acceptance rate above upper target of 0.325: 892
+Begin saving restart file(s) at sample (iteration): 820 (4100)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 820 (4100)
+	 current logPosterior: -2.80537e+06 
+	 current logLikelihood: -2.80032e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.797512
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.37
+	C:	0.33
+	D:	0.43
+	E:	0.44
+	F:	0.47
+	G:	0.28
+	H:	0.42
+	I:	0.35
+	K:	0.49
+	L:	0.21
+	N:	0.5
+	P:	0.23
+	Q:	0.4
+	R:	0.18
+	S:	0.19
+	T:	0.21
+	V:	0.24
+	Y:	0.51
+	Z:	0.37
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1349
+	 acceptance rate above upper target of 0.325: 958
+Begin saving restart file(s) at sample (iteration): 840 (4200)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 840 (4200)
+	 current logPosterior: -2.80539e+06 
+	 current logLikelihood: -2.80033e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.801909
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.19
+	C:	0.45
+	D:	0.46
+	E:	0.52
+	F:	0.53
+	G:	0.2
+	H:	0.48
+	I:	0.21
+	K:	0.52
+	L:	0.23
+	N:	0.31
+	P:	0.19
+	Q:	0.51
+	R:	0.19
+	S:	0.23
+	T:	0.25
+	V:	0.36
+	Y:	0.4
+	Z:	0.46
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1340
+	 acceptance rate above upper target of 0.325: 950
+Begin saving restart file(s) at sample (iteration): 860 (4300)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 860 (4300)
+	 current logPosterior: -2.80532e+06 
+	 current logLikelihood: -2.80034e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.764132
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.28
+	C:	0.44
+	D:	0.48
+	E:	0.4
+	F:	0.36
+	G:	0.24
+	H:	0.43
+	I:	0.23
+	K:	0.5
+	L:	0.24
+	N:	0.35
+	P:	0.19
+	Q:	0.43
+	R:	0.17
+	S:	0.3
+	T:	0.17
+	V:	0.32
+	Y:	0.46
+	Z:	0.39
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1439
+	 acceptance rate above upper target of 0.325: 853
+Begin saving restart file(s) at sample (iteration): 880 (4400)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 880 (4400)
+	 current logPosterior: -2.8054e+06 
+	 current logLikelihood: -2.80033e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.765832
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.23
+	C:	0.44
+	D:	0.43
+	E:	0.48
+	F:	0.48
+	G:	0.32
+	H:	0.51
+	I:	0.25
+	K:	0.46
+	L:	0.17
+	N:	0.41
+	P:	0.28
+	Q:	0.39
+	R:	0.14
+	S:	0.28
+	T:	0.28
+	V:	0.24
+	Y:	0.43
+	Z:	0.27
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1586
+	 acceptance rate above upper target of 0.325: 805
+Begin saving restart file(s) at sample (iteration): 900 (4500)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 900 (4500)
+	 current logPosterior: -2.80535e+06 
+	 current logLikelihood: -2.80031e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.76482
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.18
+	C:	0.44
+	D:	0.45
+	E:	0.39
+	F:	0.45
+	G:	0.27
+	H:	0.48
+	I:	0.33
+	K:	0.43
+	L:	0.25
+	N:	0.41
+	P:	0.25
+	Q:	0.44
+	R:	0.29
+	S:	0.27
+	T:	0.27
+	V:	0.25
+	Y:	0.44
+	Z:	0.44
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1478
+	 acceptance rate above upper target of 0.325: 845
+Begin saving restart file(s) at sample (iteration): 920 (4600)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 920 (4600)
+	 current logPosterior: -2.80547e+06 
+	 current logLikelihood: -2.80032e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.782188
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.23
+	C:	0.43
+	D:	0.54
+	E:	0.51
+	F:	0.41
+	G:	0.29
+	H:	0.43
+	I:	0.3
+	K:	0.48
+	L:	0.26
+	N:	0.46
+	P:	0.25
+	Q:	0.43
+	R:	0.2
+	S:	0.25
+	T:	0.17
+	V:	0.23
+	Y:	0.49
+	Z:	0.49
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1484
+	 acceptance rate above upper target of 0.325: 867
+Begin saving restart file(s) at sample (iteration): 940 (4700)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 940 (4700)
+	 current logPosterior: -2.80539e+06 
+	 current logLikelihood: -2.80031e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.781789
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.32
+	C:	0.48
+	D:	0.5
+	E:	0.45
+	F:	0.41
+	G:	0.25
+	H:	0.44
+	I:	0.32
+	K:	0.55
+	L:	0.19
+	N:	0.45
+	P:	0.25
+	Q:	0.47
+	R:	0.19
+	S:	0.3
+	T:	0.24
+	V:	0.21
+	Y:	0.36
+	Z:	0.42
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1462
+	 acceptance rate above upper target of 0.325: 837
+Begin saving restart file(s) at sample (iteration): 960 (4800)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 960 (4800)
+	 current logPosterior: -2.80526e+06 
+	 current logLikelihood: -2.80023e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.765862
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.36
+	C:	0.45
+	D:	0.4
+	E:	0.35
+	F:	0.41
+	G:	0.24
+	H:	0.53
+	I:	0.28
+	K:	0.43
+	L:	0.27
+	N:	0.55
+	P:	0.19
+	Q:	0.46
+	R:	0.13
+	S:	0.29
+	T:	0.29
+	V:	0.24
+	Y:	0.43
+	Z:	0.47
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1486
+	 acceptance rate above upper target of 0.325: 863
+Begin saving restart file(s) at sample (iteration): 980 (4900)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 980 (4900)
+	 current logPosterior: -2.80551e+06 
+	 current logLikelihood: -2.80032e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.77521
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.28
+	C:	0.35
+	D:	0.49
+	E:	0.38
+	F:	0.43
+	G:	0.31
+	H:	0.35
+	I:	0.34
+	K:	0.41
+	L:	0.22
+	N:	0.39
+	P:	0.19
+	Q:	0.48
+	R:	0.16
+	S:	0.26
+	T:	0.24
+	V:	0.22
+	Y:	0.43
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1608
+	 acceptance rate above upper target of 0.325: 784
+Begin saving restart file(s) at sample (iteration): 1000 (5000)
+Begin writing restart file
+End writing restart file
+Status at thinned sample (iteration): 1000 (5000)
+	 current logPosterior: -2.80547e+06 
+	 current logLikelihood: -2.80034e+06
+No longer adapting
+	 current stdDevSynthesisRate estimate for selection category 0: 0.776036
+	 current stdDevSynthesisRate proposal width: 0.0362388
+	 current Mixture element probability for element 0: 1
+Acceptance rates for Codon Specific Parameters
+Target range: 0.175-0.375 
+Adjustment range: < 0.225 or > 0.325 
+	AA	Acc.Rat
+	A:	0.27
+	C:	0.24
+	D:	0.48
+	E:	0.49
+	F:	0.5
+	G:	0.27
+	H:	0.41
+	I:	0.35
+	K:	0.44
+	L:	0.18
+	N:	0.4
+	P:	0.21
+	Q:	0.45
+	R:	0.17
+	S:	0.18
+	T:	0.27
+	V:	0.32
+	Y:	0.53
+	Z:	0.41
+Acceptance rate for synthesis rate:
+Target range: 0.225-0.325 
+Adjustment range: < 0.225 or > 0.325 
+	 acceptance rates below lower target of 0.225: 1596
+	 acceptance rate above upper target of 0.325: 753
+##################################################
+Geweke Score after 5000 iterations: 0.934169
+##################################################
+Stopping run based on convergence after 5000 iterations
+
+Begin writing restart file
+End writing restart file
+leaving MCMC loop
+Error in loadNamespace(x) : there is no package called ‘Hmisc’
+Calls: plot ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Execution halted
