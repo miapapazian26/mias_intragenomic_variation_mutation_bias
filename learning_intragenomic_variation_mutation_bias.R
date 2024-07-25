@@ -70,9 +70,10 @@ gunzip mias_intragenomic_variation_mutation_bias/fasta/revisit_cds_data/*.gz
 #use script runRoc_parallel and edit for which species needed to analyze 
 
 #LOOPING 
+#loop was easily written in by coding: 
+for SPECIES in "${SPECIES_LIST[@]}"; do 
 
-
-
+INPUT="${INFOLDER}/${SPECIES}${SUFFIX}"
 
 
 #geweke score: a stats test used to asses the convergence of MCMC simulations
