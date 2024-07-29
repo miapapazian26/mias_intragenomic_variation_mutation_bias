@@ -96,6 +96,11 @@ blastx #compares a nucleotide query sequence translated in all reading frames ag
 tblastn #compares a protein query sequence against a nucleotide sequence database translated in all reading frames.
 tblastx #compares the six-frame translations of a nucleotide query sequence against the six-frame translations of a nucleotide sequence database.
 
+#RE-CREATING FIGURES 
+#using the prediciting_phi.Rmd file, we can recreate the figures from the paper. 
+
+
+
 
 
 # PLOTTING

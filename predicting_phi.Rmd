@@ -3,14 +3,17 @@ title: Accounting for intragenomic variation in mutation bias improves predictio
   of gene expression
 author: "Alex Cope"
 date: "4/12/2021"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=F, results='hide',message=F)
 #rm(list=ls())
 library(tidyverse)
-library(AnaCoDa,lib.loc="~/R_dev")
+library(tidyr)
+library(AnaCoDa)
 library(rtracklayer)
 library(cowplot)
 library(ggpubr)
@@ -20,7 +23,8 @@ library(ggside)
 library(ggtree)
 library(scales)
 library(seqinr)
-
+library(broom)
+library(purrr)
 
 ```
 
@@ -427,7 +431,7 @@ y.label <- "Predicted Expression"
 
 runs.k.1 <- paste0("Results/ConstMut/",species,"/run_2/Parameter_est/gene_expression.txt")
 runs.k.2 <- paste0("Results/VarMut/",species,"/run_2/Parameter_est/gene_expression.txt")
-codonw.files <- paste0("/data2/cope/codonW/",species,"/",str_replace(species,".cds",".out_all"))
+codonw.files <- paste0("Results/CodonW/", str_replace(species,".cds$",".out_all"))
 
 mixtures <- paste0("Results/Clustering/",species)
 emp.data <- paste0("Data/Expression/",species)
@@ -582,7 +586,7 @@ gc.sig <- target.species.gc %>%
           nest(GC3) %>% 
           pivot_wider(names_from=Cluster,values_from = data) %>% 
           mutate(ks.results=purrr::map2(`2`,`1`,~ks.test(.x$GC3,.y$GC3))) %>% 
-          mutate(tidied=purrr::map(ks.results,tidy),`1` = purrr::map(`1`, nrow),`2` = purrr::map(`2`, nrow)) %>% 
+          mutate(tidied=purrr::map(ks.results, tidy),`1` = purrr::map(`1`, nrow),`2` = purrr::map(`2`, nrow)) %>% 
           unnest(tidied,`1`,`2`) %>% 
           dplyr::select(-ks.results) %>% 
           mutate(p.value=ifelse(p.value == 0,
@@ -760,7 +764,7 @@ top5.rscu <- lapply(target.species,function(x) {
               rscu <- rscu %>% dplyr::select(codon,RSCU)
 }) %>% bind_rows(.id="Species")
 
-top5.rscu.wide <- top5.rscu %>% pivot_wider(id=codon,names_from=Species,values_from = RSCU)
+top5.rscu.wide <- top5.rscu %>% pivot_wider(names_from=Species,values_from = RSCU)
 scu.rscu <- compareRSCU(top5.rscu.wide,"saccharomyces_cerevisiae.max.cds","saccharomyces_uvarum.max.cds")
 cpa.rscu <- compareRSCU(top5.rscu.wide,"candida_parapsilosis.max.cds","candida_albicans.max.cds")
 cpd.rscu <- compareRSCU(top5.rscu.wide,"candida_parapsilosis.max.cds","candida_dubliniensis.max.cds")
@@ -1271,7 +1275,7 @@ corr.per.species.wide <- corr.per.species %>%
 med.diff <- gc.mixture.df %>% 
             group_by(Species,Cluster) %>% 
             summarize(Median=median(GC3)) %>% 
-            pivot_wider(Species,names_from=Cluster,values_from=Median) %>%
+            pivot_wider(id_cols=Species,names_from=Cluster,values_from=Median) %>%
              mutate(Species=cleanSpeciesLabels(Species),Median.Diff = `2` - `1`)
 
 corr.per.species.wide <- corr.per.species.wide %>% left_join(med.diff,by="Species")
@@ -1282,8 +1286,18 @@ corr.per.species.wide <- corr.per.species.wide %>% left_join(med.diff,by="Specie
 
 ```{r echo= F,fig.width=12,fig.height=12}
 
-est.tree <- treeVsCorrelation(tree,corr.per.species.wide)
-est.tree <- est.tree + theme_tree2()+ theme(text = element_text(size=12),
+est.tree <- treeVsCorrelation(tree, corr.per.species.wide)
+est.tree <- est.tree + theme_tree2() + theme(text = element_text(size=12),
+                                          strip.text = element_text(size=12),
+                                            legend.title = element_text(size=12),
+                                           legend.text = element_text(size=12),
+                                          strip.background = element_blank()) + 
+  xlim_tree(1100) + 
+  labs(color = "Clade")
+est.tree
+
+est.tree <- treeVsCorrelation(tree, corr.per.species.wide,"Phi_Shared_Mutation","Correlation:\nEmpirical vs. Predicted Expression")
+est.tree <- est.tree + theme_tree2() + theme(text = element_text(size=12),
                                           strip.text = element_text(size=12),
                                             legend.title = element_text(size=12),
                                            legend.text=element_text(size=12),
@@ -1292,31 +1306,21 @@ est.tree <- est.tree + theme_tree2()+ theme(text = element_text(size=12),
   labs(color = "Clade")
 est.tree
 
-est.tree <- treeVsCorrelation(tree,corr.per.species.wide,"Phi_Shared_Mutation","Correlation:\nEmpirical vs. Predicted Expression")
-est.tree <- est.tree + theme_tree2()+ theme(text = element_text(size=12),
-                                          strip.text = element_text(size=12),
-                                            legend.title = element_text(size=12),
-                                           legend.text=element_text(size=12),
-                                          strip.background=element_blank()) + 
-  xlim_tree(1100) + 
-  labs(color = "Clade")
-est.tree
 
 
-
-med.diff.plot <- ggplot(corr.per.species.wide,aes(x=Median.Diff,y=ROC_Difference,color=Major.clade)) + geom_point() +
+med.diff.plot <- ggplot(corr.per.species.wide, aes(x=Median.Diff, y=ROC_Difference, color=Major.clade)) + geom_point() +
             xlab("Difference in Median GC3%\nBetween Higher and Lower Clusters") +
             ylab("Correlation Difference\nVarMut vs. ConstMut") +
             theme_cowplot() +
             theme(aspect.ratio = 1) +
             ggtitle("Effects of GC3% Variation\non Ability to Detect Selection")+
-            stat_cor(aes(x=Median.Diff,y=ROC_Difference),method="spearman",label.sep = "\n",inherit.aes = F)
+            stat_cor(aes(x=Median.Diff, y=ROC_Difference), method="spearman", label.sep = "\n", inherit.aes = F)
 
 
 x <- pic(corr.per.species.wide$Median.Diff,tree)
 y <- pic(corr.per.species.wide$ROC_Difference,tree)
 cor.test(x,y,method="spearman")
-right <- plot_grid(med.diff.plot+theme(legend.position = "none"),legend,nrow=2)
+right <- plot_grid(med.diff.plot + theme(legend.position = "none"), legend, nrow=2)
 
 comb <- plot_grid(est.tree+theme(legend.position = "none"),right,ncol=2,labels=c("A","B"))
 comb
