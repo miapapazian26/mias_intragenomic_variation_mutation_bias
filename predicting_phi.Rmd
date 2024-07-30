@@ -396,19 +396,16 @@ compareGC3ToClusterFreq <- function(cluster.file,gc.file,gff.file,gff.id="transc
 
 ```
 
-
 # Set up
-
-
 
 ```{r echo = F, message = F}
 species <- list.files("Data/Expression/",pattern="*.max.cds")
 ```
 
-
 ## Rescale selection coefficients to mutation bias -- don't need to run.
 
 These files should already be present in the Results directory.
+
 ```{r}
 
 target.dir <- paste0("Results/ConstMut/",species,"/
@@ -419,9 +416,6 @@ target.dir <- paste0("Results/VarMut/",species,"/run_2/")
 purrr::map(target.dir,rescaleParam)
 
 ```
-
-
-
 
 ```{r echo=F,warning=F,message=F}
 
@@ -471,7 +465,6 @@ gc.mixture.df <- gc.mixture.df %>%
 
 ```
 
-
 ## Create Table
 
 This will create a table for comparing ConstMut and VarMut expression predictions with empirical data.
@@ -508,8 +501,7 @@ df.long.split <- df.long %>% group_by(Species) %>% group_split()
 
 # Generate plots comparing empirical and predicted expression
 
-This will generate scatter plots similar to those seen in Figures 1 and 2 comparing predicted and empirical expression estimates for the ConstMut and VarMut model.
-Will also compare predicted expression estimates between the two models. 
+This will generate scatter plots similar to those seen in Figures 1 and 2 comparing predicted and empirical expression estimates for the ConstMut and VarMut model. Will also compare predicted expression estimates between the two models.
 
 ```{r echo = F, warning = F,fig.width=16,fig.height=7}
 purrr::map(df.long.split,plotSpecies)
@@ -518,11 +510,7 @@ purrr::map(df.long.split,plotSpecies)
 
 # Create Figure 1
 
-Figure 1 shows the results of the ConstMut model across three genera: Saccharomyces, Candida, Ogataea.
-Each genera has a species where predicted expression correlates with the empirical estimates of mRNA abundance from kallisto, while the other species show weak or even negative correlations.
-We also show the distributions of GC3% of the two clusters estimated from the Correspondence Analysis (CA) + CLARA clustering of absolute codon frequencies (see R_scripts/ca.R). The cluster with the highest median GC3% is designated as the Higher GC3% cluster.
-The difference in median GC3% between the clusters and the results of a KS test are indicated by the brackets. 
-We also show the phylogenetic relationships between the species, units in millions of years. 
+Figure 1 shows the results of the ConstMut model across three genera: Saccharomyces, Candida, Ogataea. Each genera has a species where predicted expression correlates with the empirical estimates of mRNA abundance from kallisto, while the other species show weak or even negative correlations. We also show the distributions of GC3% of the two clusters estimated from the Correspondence Analysis (CA) + CLARA clustering of absolute codon frequencies (see R_scripts/ca.R). The cluster with the highest median GC3% is designated as the Higher GC3% cluster. The difference in median GC3% between the clusters and the results of a KS test are indicated by the brackets. We also show the phylogenetic relationships between the species, units in millions of years.
 
 ```{r echo = F,fig.width=9,fig.height=9}
 
@@ -631,7 +619,6 @@ ggsave("Figures/candida_ahmed_poster.png",plot = emp.pred.gc3,width = 12,height 
 
 ```
 
-
 ```{r,fig.width=21,fig.height=10}
 
 cai <- compareSpeciesPlot(target.species.df,metric = "CAI_CA",title="",ncol=8)
@@ -645,11 +632,9 @@ cai <- compareSpeciesPlot(target.species.df,metric = "CAI_ribo",title="",ncol=8)
 cai
 ```
 
+# Create Supplementary Figure 1
 
-
-# Create Supplementary Figure 1 
-
-These plots illustrate that the apparent drop in correlation between predicted and empirical expression sets when using the ConstMut model is not due to quality of the RNA-seq data sets. 
+These plots illustrate that the apparent drop in correlation between predicted and empirical expression sets when using the ConstMut model is not due to quality of the RNA-seq data sets.
 
 ```{r}
 target.species <- c("candida_parapsilosis.max.cds","candida_albicans.max.cds","candida_dubliniensis.max.cds","saccharomyces_cerevisiae.max.cds","saccharomyces_uvarum.max.cds","ogataea_polymorpha.max.cds","ogataea_parapolymorpha.max.cds","ogataea_methanolica.max.cds")
@@ -680,6 +665,7 @@ count.box
 ## Load orthologs
 
 Orthologs were determined using OrthoFinder v2.3.14.
+
 ```{r}
 ortho <- read_tsv("Data/Orthologs/ortholog_matrix.tsv",col_types = cols())
 ```
@@ -736,7 +722,6 @@ ggsave2("Figures/Supplementary_Figure_1.pdf",height=12,width=12)
 
 # Create Supplementary Figure 2 and 3
 
-
 ```{r fig.width=12,fig.height=18}
 
 compareRSCU <- function(df,species.1,species.2)
@@ -776,8 +761,6 @@ high.rscu
 ggsave("Figures/Supplementary_Figure_2.pdf",high.rscu,width=12,height=18)
 ```
 
-
-
 ```{r fig.wigth=12, fig.height=12}
 bottom5.rscu <- lapply(target.species,function(x) {
               fasta <- read.fasta(str_c("Data/Bottom5_phi/",x))
@@ -802,17 +785,9 @@ rscu.high.low.plot
 ggsave("Figures/Supplementary_Figure_3.pdf",rscu.high.low.plot,width=12,height=12)
 ```
 
-
-
-
-
-
 # Create Figure 2
 
-Figure 2 compares the results from the ConstMut and VarMut models, with the latter allowing mutation bias parameters to vary for genes in the the different clusters.
-Species showing greater differences in the median GC3% between the two clusters show improvement in correlations between predicted and empirical gene expression estimates, suggesting the model is doing better at detecting selection on codon usage. 
-For the other species, the correlation is not affected or weakened, the latter consistent with dispersing the signals of selection.
-We observe that in the case of significant intragenomic mutation bias variation, the predicted expression estimates for ROC-SEMPPR appear to recapitulate the clusters from the CA + CLARA clustering.
+Figure 2 compares the results from the ConstMut and VarMut models, with the latter allowing mutation bias parameters to vary for genes in the the different clusters. Species showing greater differences in the median GC3% between the two clusters show improvement in correlations between predicted and empirical gene expression estimates, suggesting the model is doing better at detecting selection on codon usage. For the other species, the correlation is not affected or weakened, the latter consistent with dispersing the signals of selection. We observe that in the case of significant intragenomic mutation bias variation, the predicted expression estimates for ROC-SEMPPR appear to recapitulate the clusters from the CA + CLARA clustering.
 
 ```{r echo = F,fig.width=16,fig.height=14}
 bad.fits <- target.species.df %>% filter(Species %in% c("S. uvarum","C. albicans","C. dubliniensis","O. parapolymorpha","O. polymorpha"))
@@ -834,12 +809,9 @@ phi
 ggsave2("Figures/candida_for_ahmed.png",plot=phi,width = 8,height = 14)
 ```
 
-
-
 # Create Figure 3
 
-This figure illustrates the physical clustering of genes assigned to the same clusters determined in the CA + CLARA approach. 
-The left panels quantify this covariation using 20-gene moving averages, while the right panels use non-overlapping windows of 20 genes. 
+This figure illustrates the physical clustering of genes assigned to the same clusters determined in the CA + CLARA approach. The left panels quantify this covariation using 20-gene moving averages, while the right panels use non-overlapping windows of 20 genes.
 
 ```{r echo = F}
 
@@ -896,12 +868,6 @@ ggsave2("Figures/Figure_3.pdf",height=12,width=12)
 
 ```
 
-
-
-
-
-
-
 # Create Supplementary Figures 4 - 11, 15, 16
 
 The same as the left panels for Figure 3, but for all chromosomes.
@@ -954,7 +920,6 @@ ggsave2("Figures/Supplementary_Figure_15.pdf",plot=lkluy.all$Mov.Avg,height=12,w
 ggsave2("Figures/Supplementary_Figure_16.pdf",plot=ltherm.all$Mov.Avg,height=12,width=12)
 ```
 
-
 ```{r}
 
 lkluy.c <- compareGC3ToClusterFreq("Results/Clustering/lachancea_kluyveri.max.cds","Data/GC/lachancea_kluyveri.max.cds","Data//gtf/lachancea_kluyveri.max.gtf",title="L.kluyveri Chr. C",chr.to.plot = c("SAKL0C"))
@@ -967,11 +932,9 @@ comb <- plot_grid(lkluy.b[[1]],lkluy.c[[1]],nrow=1,align = "h")
 comb
 ```
 
-
-
 # Create Supplementary Figure 12
 
-Same as right side panels in Figure 3, but for the species showing little impact of the VarMut model. 
+Same as right side panels in Figure 3, but for the species showing little impact of the VarMut model.
 
 ```{r echo = F,fig.width=9,fig.height=9}
 scer <- compareGC3ToClusterFreq("Results/Clustering/saccharomyces_cerevisiae.max.cds","Data/GC/saccharomyces_cerevisiae.max.cds","Data//gff/saccharomyces_cerevisiae_max.cds",plots.to.create = "independent",gff.id = "locus_tag",chr.to.exclude = "NC_001224.1")
@@ -993,8 +956,7 @@ ggsave("Figures/Supplementary_Figure_12.pdf",spec.compare,width=9,height=9)
 
 # Create Figure 4
 
-This figure highlights the impact of the VarMut model on identification of the optimal or preferred codon for each amino acid and each species.
-In the cases where the optimal codon is correctly identified, we still observe large changes in the magnitude of the selection coefficients.
+This figure highlights the impact of the VarMut model on identification of the optimal or preferred codon for each amino acid and each species. In the cases where the optimal codon is correctly identified, we still observe large changes in the magnitude of the selection coefficients.
 
 ```{r echo=F,fig.width=14,fig.height=14}
 sel.k1.files <- paste0("Results//ConstMut/",species,"/run_2/Parameter_est/",species,"_Selection.csv")
@@ -1098,10 +1060,7 @@ ggsave("Figures/Figure_4.pdf",full,width=14,height=14)
 
 # Create Supplementary Figure 13
 
-Selection coefficients for an amino acid are scaled relative to a single reference codon for an amino acid.
-Showing the impact of VarMut model on selection coefficient estimates, but this time with all codons rescaled to represent the NNG/C codon relative to the corresponding NNA/T codon.
-This makes it a little easier to observe the effects of variation in mutation biases on the selection coefficients of G vs. A ending codons or C vs. T ending codons, regardless of which codon is the overall optimal.
-
+Selection coefficients for an amino acid are scaled relative to a single reference codon for an amino acid. Showing the impact of VarMut model on selection coefficient estimates, but this time with all codons rescaled to represent the NNG/C codon relative to the corresponding NNA/T codon. This makes it a little easier to observe the effects of variation in mutation biases on the selection coefficients of G vs. A ending codons or C vs. T ending codons, regardless of which codon is the overall optimal.
 
 ```{r echo=F,fig.width=12,fig.height=6}
 sel.k1.files <- paste0("Results//ConstMut/",species,"/run_2/Parameter_est/",species,"_Selection_GC_rescaled.csv")
@@ -1159,13 +1118,9 @@ sel.gc.plot
 ggsave2("Figures/Supplementary_Figure_13.pdf",plot = sel.gc.plot,width=12,height=6)
 ```
 
-
-
 # Create Supplementary Figure 14
 
-Mutation bias for an amino acid are scaled relative to a single reference codon for an amino acid.
-This figure illustrates the difference in mutation bias estimates between the Lower and Higher GC3% clusters, but with all codons rescaled to represent the NNG/C codon relative to the corresponding NNA/T codon.
-
+Mutation bias for an amino acid are scaled relative to a single reference codon for an amino acid. This figure illustrates the difference in mutation bias estimates between the Lower and Higher GC3% clusters, but with all codons rescaled to represent the NNG/C codon relative to the corresponding NNA/T codon.
 
 ```{r echo=F,fig.width=12,fig.height=6}
 mut.lower.files <- paste0("Results//VarMut/",species,"/run_2/Parameter_est/1_Mutation_GC_rescaled.csv")
@@ -1246,9 +1201,7 @@ ggsave2("Figures/Supplementary_Figure_14.pdf",plot = mut.gc.plot,width=12,height
 
 ## Create Figure 5
 
-This figure shows the impact of intragenomic variation in mutation bias across 49 Saccharomycotina budding yeasts.
-Clade names are taken from Labella et al. 2019, Plos Genetics.
-Results indicate that VarMut model improves the ability to detect selection on codon usage for species showing larger differences in GC3% between the Lower and Higher GC3% clusters.  
+This figure shows the impact of intragenomic variation in mutation bias across 49 Saccharomycotina budding yeasts. Clade names are taken from Labella et al. 2019, Plos Genetics. Results indicate that VarMut model improves the ability to detect selection on codon usage for species showing larger differences in GC3% between the Lower and Higher GC3% clusters.
 
 ```{r echo = F, warning =F}
 corr.per.species <- map_df(df.long.split,getCorrelation)
@@ -1283,7 +1236,6 @@ corr.per.species.wide <- corr.per.species.wide %>% left_join(med.diff,by="Specie
 
 ```
 
-
 ```{r echo= F,fig.width=12,fig.height=12}
 
 est.tree <- treeVsCorrelation(tree, corr.per.species.wide)
@@ -1317,34 +1269,32 @@ med.diff.plot <- ggplot(corr.per.species.wide, aes(x=Median.Diff, y=ROC_Differen
             stat_cor(aes(x=Median.Diff, y=ROC_Difference), method="spearman", label.sep = "\n", inherit.aes = F)
 
 
-x <- pic(corr.per.species.wide$Median.Diff,tree)
-y <- pic(corr.per.species.wide$ROC_Difference,tree)
-cor.test(x,y,method="spearman")
-right <- plot_grid(med.diff.plot + theme(legend.position = "none"), legend, nrow=2)
+x <- pic(corr.per.species.wide$Median.Diff, tree)
+y <- pic(corr.per.species.wide$ROC_Difference, tree)
+cor.test(x, y, method = "spearman")
+right <- plot_grid(med.diff.plot + theme(legend.position = "none"), nrow=2)
 
-comb <- plot_grid(est.tree+theme(legend.position = "none"),right,ncol=2,labels=c("A","B"))
+comb <- plot_grid(est.tree, right, ncol=2, labels=c("A","B"))
 comb
 
-ggsave2("Figures/Figure_5.pdf",plot=comb,width=12,height=8)
+ggsave2("Figures/Figure_5.pdf", plot=comb, width=12, height=8)
 
 ```
 
 ```{r,fig.width=9,fig.height=8}
-est.tree <- treeVsCorrelation(tree,corr.per.species.wide,"Phi_Shared_Mutation","Correlation:\nEmpirical vs. Predicted Expression")
-est.tree <- est.tree + theme_tree2()+ theme(text = element_text(size=12),
+est.tree <- treeVsCorrelation(tree, corr.per.species.wide, "Phi_Shared_Mutation", "Correlation:\nEmpirical vs. Predicted Expression")
+est.tree <- est.tree + theme_tree2() + theme(text = element_text(size=12),
                                           strip.text = element_text(size=12),
-                                            legend.title = element_text(size=12),
-                                           legend.text=element_text(size=12),
-                                          strip.background=element_blank()) + 
+                                          legend.title = element_text(size=12),
+                                          legend.text=element_text(size=12),
+                                          strip.background = element_blank(),
+                                          legend.position = "none") + 
   xlim_tree(1100) + 
   labs(color = "Clade")
 est.tree
 ggsave2("Figures/phi_shared_tree.pdf",plot=est.tree,width=9,height=8)
 
 ```
-
-
-
 
 ```{r}
 
@@ -1374,28 +1324,30 @@ dic.df <- dic.df %>% left_join(corr.per.species.wide,by="Species")
 ```{r,fig.width=7,fig.height=7}
 
 
-dic.loglik.plot <- ggplot(dic.df,aes(x=ROC_Difference,y=Delta.DIC.LogLik,label=Species)) + geom_point() +
-            ggrepel::geom_text_repel(point.padding = 5) +
+dic.loglik.plot <- ggplot(dic.df, aes(x = ROC_Difference, y = Delta.DIC.LogLik, label = Species)) + geom_point() +
+            ggrepel::geom_text_repel(point.padding = 5, max.overlaps = Inf) +
             theme_cowplot() +
-            stat_cor(method="spearman",label.sep="\n",label.y.npc = "bottom",label.x.npc = "left") +
-            geom_hline(yintercept = 0,linetype="dashed") +
-            geom_vline(xintercept = 0,linetype="dashed") +
+            stat_cor(method = "spearman", label.sep = "\n", label.y.npc = "bottom", label.x.npc = "left") +
+            geom_hline(yintercept = 0, linetype = "dashed") + 
+            geom_vline(xintercept = 0, linetype = "dashed") +
             xlab("Spearman Correlation Empirical and Predicted Expression\nVarMut - ConstMut") +
-            ylab(expression(atop(Delta*"DIC","VarMut - ConstMut"))) +
+            ylab(expression(atop(Delta * "DIC", "VarMut - ConstMut"))) +
             ggtitle("Comparing ConstMut and VarMut Models\nEmpirical vs. Deviance Information Criterion") +
-            theme(aspect.ratio = 1)
+            theme(aspect.ratio = 1, legend.position = "none")
+
 dic.loglik.plot
 
-dic.loglik.vs.gc3 <- ggplot(dic.df,aes(x=Median.Diff,y=Delta.DIC.LogLik,label=Species)) + geom_point() +
-            ggrepel::geom_text_repel(point.padding = 5) +
+dic.loglik.vs.gc3 <- ggplot(dic.df, aes(x=Median.Diff, y=Delta.DIC.LogLik, label=Species)) + geom_point() +
+            ggrepel::geom_text_repel(point.padding = 5, max.overlaps = Inf) +
             theme_cowplot() +
-            stat_cor(method="spearman",label.sep="\n",label.y.npc = "bottom",label.x.npc = "left") +
-            geom_hline(yintercept = 0,linetype="dashed") +
-            geom_vline(xintercept = 0,linetype="dashed") +
+            stat_cor(method = "spearman", label.sep = "\n", label.y.npc = "bottom", label.x.npc = "left") +
+            geom_hline(yintercept = 0, linetype = "dashed") +
+            geom_vline(xintercept = 0, linetype = "dashed") +
             xlab("Difference in Median GC3% \nHigher GC3% Cluster - Lower GC3% Cluster") +
-            ylab(expression(atop(Delta*"DIC","VarMut - ConstMut"))) +
+            ylab(expression(atop(Delta * "DIC","VarMut - ConstMut"))) +
             ggtitle("Impact of Differences in GC3% between cluster\non model selection") +
             theme(aspect.ratio = 1)
+
 dic.loglik.vs.gc3 
 
 dic.comp <- plot_grid(dic.loglik.plot,dic.loglik.vs.gc3,labels=c("A","B"))
@@ -1403,8 +1355,6 @@ dic.comp
 
 ggsave2("Figures/dic.pdf",dic.comp,width=14,height = 7)
 ```
-
-
 
 ```{r}
 deta.k1.files <- file.path("Results/ConstMut/",species,"run_2","Parameter_est",paste0(species,"_Selection.csv"))
@@ -1555,19 +1505,13 @@ p
 
 ```
 
-
-
-
-
-
 ```{r}
 
 species <- c("candida_albicans.max.cds","candida_dubliniensis.max.cds","saccharomyces_uvarum.max.cds","ogataea_polymorpha.max.cds","ogataea_parapolymorpha.max.cds")
 
 runs.k.1 <- paste0("Results/VarMut/",species,"/run_2/Parameter_est/gene_expression.txt")
-runs.k.2 <- paste0("Results/VarMut_3/Longer/",species,"/run_2/Parameter_est/gene_expression.txt")
-codonw.files <- paste0("Results/CodonW/",species,"/",str_replace(species,".cds",".out_all"))
-
+runs.k.2 <- paste0("Results/VarMut_3/",species,"/run_2/Parameter_est/gene_expression.txt")
+codonw.files <- paste0("Results/CodonW/", str_replace(species,".cds$",".out_all"))
 
 mixtures <- paste0("Results/Clustering_k_3/",species)
 emp.data <- paste0("Data/Expression/",species)
@@ -1607,8 +1551,6 @@ gc.mixture.df <- mixtures.df %>% left_join(gc.df,by=c("Species","GeneID"))
 
 ```
 
-
-
 ```{r,warning=F}
 
 
@@ -1640,7 +1582,6 @@ df.long <- df %>%
 
 df.long.split <- df.long %>% group_by(Species) %>% group_split()
 ```
-
 
 ```{r echo = F,fig.width=18,fig.height=14}
 

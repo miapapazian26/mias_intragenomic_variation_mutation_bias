@@ -97,11 +97,8 @@ tblastn #compares a protein query sequence against a nucleotide sequence databas
 tblastx #compares the six-frame translations of a nucleotide query sequence against the six-frame translations of a nucleotide sequence database.
 
 #RE-CREATING FIGURES 
-#using the prediciting_phi.Rmd file, we can recreate the figures from the paper. 
-
-
-
-
+#using the 'predicting_phi.Rmd file', we can recreate the figures from the paper. 
+#saves results to an html file link, had to go through and debug. 
 
 # PLOTTING
 # load libraries
