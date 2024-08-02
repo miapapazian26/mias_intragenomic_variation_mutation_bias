@@ -70,6 +70,7 @@ gunzip mias_intragenomic_variation_mutation_bias/fasta/revisit_cds_data/*.gz
 #use script runRoc_parallel and edit for which species needed to analyze 
 
 #LOOPING 
+#in bash
 #loop was easily written in by coding: 
 for SPECIES in "${SPECIES_LIST[@]}"; do 
 

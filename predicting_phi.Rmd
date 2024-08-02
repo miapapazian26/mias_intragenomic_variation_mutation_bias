@@ -4,8 +4,8 @@ title: Accounting for intragenomic variation in mutation bias improves predictio
 author: "Alex Cope"
 date: "4/12/2021"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
