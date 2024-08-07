@@ -148,7 +148,7 @@ ln -s /~/revisit_Cope-and-Shah_2022_yeast-analysis/data/cds
 ls -l 
 
 
-# ENTERING AND EXITING PYTHON
+#ENTERING AND EXITING PYTHON
 exit() #to leave 
 
 #MAKING COMMITS IN BASH
@@ -156,5 +156,13 @@ exit() #to leave
 git status 
 git add . #adds all changes  
 git commit -m #makes commits and adds a message 
+
+#UPDATING RMARKDOWN FILES/OLD CODE
+#if you want to supress warning messages from the final product, use the "supressWarnings()" function. 
+#ex. 
+library(knitr)
+suppressWarnings({
+  #insert code that generates the warnings
+})
 
 
