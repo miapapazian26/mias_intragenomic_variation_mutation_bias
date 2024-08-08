@@ -128,6 +128,32 @@ ggplot(data_long, aes(x = Species, y = MaxValue)) +
   labs(title = "Maximum Expression Levels by Species",
        x = "Species", y = "Maximum Value")
 
+#checking for missing (non-finite) values within relevant species columns
+non_finite_values <- top5.rscu.wide %>%
+  filter(!is.finite(saccharomyces_cerevisiae.max.cds) |
+           !is.finite(saccharomyces_uvarum.max.cds) |
+           !is.finite(candida_parapsilosis.max.cds) |
+           !is.finite(candida_albicans.max.cds) |
+           !is.finite(candida_dubliniensis.max.cds) |
+           !is.finite(ogataea_methanolica.max.cds) |
+           !is.finite(ogataea_parapolymorpha.max.cds) |
+           !is.finite(ogataea_polymorpha.max.cds))
+print(non_finite_values)
+
+#geom_text_repel variables 
+point.padding = 0.6,           # Adds space between the label and the point.
+box.padding = 0.6,             # Adds space around the label itself.
+max.overlaps = Inf,            # No limit on the number of label overlaps.
+nudge_x = 0.5,                 # Moves labels slightly to the right.
+nudge_y = -0.5,                # Moves labels slightly down.
+min.segment.length = 0.7,     # Keeps connecting lines at least 0.7 mm long.
+direction = "both",            # Allows labels to be repelled in both directions.
+force = 1.5,                   # Controls the strength of the repulsion force.
+size = 3                       # Sets the size of the text labels to 3.
+
+
+
+
 
 # INDIVIDUAL DATA SETS
 # install packages & load 

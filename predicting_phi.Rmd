@@ -2,7 +2,7 @@
 title: Accounting for intragenomic variation in mutation bias improves prediction
   of gene expression
 author: "Alex Cope & Mia Papazian"
-date: "8/7/2024"
+date: "8/8/2024"
 output:
   pdf_document: default
   html_document: default
@@ -625,7 +625,7 @@ ggsave("Figures/candida_ahmed_poster.png",plot = emp.pred.gc3,width = 12,height 
 
 ```
 
-```{r,fig.width=21,fig.height=10}
+```{r, fig.width=21, fig.height=10}
 
 cai <- compareSpeciesPlot(target.species.df,metric = "CAI_CA",title="",ncol=8)
 cai <- cai + ylab("CAI") + ggtitle("CAI Predictions of Gene Expression")
@@ -762,9 +762,10 @@ cpd.rscu <- compareRSCU(top5.rscu.wide,"candida_parapsilosis.max.cds","candida_d
 ompa.rscu <- compareRSCU(top5.rscu.wide,"ogataea_methanolica.max.cds","ogataea_parapolymorpha.max.cds")
 ompo.rscu <- compareRSCU(top5.rscu.wide,"ogataea_methanolica.max.cds","ogataea_polymorpha.max.cds")
 
-high.rscu <- plot_grid(scu.rscu,NULL,cpa.rscu,cpd.rscu,ompa.rscu,ompo.rscu,labels=c("A","","B","","C"),label.size=24,nrow=3,ncol=2)
+high.rscu <- plot_grid(scu.rscu, cpa.rscu, cpd.rscu, ompa.rscu, ompo.rscu, labels=c("A","","B","","C"), label.size=24, nrow=3, ncol=2)
+
 high.rscu
-ggsave("Figures/Supplementary_Figure_2.pdf",high.rscu,width=12,height=18)
+ggsave("Figures/Supplementary_Figure_2.pdf", high.rscu, width=12, height=18)
 ```
 
 ```{r fig.wigth=12, fig.height=12}
@@ -1027,13 +1028,13 @@ data <- data %>% mutate(Species=fct_relevel(Species,"S. uvarum","C. albicans","C
 # Make the plot
 donut.codon <- ggplot(data, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=Change)) +
   geom_rect() +
-  geom_label(x=3.5, aes(y=labelPosition, label=label), size=6,show.legend=F) +
+  geom_label(x=3.5, aes(y=labelPosition, label=label), size=6, show.legend=F) +
   scale_fill_viridis_d(alpha=0.5) +
   coord_polar(theta="y") +
   labs(fill="Amino Acid") +
   xlim(c(2, 4)) +
   theme_void() +
-  theme(legend.position=c(0.85,0.25),
+  theme(legend.position.inside = c(0.85, 0.25),
         legend.title=element_text(size=18),
         legend.text = element_text(size=18),
         strip.text = element_text(size=18,face="bold"),
@@ -1357,10 +1358,10 @@ dic.loglik.vs.gc3 <- ggplot(dic.df, aes(x=Median.Diff, y=Delta.DIC.LogLik, label
 
 dic.loglik.vs.gc3 
 
-dic.comp <- plot_grid(dic.loglik.plot,dic.loglik.vs.gc3,labels=c("A","B"))
+dic.comp <- plot_grid(dic.loglik.plot, dic.loglik.vs.gc3, labels=c("A","B"))
 dic.comp
 
-ggsave2("Figures/dic.pdf",dic.comp,width=14,height = 7)
+ggsave2("Figures/dic.pdf", dic.comp, width = 14, height = 7)
 ```
 
 ```{r}
@@ -1494,20 +1495,20 @@ corr.deta.dm <- corr.deta.dm %>%
 ## Use absolute value because correlation will switch depending on if using Mutation.K2.1 - Mutation.K2.2
 ## or Mutation.K2.2 - Mutation.K2.1
 p <- ggplot(corr.deta.dm, aes(x=abs(estimate), y=ROC_Difference, label=Species, color=Delta.DIC.LogLik)) + geom_point() +
-     ggrepel::geom_text_repel(point.padding = 5, max.overlaps = Inf) +
+     ggrepel::geom_text_repel(point.padding = 1, size = 3, box.padding = 1, max.overlaps = Inf, nudge_x = 0.2, nudge_y = -0.1, min.segment.length = 0.2, direction = "both", force = 1.5) +
      theme_cowplot() +
      ylab("Correlation Shift\nVarMut - ConstMut") +
      xlab("|Spearman Correlation Coefficient|\nSelection (ConstMut) - Mutation Difference (VarMut)") + 
-  stat_cor(method="spearman", aes(group = 1), label.y.npc = "bottom", label.x.npc = "center")
+  stat_cor(method="spearman", aes(color = NULL), label.y.npc = "bottom", label.x.npc = "center")
 p
 
 #plot 2: Delta.DICLogLik vs. Absolute Correlation
 p <- ggplot(corr.deta.dm, aes(x=abs(estimate), y=Delta.DIC.LogLik, label=Species, color=ROC_Difference)) + geom_point() +
-     ggrepel::geom_text_repel(point.padding = 5, max.overlaps = Inf) +
+     ggrepel::geom_text_repel(point.padding = 1, size = 3, box.padding = 2, max.overlaps = Inf, nudge_x = 0.2, nudge_y = -0.1, min.segment.length = 0.2, direction = "both", force = 1.5) +
      theme_cowplot() +
      ylab(expression(Delta*"DIC")) +
      xlab("|Spearman Correlation Coefficient|\nSelection (ConstMut) - Mutation Difference (VarMut)") + 
-  stat_cor(method="spearman", aes(group = 1), label.y.npc = "bottom",label.x.npc = "center")
+  stat_cor(method="spearman", aes(color = NULL), label.y.npc = "bottom",label.x.npc = "center")
 p
 
 ```
