@@ -35,7 +35,7 @@ for (file in cds_files) {
 #you use a dataset with clear subgroup separations. you can check if changing the number of clusters (k) leads to logical subgroupings in the output
 
 test_that("Increasing k results in more refined clustering", {
-  input_file <- "diverse_data_file.cds"  # File with groups of gene sequences
+  input_file <- "candida_apicola.max.cds"  # file with groups of gene sequences
   
   # test with k = 2 and expect 2 clusters
   output_k2 <- clustering_script(input = input_file, output = "./", k = 2)
