@@ -47,4 +47,3 @@ test_that("Increasing k results in more refined clustering", {
   expect_equal(length(unique(output_k4$Cluster)), 4, 
                info = "Expected 4 clusters with k=4")
 })
-
