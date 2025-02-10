@@ -31,3 +31,5 @@ plot(mcmc$getLogPosteriorTrace(), type = "l", main = "MCMC Log-Posterior Trace")
 
 trace <- parameter$getTraceObject()
 plot(x = trace, what = "Expression", mixture = 1, geneIndex = 669)
+#x axis is number of steps 
+#y is estimated expression level for gene index 669
