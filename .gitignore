@@ -58,5 +58,3 @@ predicting_phi.pdf
 # Ignore system files
 .DS_Store
 
-# Ignore RibModelFramework
-RibModelFramework/
