@@ -3,7 +3,7 @@
 library(AnaCoDa)
 genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/candida_tenuis.max.cds")
 parameter <- initializeParameterObject(genome = genome, sphi = 1, num.mixtures = 1, gene.assignment = rep(1, length(genome)))
-mcmc <- initializeMCMCObject(samples = 2000, thinning = 10, adaptive.width = 50)
+mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
 model <- initializeModelObject(parameter = parameter, model = "ROC")
 
 mcmc_results <- runMCMC(mcmc = mcmc, genome = genome, model = model)
