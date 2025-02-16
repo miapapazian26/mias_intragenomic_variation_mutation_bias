@@ -25,10 +25,6 @@ runMCMC(mcmc = mcmc, genome = genome, model = model)
 mcmc_file <- file.path(tempdir(), "mcmc_results.Rda")
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
-load(file.path(tempdir(), "mcmc_results.Rda"))
-print(mcmc)
-plot(mcmc$getLogPosteriorTrace(), type = "l", main = "MCMC Log-Posterior Trace")
-
 trace <- parameter$getTraceObject()
 plot(x = trace, what = "Expression", mixture = 1, geneIndex = 669)
 #x axis is number of steps 
