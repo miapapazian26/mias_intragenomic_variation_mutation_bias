@@ -1,6 +1,8 @@
 #ex: using codon data in the form of CDS in fasta format with one mixture (ROC)
 #the following example illustrates how you would estimates parameters under the ROC model of a given set of protein coding genes, assuming the same mutation and selection regime for all genes.
 library(AnaCoDa)
+library(tidyr)
+library(dplyr)
 
 #initialize genome object
 genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/candida_tenuis.max.cds")
@@ -29,3 +31,9 @@ trace <- parameter$getTraceObject()
 plot(x = trace, what = "Expression", mixture = 1, geneIndex = 669)
 #x axis is number of steps 
 #y is estimated expression level for gene index 669
+
+#extract phi values:
+phi_mat <- getExpressionEstimates(parameter = parameter, 
+                                  gene.index = 1:length(genome),
+                                  samples = 100)
+
