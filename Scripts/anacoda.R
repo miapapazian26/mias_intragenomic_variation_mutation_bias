@@ -33,7 +33,8 @@ plot(x = trace, what = "Expression", mixture = 1, geneIndex = 669)
 #y is estimated expression level for gene index 669
 
 #extract phi values:
-phi_mat <- getExpressionEstimates(parameter = parameter, 
-                                  gene.index = 1:length(genome),
-                                  samples = 100)
+estimatedExpression <- getExpressionEstimates(parameter, 1:length(genome), 100)
+
+#converting to data frame
+long_df <- as.data.frame(estimatedExpression)
 
