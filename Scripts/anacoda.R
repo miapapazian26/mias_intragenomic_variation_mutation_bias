@@ -28,13 +28,12 @@ mcmc_file <- file.path(tempdir(), "mcmc_results.Rda")
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
 trace <- parameter$getTraceObject()
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = 669)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 500)
 #x axis is number of steps 
-#y is estimated expression level for gene index 669
+#y is estimated expression level for gene index ###
 
-#extract phi values:
+#extract phi values
 estimatedExpression <- getExpressionEstimates(parameter, 1:length(genome), 100)
 
 #converting to data frame
 long_df <- as.data.frame(estimatedExpression)
-
