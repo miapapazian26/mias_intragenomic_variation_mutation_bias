@@ -1,5 +1,6 @@
 #ex: using codon data in the form of CDS in fasta format with one mixture (ROC)
 #the following example illustrates how you would estimates parameters under the ROC model of a given set of protein coding genes, assuming the same mutation and selection regime for all genes.
+
 library(AnaCoDa)
 library(tidyr)
 library(dplyr)
@@ -30,13 +31,15 @@ writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 trace <- parameter$getTraceObject()
 
 #plot trace of gene ###
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = c(99))
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = c(1))
 #x axis is number of steps 
 #y is estimated expression level for gene index ###
 
 #synthesis trace 
 synthesis_trace <- trace$getSynthesisRateTraceForGene(1)
-
 long_df <- as.data.frame(synthesis_trace)
 head(long_df)
+
+
+
 
