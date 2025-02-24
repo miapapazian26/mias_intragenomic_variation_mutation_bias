@@ -31,7 +31,7 @@ writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 trace <- parameter$getTraceObject()
 
 #plot trace of gene ###
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = c(1))
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
 #x axis is number of steps 
 #y is estimated expression level for gene index ###
 
