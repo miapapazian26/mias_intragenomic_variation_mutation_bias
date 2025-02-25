@@ -45,7 +45,7 @@ synth_trace_mix <- synth_trace_list[[1]] %>% tibble()
 
 length(synth_trace_list)
 
-#get csp
+#get csp estimates
 csp_mat <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
 head(csp_mat)
 
