@@ -31,7 +31,7 @@ writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 trace <- parameter$getTraceObject()
 
 #plot trace of gene ###
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 50)
 #x axis is number of steps 
 #y is estimated expression level for gene index ###
 
@@ -40,6 +40,7 @@ synthesis_trace <- trace$getSynthesisRateTraceForGene(1)
 long_df <- as.data.frame(synthesis_trace)
 head(long_df)
 
+synth_trace_list <- trace$getSynthesisRateTrace()
+synth_trace_mix <- synth_trace_list[[1]] %>% tibble()
 
-
-
+length(synth_trace_list)
