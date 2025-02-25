@@ -28,6 +28,7 @@ runMCMC(mcmc = mcmc, genome = genome, model = model)
 mcmc_file <- file.path(tempdir(), "mcmc_results.Rda")
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
+#get trace
 trace <- parameter$getTraceObject()
 
 #plot trace of gene ###
@@ -46,7 +47,12 @@ synth_trace_mix <- synth_trace_list[[1]] %>% tibble()
 length(synth_trace_list)
 
 #get csp estimates
-csp_mat <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
 head(csp_mat)
+
+
+#get csp traces 
+csp_trace <- parameter$getTraceObject()
+csp_trace$getCodonSpecificParameterTrace()
 
 
