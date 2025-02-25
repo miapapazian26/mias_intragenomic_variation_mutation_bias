@@ -50,9 +50,10 @@ length(synth_trace_list)
 csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
 head(csp_mat)
 
-
 #get csp traces 
 csp_trace <- parameter$getTraceObject()
-csp_trace$getCodonSpecificParameterTrace()
+csp_trace_data <- csp_trace$getCodonSpecificParameterTrace(1)
+csp_trace_1 <- csp_trace_data[[1]]
+csp_trace_df1 <- as.data.frame(csp_trace_1)
 
 
