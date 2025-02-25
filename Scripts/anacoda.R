@@ -55,7 +55,7 @@ csp_trace <- parameter$getTraceObject()
 csp_trace_data <- csp_trace$getCodonSpecificParameterTrace(1)
 csp_trace_1 <- csp_trace_data[[1]]
 csp_trace_df1 <- as.data.frame(csp_trace_1)
-#reshape the data into long format
+#reshape the data into long format - each parameter trace is in its own row 
 csp_trace_long1 <- csp_trace_df1 %>%
   pivot_longer(cols = everything(),
                names_to = "Parameter",
