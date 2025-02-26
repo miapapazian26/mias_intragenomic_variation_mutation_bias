@@ -41,15 +41,12 @@ plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
 #y is estimated expression level for gene index ###
 
 #synthesis trace 
-synthesis_trace <- trace$getSynthesisRateTraceForGene(1)
-synthesis_long_df <- as.data.frame(synthesis_trace)
-head(synthesis_long_df)
-
 synth_trace_list <- trace$getSynthesisRateTrace()
-synth_trace_mix <- synth_trace_list[[1]] %>% tibble()
+synth_trace_mix <- synth_trace_list[[1]] %>% tibble() %>% unnest(cols = c(.))
+
 head(synth_trace_mix)
 
-length(synth_trace_list)
+length(synth_trace_mix)
 
 #get csp estimates
 csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
