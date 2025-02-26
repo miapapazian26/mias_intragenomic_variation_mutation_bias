@@ -15,6 +15,10 @@ parameter <- initializeParameterObject(genome = genome, sphi = 1, num.mixtures =
 param_file <- file.path(tempdir(), "parameter.Rda")
 writeParameterObject(parameter = parameter, file = param_file)
 
+#load parameter object
+load(param_file)
+
+
 #initialize MCMC object
 mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
 
@@ -38,11 +42,12 @@ plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
 
 #synthesis trace 
 synthesis_trace <- trace$getSynthesisRateTraceForGene(1)
-long_df <- as.data.frame(synthesis_trace)
-head(long_df)
+synthesis_long_df <- as.data.frame(synthesis_trace)
+head(synthesis_long_df)
 
 synth_trace_list <- trace$getSynthesisRateTrace()
 synth_trace_mix <- synth_trace_list[[1]] %>% tibble()
+head(synth_trace_mix)
 
 length(synth_trace_list)
 
@@ -52,7 +57,7 @@ head(csp_mat)
 
 #get csp traces 
 csp_trace <- parameter$getTraceObject()
-csp_trace_data <- csp_trace$getCodonSpecificParameterTrace(1)
+csp_trace_data <- csp_trace$getCodonSpecificParameterTrace(0)
 csp_trace_1 <- csp_trace_data[[1]]
 csp_trace_df1 <- as.data.frame(csp_trace_1)
 #reshape the data into long format - each parameter trace is in its own row 
@@ -62,3 +67,10 @@ csp_trace_long1 <- csp_trace_df1 %>%
                values_to = "Value")
 head(csp_trace_long1)
 summary(csp_trace_long1) #summary stats 
+
+#mutation/selection trace 
+mutationTrace <- trace$getCodonSpecificParameterTrace(0)
+selectionTrace <- trace$getCodonSpecificParameterTrace(1)
+
+head(codon_counts) #looking at codon counts 
+head(synthesis_long_df) #looking at phi values 
