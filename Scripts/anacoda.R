@@ -41,12 +41,19 @@ plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
 #y is estimated expression level for gene index ###
 
 #synthesis trace 
+# get the synthesis rate trace
 synth_trace_list <- trace$getSynthesisRateTrace()
-synth_trace_mix <- synth_trace_list[[1]] %>% tibble() %>% unnest(cols = c(.))
 
+# convert to wide format directly without creating a tibble first
+synth_trace_mix <- do.call(rbind, synth_trace_list[[1]]) %>%
+  as_tibble()
+
+# check the first few rows
 head(synth_trace_mix)
 
+# check the number of columns
 length(synth_trace_mix)
+
 
 #get csp estimates
 csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
@@ -69,5 +76,6 @@ summary(csp_trace_long1) #summary stats
 mutationTrace <- trace$getCodonSpecificParameterTrace(0)
 selectionTrace <- trace$getCodonSpecificParameterTrace(1)
 
+#checking 
 head(codon_counts) #looking at codon counts 
-head(synthesis_long_df) #looking at phi values 
+head(synth_trace_mix) #looking at phi values 
