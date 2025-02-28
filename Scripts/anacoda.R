@@ -74,8 +74,9 @@ summary(csp_trace_long1) #summary stats
 
 #mutation/selection trace 
 mutationTrace <- trace$getCodonSpecificParameterTrace(0)
+head(mutationTrace)
 selectionTrace <- trace$getCodonSpecificParameterTrace(1)
-
+head(selectionTrace)
 #checking 
 head(codon_counts) #looking at codon counts 
 head(synth_trace_mix) #looking at phi values 
