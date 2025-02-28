@@ -4,7 +4,7 @@ parameter <- loadParameterObject("parameter.Rda")
 mcmc <- loadMCMCObject("mcmc.Rda")
 calculate_marginal_likelihood(parameter, mcmc, mixture = 1, samples = 100, scaling = 1.5)
 
-#previous code function 
+#code function 
 calculateMarginalLogLikelihood <- function(parameter, mcmc, mixture, n.samples, divisor,warnings=TRUE)
 {  
   if(divisor < 1) stop("Generalized Harmonic Mean Estimation of Marginal Likelihood requires importance sampling distribution variance divisor be greater than 1")
@@ -136,6 +136,7 @@ calculateMarginalLogLikelihood <- function(parameter, mcmc, mixture, n.samples, 
 #' opt_codons <- findOptimalCodon(csp_mat)
 #' }
 
+calculateMarginalLogLikelihood(parameter, mcmc, mixture, n.samples, divisor)
 
 #found this in the code
 # calculate the bayes factor for two models
