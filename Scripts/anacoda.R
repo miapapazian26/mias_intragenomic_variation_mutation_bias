@@ -80,3 +80,11 @@ head(selectionTrace)
 #checking 
 head(codon_counts) #looking at codon counts 
 head(synth_trace_mix) #looking at phi values 
+
+
+#logLikTrace
+#convert to dataframe 
+logLikeTrace_df <- data.frame(iteration = 1:length(logLikeTrace), logLik = logLikeTrace)
+head(logLikeTrace_df)
+
+
