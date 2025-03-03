@@ -28,14 +28,14 @@ gene_name <- "GeneX"
 delta_M <- c(-0.5, 0.1, -0.3)  # ΔM for codons
 delta_eta <- c(0.2, -0.1, 0.5)  # Δη for codons
 phi <- 50                       # protein synthesis rate (Φ)
-codon_counts <- c(10, 5, 20)     # codon counts
+codon_counts <- donut.codon$data$count     # codon counts
 
 LLikGene(gene_name, delta_M, delta_eta, phi, codon_counts)
 
 #logliklihood amino acid function 
 LLikAA <- function(delta_M, delta_eta, phi, codon_counts) {
   log_P = delta_M - delta_eta * phi
-  log_P = (log_P) - max(log_p)
+  log_P = (log_P) - max(log_P)
   p = exp(log_P)
   
  LL = dmultinom(x = codon_counts, prob = P, log = TRUE)

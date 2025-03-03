@@ -1,6 +1,5 @@
 #ex: using codon data in the form of CDS in fasta format with one mixture (ROC)
 #the following example illustrates how you would estimates parameters under the ROC model of a given set of protein coding genes, assuming the same mutation and selection regime for all genes.
-
 library(AnaCoDa)
 library(tidyr)
 library(dplyr)
@@ -17,7 +16,6 @@ writeParameterObject(parameter = parameter, file = param_file)
 
 #load parameter object
 load(param_file)
-
 
 #initialize MCMC object
 mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
@@ -74,9 +72,7 @@ summary(csp_trace_long1) #summary stats
 
 #mutation/selection trace 
 mutationTrace <- trace$getCodonSpecificParameterTrace(0)
-head(mutationTrace)
 selectionTrace <- trace$getCodonSpecificParameterTrace(1)
-head(selectionTrace)
 #checking 
 head(codon_counts) #looking at codon counts 
 head(synth_trace_mix) #looking at phi values 
