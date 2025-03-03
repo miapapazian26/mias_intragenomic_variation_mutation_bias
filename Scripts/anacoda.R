@@ -81,10 +81,23 @@ head(selectionTrace)
 head(codon_counts) #looking at codon counts 
 head(synth_trace_mix) #looking at phi values 
 
-
-#logLikTrace
+#logLikTrace (what i am comparing to)
 #convert to dataframe 
 logLikeTrace_df <- data.frame(iteration = 1:length(logLikeTrace), logLik = logLikeTrace)
 head(logLikeTrace_df)
 
+#found this in the code
+# calculate the log-marginal likelihood
+parameter <- loadParameterObject("parameter.Rda")
+mcmc <- loadMCMCObject("mcmc.Rda")
+calculate_marginal_likelihood(parameter, mcmc, mixture = 1, samples = 100, scaling = 1.5)
 
+#found this in the code
+# calculate the bayes factor for two models
+parameter1 <- loadParameterObject("parameter1.Rda")
+parameter2 <- loadParameterObject("parameter2.Rda")
+mcmc1 <- loadMCMCObject("mcmc1.Rda")
+mcmc2 <- loadMCMCObject("mcmc2.Rda")
+mll1 <- calculate_marginal_likelihood(parameter1, mcmc1, mixture = 1, samples = 500, scaling = 1.5)
+mll2 <- calculate_marginal_likelihood(parameter2, mcmc2, mixture = 1, samples = 500, scaling = 1.5)
+cat("Bayes factor: ", mll1 - mll2, "\n")
