@@ -26,8 +26,8 @@ LLikGene <- function(gene_name, delta_M, delta_eta, phi, codon_counts) {
 # example usage
 gene_name <- "GeneX"
 delta_M <- mutationTrace[[1]][[1]]  # ΔM for codons
-delta_eta <- c(0.2, -0.1, 0.5)  # Δη for codons
-phi <- 50                       # protein synthesis rate (Φ)
+delta_eta <- selectionTrace[[1]][[1]]  # Δη for codons
+phi <- synth_trace_mix                     # protein synthesis rate (Φ)
 codon_counts <- donut.codon$data$count     # codon counts
 
 LLikGene(gene_name, delta_M, delta_eta, phi, codon_counts)
