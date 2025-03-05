@@ -70,6 +70,7 @@ csp_trace_long1 <- csp_trace_df1 %>%
 head(csp_trace_long1)
 summary(csp_trace_long1) #summary stats 
 
+
 #mutation/selection trace 
 mutationTrace <- trace$getCodonSpecificParameterTrace(0)
 selectionTrace <- trace$getCodonSpecificParameterTrace(1)
