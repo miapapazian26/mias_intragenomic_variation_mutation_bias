@@ -36,14 +36,14 @@ LLikGene(gene_name, delta_M, delta_eta, phi, codon_counts)
 #logliklihood amino acid function 
 LLikAA <- function(delta_M, delta_eta, phi, codon_counts) {
   log_P = delta_M - delta_eta * phi
-  log_P = (log_P) - max(log_P)
+  log_P = log_P - max(log_P)  
   p = exp(log_P)
+
   
- LL = dmultinom(x = codon_counts, prob = P, log = TRUE)
- 
- return(LL)
-  }
+  LL = dmultinom(x = codon_counts, prob = p, log = TRUE)
+  return(LL)
+}
 
 LLikAA(delta_M, delta_eta, phi, codon_counts)
 
-  
+
