@@ -5,7 +5,7 @@ head(mutationTrace)
 selectionTrace <- trace$getCodonSpecificParameterTrace(1) #eta
 head(selectionTrace)
 head(codon_counts) #looking at codon counts 
-head(synth_trace_mix) #looking at phi values 
+head(phi) #looking at phi values 
 
 #function
 LLikGene <- function(gene_name, delta_M, delta_eta, phi, codon_counts) {
@@ -27,7 +27,7 @@ LLikGene <- function(gene_name, delta_M, delta_eta, phi, codon_counts) {
 gene_name <- "GeneX"
 delta_M <- mutationTrace[[1]][[1]]  # ΔM for codons
 delta_eta <- selectionTrace[[1]][[1]]  # Δη for codons
-phi <- synth_trace_mix                     # protein synthesis rate (Φ)
+phi <- phi                     # protein synthesis rate (Φ)
 codon_counts <- donut.codon$data$count     # codon counts
 
 LLikGene(gene_name, delta_M, delta_eta, phi, codon_counts)
