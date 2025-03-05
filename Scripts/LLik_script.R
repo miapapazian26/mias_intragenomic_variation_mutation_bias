@@ -2,15 +2,18 @@
 gene_names <- getNames(genome = genome)
 delta_M <- mutationTrace[[1]][[1]]  # ΔM for codons
 delta_eta <- selectionTrace[[1]][[1]]  # Δη for codons
-phi <- phi[[1]]  # protein synthesis rate (Φ)
+phi <- synth_trace_mix  # protein synthesis rate (Φ)
 codon_counts <- getCodonCounts(genome = genome)   # codon counts
 
-#delta eta, delta mu, phi, codon counts
+#delta eta and delta mu
 #need to run loop first 
 mutationTrace <- trace$getCodonSpecificParameterTrace(0) #mu
-head(mutationTrace)
+
 selectionTrace <- trace$getCodonSpecificParameterTrace(1) #eta
-head(selectionTrace)
+
+#checking 
+head(mutationTrace) #looking delta M
+head(selectionTrace) #looking delta eta
 head(codon_counts) #looking at codon counts 
 head(phi) #looking at phi values 
 
