@@ -3,10 +3,11 @@ gene_names <- getNames(genome = genome)
 delta_M <- mutationTrace[[1]][[1]]  # ΔM for codons
 delta_eta <- selectionTrace[[1]][[1]]  # Δη for codons
 phi <- synth_trace_mix  # protein synthesis rate (Φ)
-codon_counts <- getCodonCounts(genome = genome)   # codon counts
+codon_counts <- #working (photo from 3/5)   # codon counts and gene ids
 
 #delta eta and delta mu
 #need to run loop first 
+
 mutationTrace <- trace$getCodonSpecificParameterTrace(0) #mu
 
 selectionTrace <- trace$getCodonSpecificParameterTrace(1) #eta
@@ -47,6 +48,6 @@ LLikAA <- function(delta_M, delta_eta, phi, codon_counts) {
   return(LL)
 }
 
-LLikAA(delta_M, delta_eta, phi, codon_counts)
+LLikAA(delta_M, delta_eta, phi, codon_counts) 
 
 

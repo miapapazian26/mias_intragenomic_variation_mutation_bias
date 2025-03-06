@@ -98,3 +98,18 @@ mcmc2 <- loadMCMCObject("mcmc2.Rda")
 mll1 <- calculate_marginal_likelihood(parameter1, mcmc1, mixture = 1, samples = 500, scaling = 1.5)
 mll2 <- calculate_marginal_likelihood(parameter2, mcmc2, mixture = 1, samples = 500, scaling = 1.5)
 cat("Bayes factor: ", mll1 - mll2, "\n")
+
+
+#getting codon counts 
+for (gene in genome$getGenes()) {
+  c_counts_gene <- codon_counts[gene, ]
+
+aa_list <- as.character(aa.bar$data$AA)  # converting factor to character
+  
+for (AA in aa_list) {
+    codons <- AAToCodon(AA)  # pass one amino acid at a time
+    print(codons)  # check what it returns
+  }
+}  
+
+  
