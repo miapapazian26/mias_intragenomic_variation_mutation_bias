@@ -100,20 +100,7 @@ mll2 <- calculate_marginal_likelihood(parameter2, mcmc2, mixture = 1, samples = 
 cat("Bayes factor: ", mll1 - mll2, "\n")
 
 
-#getting codon counts 
-aa_list <- as.character(aa.bar$data$AA)
-
-for (gene in genome$getGenes()) {
-  c_counts_gene <- codon_counts[gene, ]
-  
-for (AA in aa_list) {
-    codons <- AAToCodon(AA)  # pass one amino acid at a time
-    print(codons)  # check what it returns
-  }
-}  
-
-
-#WORKING 
+#getting codon counts associated with gene ID
 aa_list <- as.character(aa.bar$data$AA)  # convert amino acids to characters
 
 # initialize an empty list to store results
