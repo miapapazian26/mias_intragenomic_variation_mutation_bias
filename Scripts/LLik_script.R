@@ -1,9 +1,9 @@
 #usage
-gene_names <- getNames(genome = genome)
+gene_names <- getNames(genome, FALSE)
 delta_M <- mutationTrace[[1]][[1]]  # ΔM for codons
 delta_eta <- selectionTrace[[1]][[1]]  # Δη for codons
 phi <- synth_trace_mix  # protein synthesis rate (Φ)
-codon_counts <- #working (photo from 3/5)   # codon counts and gene ids
+codon_usage_per_gene   # codon counts and gene ids
 
 #delta eta and delta mu
 #need to run loop first 

@@ -101,10 +101,10 @@ cat("Bayes factor: ", mll1 - mll2, "\n")
 
 
 #getting codon counts 
+aa_list <- as.character(aa.bar$data$AA)
+
 for (gene in genome$getGenes()) {
   c_counts_gene <- codon_counts[gene, ]
-
-aa_list <- as.character(aa.bar$data$AA)  # converting factor to character
   
 for (AA in aa_list) {
     codons <- AAToCodon(AA)  # pass one amino acid at a time
@@ -112,4 +112,34 @@ for (AA in aa_list) {
   }
 }  
 
+
+#WORKING 
+aa_list <- as.character(aa.bar$data$AA)  # convert amino acids to characters
+
+# initialize an empty list to store results
+codon_usage_per_gene <- list()
+
+for (gene in gene_names) {
+  c_counts_gene <- codon_counts[gene, , drop = FALSE]  # keep as a dataframe
   
+  # initialize a list for this gene to store 
+  codon_usage_per_gene[[gene]] <- list()
+  
+  for (AA in aa_list) {
+    codons <- AAToCodon(AA)  # get codons for this amino acid
+    valid_codons <- intersect(codons, colnames(codon_counts))  # ensure valid codons
+    
+    if (length(valid_codons) > 0) {
+      # extract counts safely
+      codon_counts_subset <- c_counts_gene[, valid_codons, drop = FALSE]
+      
+      # store in the list
+      codon_usage_per_gene[[gene]][[AA]] <- codon_counts_subset
+    } else {
+      codon_usage_per_gene[[gene]][[AA]] <- NULL  # no valid codons found
+    }
+  }
+}
+
+# check a gene result
+codon_usage_per_gene[[gene_names[1]]]  # view codon counts for the first gene
