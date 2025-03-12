@@ -17,9 +17,8 @@ access.df <- data.frame(
   dE_trace = dE_trace,
   gene_names = gene_names,
   gene_index = gene_index,
-  samples = 10
+  samples = 100
 )
-
 
 
 for(i in gene_index) {
