@@ -38,13 +38,12 @@ plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
 #x axis is number of steps 
 #y is estimated expression level for gene index ###
 
-#synthesis trace 
+#phi trace 
 # get the synthesis rate trace
 synth_trace_list <- trace$getSynthesisRateTrace()
 
 # convert to wide format directly without creating a tibble first
-synth_trace_mix <- do.call(rbind, synth_trace_list[[1]]) %>%
-  as_tibble()
+synth_trace_mix <- do.call(rbind, synth_trace_list[[1]])
 
 # check the first few rows
 head(synth_trace_mix)
