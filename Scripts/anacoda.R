@@ -129,3 +129,17 @@ for (gene in gene_names) {
 
 # check a gene result
 codon_usage_per_gene[[gene_names[1]]]  # view codon counts for the first gene
+
+
+#dr. g code loop for llik
+for(i in gene_index) {
+  phi <- phi_trace[i, ]
+  cc <- genome$getCodonCountsPerGene(i)
+  
+  for(s in samples) {
+    dM <- dM_trace[mix][[s]]
+    dE <- dE_trace[mix][[s]]
+    p <- phi[[s]]
+    llik[[index,s]]=LLik(cc, dM, dE, p)
+  }
+}
