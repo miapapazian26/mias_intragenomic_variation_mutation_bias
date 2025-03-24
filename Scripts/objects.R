@@ -17,8 +17,10 @@ codon_names <- colnames(codon_counts)
 
 #creating gene indexes 
 gene_index <- match(gene_names, gene_names)
+
 #creating gene names 
 gene_names <- getNames(genome, FALSE)
+
 #creating phi values 
 phi_trace <- synth_trace_mix
 

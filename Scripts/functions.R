@@ -14,6 +14,7 @@ LLikGene <- function(gene_name, delta_M, delta_eta, phi, codon_counts) {
   return(list(Gene = gene_name, LogLikelihood = LL))
 }
 
+
 #logliklihood amino acid function 
 LLikAA <- function(delta_M, delta_eta, phi, codon_counts) {
   log_P = delta_M - delta_eta * phi
