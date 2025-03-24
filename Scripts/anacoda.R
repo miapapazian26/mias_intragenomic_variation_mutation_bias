@@ -6,9 +6,9 @@ library(AnaCoDa)
 library(tidyr)
 library(dplyr)
 
-
+##
 # initialization
-
+##
 # initialize genome object
 genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/candida_tenuis.max.cds")
 
@@ -26,9 +26,9 @@ mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
 # initialize model
 model <- initializeModelObject(parameter = parameter, model = "ROC")
 
-
+##
 # run mcmc
-
+##
 # run mcmc (modifies 'mcmc' in place)
 runMCMC(mcmc = mcmc, genome = genome, model = model)
 
@@ -36,8 +36,9 @@ runMCMC(mcmc = mcmc, genome = genome, model = model)
 mcmc_file <- file.path(tempdir(), "mcmc_results.Rda")
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
+##
 # trace analysis
-
+##
 # get trace
 trace <- parameter$getTraceObject()
 
@@ -50,9 +51,9 @@ synth_trace_mix <- do.call(rbind, synth_trace_list[[1]])
 head(synth_trace_mix) # check first few rows
 length(synth_trace_mix) # check number of columns
 
-
+##
 # codon-specific parameter estimates
-
+##
 # get csp estimates
 csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
 head(csp_mat)
@@ -70,15 +71,15 @@ csp_trace_long1 <- csp_trace_df1 %>%
 head(csp_trace_long1)
 summary(csp_trace_long1) # summary stats 
 
-
+##
 # mutation/selection trace
-
+##
 mutationTrace <- trace$getCodonSpecificParameterTrace(0)
 selectionTrace <- trace$getCodonSpecificParameterTrace(1)
 
-
+##
 # likelihood analysis(what i am comparing MY results to)
-
+##
 # convert log-likelihood trace to dataframe
 logLikeTrace_df <- data.frame(iteration = 1:length(logLikeTrace), logLik = logLikeTrace)
 head(logLikeTrace_df)
@@ -97,9 +98,9 @@ mll1 <- calculate_marginal_likelihood(parameter1, mcmc1, mixture = 1, samples = 
 mll2 <- calculate_marginal_likelihood(parameter2, mcmc2, mixture = 1, samples = 500, scaling = 1.5)
 cat("Bayes factor: ", mll1 - mll2, "\n")
 
-
+##
 # codon usage analysis
-
+##
 aa_list <- as.character(aa.bar$data$AA)  # convert amino acids to characters
 codon_usage_per_gene <- list()
 
@@ -123,9 +124,9 @@ for (gene in gene_names) {
 # check codon counts for first gene
 codon_usage_per_gene[[gene_names[1]]]
 
-
+##
 # log-likelihood loop analysis
-
+##
 for(i in gene_index) {
   phi <- phi_trace[i, ]
   cc <- genome$getCodonCountsPerGene(i)
