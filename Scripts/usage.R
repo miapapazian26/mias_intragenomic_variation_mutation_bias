@@ -1,6 +1,6 @@
 #checking and usage 
-head(delta_M) #looking delta M
-head(delta_eta) #looking delta eta
+head(delta_M) #looking delta M **fix name
+head(delta_eta) #looking delta eta **fix name
 head(codon_counts) #looking at codon counts 
 head(phi_trace) #looking at phi values 
 head(codon_names) #looking at codon names

@@ -13,7 +13,12 @@ delta_eta <- selectionTrace[[1]]
 dE_trace <- delta_eta
 
 #getting codon names 
-codon_names <- colnames(codon_counts)
+codon_names <- c()
+for (aa in aminoAcids()) {
+  if (aa %in% c("M", "W", "X")) next
+  codons <- AAToCodon(aa, TRUE)  # TRUE = exclude reference codon
+  codon_names <- c(codon_names, codons)
+}
 
 #creating gene indexes 
 gene_index <- match(gene_names, gene_names)
@@ -26,4 +31,7 @@ phi_trace <- synth_trace_mix
 
 #getting codon counts and gene ids
 codon_counts <- getCodonCounts(genome)
+
+#matching codon names with vectors for delta m and delta eta 
+
 
