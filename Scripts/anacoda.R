@@ -123,19 +123,3 @@ for (gene in gene_names) {
 
 # check codon counts for first gene
 codon_usage_per_gene[[gene_names[1]]]
-
-##
-# log-likelihood loop analysis
-##
-for(i in gene_index) {
-  phi <- phi_trace[i, ]
-  cc <- genome$getCodonCountsPerGene(i)
-  
-  for(s in samples) {
-    dM <- dM_trace[mix][[s]]
-    dE <- dE_trace[mix][[s]]
-    p <- phi[[s]]
-    llik[[index,s]] = LLik(cc, dM, dE, p)
-  }
-}
-
