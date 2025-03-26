@@ -16,7 +16,7 @@ dE_trace <- delta_eta
 codon_names <- c()
 for (aa in aminoAcids()) {
   if (aa %in% c("M", "W", "X")) next
-  codons <- AAToCodon(aa, TRUE)  # TRUE = exclude reference codon
+  codons <- AAToCodon(aa, TRUE)  # TRUE = excludes reference codon
   codon_names <- c(codon_names, codons)
 }
 
@@ -33,5 +33,6 @@ phi_trace <- synth_trace_mix
 codon_counts <- getCodonCounts(genome)
 
 #matching codon names with vectors for delta m and delta eta 
-
+names(delta_M) <- codon_names
+names(delta_eta) <- codon_names
 
