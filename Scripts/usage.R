@@ -16,6 +16,8 @@ str(gene_index) #looking at gene indexes
 str(gene_names) #looking at gene names 
 
 LLikGene(gene_name, dM_trace, dE_trace, phi, codon_counts)
+##do i have to call the function like this instead?
+LLikGene(gene, dM_trace[[s]][names(counts)], dE_trace[[s]][names(counts)], phi, counts)
 
 LLikAA(dM_trace, dE_trace, phi, codon_counts) 
 
