@@ -1,9 +1,11 @@
 ##
-#FUNCTION: compute log-likelihood for one gene
-##
-LLikGene <- function(gene_name, dM_trace, dE_trace, phi, codon_counts) {
+# FUNCTION: compute log-likelihood for one gene
+# takes one sample's worth of parameters and one gene's codon counts
+# returns the log-likelihood for that gene under that sample
+## 
+LLikGene <- function(gene_name, dM, dE, phi, codon_counts) {
   # compute log probabilities using the correct sign and exponent
-  log_P <- -dM_trace - dE_trace * phi
+  log_P <- -dM - dE * phi
   
   # convert to probabilities
   P <- exp(log_P)
@@ -17,16 +19,41 @@ LLikGene <- function(gene_name, dM_trace, dE_trace, phi, codon_counts) {
 }
 
 ##
-#FUNCTION: logliklihood amino acid function 
+# FUNCTION: loglikelihood amino acid function 
 ##
-LLikAA <- function(delta_M, delta_eta, phi, codon_counts) {
-  log_P = delta_M - delta_eta * phi
-  log_P = log_P - max(log_P)  
-  p = exp(log_P)
+LLikAA <- function(dM, dE, phi, codon_counts) {
+  # compute log probabilities for one amino acid group
+  log_P <- -dM - dE * phi
+  log_P <- log_P - max(log_P)  # numerical stability
   
+  # convert to probabilities
+  p <- exp(log_P)
+  p <- p / sum(p)
   
-  LL = dmultinom(x = codon_counts, prob = p, log = TRUE)
+  # compute log-likelihood
+  LL <- dmultinom(x = codon_counts, prob = p, log = TRUE)
   return(LL)
+}
+
+##
+# LOOP: log-likelihood loop analysis (updated)
+##
+log_likelihood_matrix <- matrix(NA, nrow = length(gene_names), ncol = ncol(phi_trace))
+rownames(log_likelihood_matrix) <- gene_names
+colnames(log_likelihood_matrix) <- paste0("Sample_", 1:ncol(phi_trace))
+
+for (i in seq_along(gene_names)) {
+  gene <- gene_names[i]
+  counts <- codon_counts[gene, ]
+  
+  for (s in 1:ncol(phi_trace)) {
+    phi <- phi_trace[i, s]
+    dM <- dM_trace[[s]][names(counts)]
+    dE <- dE_trace[[s]][names(counts)]
+    
+    result <- LLikGene(gene, dM, dE, phi, counts)
+    log_likelihood_matrix[i, s] <- result$LogLikelihood
+  }
 }
 
 ##
@@ -45,24 +72,7 @@ for(i in gene_index) {
 }
 
 ##
-#LOOP: editted log-likelihood loop analysis
-##
-for (i in seq_along(gene_names)) {
-  gene <- gene_names[i]
-  counts <- codon_counts[gene, ]
-  
-  for (s in 1:ncol(phi_trace)) {
-    phi <- phi_trace[i, s]
-    dM <- dM_trace[[s]][names(counts)]
-    dE <- dE_trace[[s]][names(counts)]
-    
-    result <- LLikGene(gene, dM, dE, phi, counts)
-    log_likelihood_matrix[i, s] <- result$LogLikelihood
-  }
-}
-
-##
-#LOOP: codon usage analysis
+# LOOP: codon usage analysis
 ##
 aa_list <- as.character(aa.bar$data$AA)  # convert amino acids to characters
 codon_usage_per_gene <- list()
@@ -86,13 +96,11 @@ for (gene in gene_names) {
 
 
 ##
-##CALLING
+#CALLING
+#need to specify a single sample for dM and dE
 ##
-LLikGene(gene_name, dM_trace, dE_trace, phi, codon_counts)
-##do i have to call the function like this instead?
-dM <- dM_trace[[s]][names(counts)]     ##don't assign to name until right before calling loop. 
-dE <- dE_trace[[s]][names(counts)]     ##these names are necessary for the loop, not the function
-LLikGene(gene, dM, dE, phi, counts)
 
-LLikAA(dM_trace, dE_trace, phi, codon_counts) 
+LLikGene(test_gene, dM, dE, phi, counts)
+
+LLikAA(dM, dE, phi, codon_counts)
 

@@ -1,16 +1,16 @@
 #genome is: candida_tenuis.max.cds
 
 #getting mutation trace 
-mutationTrace <- trace$getCodonSpecificParameterTrace(0) #mu
-delta_M <- mutationTrace[[1]]
+mutationTrace <- trace$getCodonSpecificParameterTrace(0) #full trace
+delta_M <- mutationTrace[[1]] #40 codon vectors 
 #renaming mutation trace 
-dM_trace <- delta_M
+dM_trace <- delta_M 
 
 #getting selection trace
-selectionTrace <- trace$getCodonSpecificParameterTrace(1) #eta
-delta_eta <- selectionTrace[[1]]
+selectionTrace <- trace$getCodonSpecificParameterTrace(1) #full trace
+delta_eta <- selectionTrace[[1]] #40 codon vectors
 #renaming selection trace 
-dE_trace <- delta_eta
+dE_trace <- delta_eta 
 
 #getting codon names 
 codon_names <- c()
