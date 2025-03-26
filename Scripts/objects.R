@@ -20,17 +20,18 @@ for (aa in aminoAcids()) {
   codon_names <- c(codon_names, codons)
 }
 
+#creating gene names 
+gene_names <- getNames(genome, FALSE)
+
 #creating gene indexes 
 gene_index <- match(gene_names, gene_names)
 
-#creating gene names 
-gene_names <- getNames(genome, FALSE)
 
 #creating phi values 
 phi_trace <- synth_trace_mix
 
 #getting codon counts and gene ids
-codon_counts <- codon_counts[, codon_names]
+codon_counts <- codon_counts[, codon_names] #filtered 40
 
 #full 64-codon count
 full_codon_counts <- getCodonCounts(genome)
