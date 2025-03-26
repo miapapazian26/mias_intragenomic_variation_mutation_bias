@@ -60,3 +60,26 @@ for (i in seq_along(gene_names)) {
     log_likelihood_matrix[i, s] <- result$LogLikelihood
   }
 }
+
+##
+#LOOP: codon usage analysis
+##
+aa_list <- as.character(aa.bar$data$AA)  # convert amino acids to characters
+codon_usage_per_gene <- list()
+
+for (gene in gene_names) {
+  c_counts_gene <- codon_counts[gene, , drop = FALSE]  # keep as dataframe
+  codon_usage_per_gene[[gene]] <- list()
+  
+  for (AA in aa_list) {
+    codons <- AAToCodon(AA)  # get codons for this amino acid
+    valid_codons <- intersect(codons, colnames(codon_counts))  # ensure valid codons
+    
+    if (length(valid_codons) > 0) {
+      codon_counts_subset <- c_counts_gene[, valid_codons, drop = FALSE]
+      codon_usage_per_gene[[gene]][[AA]] <- codon_counts_subset
+    } else {
+      codon_usage_per_gene[[gene]][[AA]] <- NULL
+    }
+  }
+}
