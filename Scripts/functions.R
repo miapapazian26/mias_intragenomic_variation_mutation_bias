@@ -83,3 +83,16 @@ for (gene in gene_names) {
     }
   }
 }
+
+
+##
+##CALLING
+##
+LLikGene(gene_name, dM_trace, dE_trace, phi, codon_counts)
+##do i have to call the function like this instead?
+dM <- dM_trace[[s]][names(counts)]     ##don't assign to name until right before calling loop. 
+dE <- dE_trace[[s]][names(counts)]     ##these names are necessary for the loop, not the function
+LLikGene(gene, dM, dE, phi, counts)
+
+LLikAA(dM_trace, dE_trace, phi, codon_counts) 
+

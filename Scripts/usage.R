@@ -14,13 +14,3 @@ str(phi_trace) #looking at phi values
 str(codon_names) #looking at codon names
 str(gene_index) #looking at gene indexes
 str(gene_names) #looking at gene names 
-
-LLikGene(gene_name, dM_trace, dE_trace, phi, codon_counts)
-##do i have to call the function like this instead?
-dM <- dM_trace[[s]][names(counts)]. ##don't assign to name until right before calling function
-dE <- dE_trace[[s]][names(counts)]
-LLikGene(gene, dM, dE, phi, counts)
-
-LLikAA(dM_trace, dE_trace, phi, codon_counts) 
-
-
