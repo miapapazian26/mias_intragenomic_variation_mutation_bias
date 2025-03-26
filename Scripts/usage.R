@@ -17,7 +17,7 @@ str(gene_names) #looking at gene names
 
 LLikGene(gene_name, dM_trace, dE_trace, phi, codon_counts)
 ##do i have to call the function like this instead?
-dM <- dM_trace[[s]][names(counts)]
+dM <- dM_trace[[s]][names(counts)]. ##don't assign to name until right before calling function
 dE <- dE_trace[[s]][names(counts)]
 LLikGene(gene, dM, dE, phi, counts)
 
