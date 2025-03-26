@@ -30,7 +30,10 @@ gene_names <- getNames(genome, FALSE)
 phi_trace <- synth_trace_mix
 
 #getting codon counts and gene ids
-codon_counts <- getCodonCounts(genome)
+codon_counts <- codon_counts[, codon_names]
+
+#full 64-codon count
+full_codon_counts <- getCodonCounts(genome)
 
 #matching codon names with vectors for delta m and delta eta 
 names(delta_M) <- codon_names

@@ -4,7 +4,7 @@ head(delta_eta) #looking delta eta **fix name
 head(codon_counts) #looking at codon counts 
 head(phi_trace) #looking at phi values 
 head(codon_names) #looking at codon names
-head(gene_index) #looking at gene indexes
+head(gene_index) #looking at gene indexes **can be dropped using seq_along(gene_names)
 head(gene_names) #looking at gene names
 
 str(delta_M) #looking delta M **fix name
