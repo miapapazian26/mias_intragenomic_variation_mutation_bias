@@ -7,6 +7,14 @@ head(codon_names) #looking at codon names
 head(gene_index) #looking at gene indexes
 head(gene_names) #looking at gene names
 
+str(delta_M) #looking delta M **fix name
+str(delta_eta) #looking delta eta **fix name
+str(codon_counts) #looking at codon counts 
+str(phi_trace) #looking at phi values 
+str(codon_names) #looking at codon names
+str(gene_index) #looking at gene indexes
+str(gene_names) #looking at gene names 
+
 LLikGene(gene_name, delta_M, delta_eta, phi, codon_counts)
 
 LLikAA(delta_M, delta_eta, phi, codon_counts) 
