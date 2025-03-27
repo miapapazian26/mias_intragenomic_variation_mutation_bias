@@ -24,8 +24,7 @@ for (aa in aminoAcids()) {
 gene_names <- getNames(genome, FALSE)
 
 #creating gene indexes 
-gene_index <- match(gene_names, gene_names)
-
+gene_index <- 1:length(gene_names)
 
 #creating phi values 
 phi_trace <- synth_trace_mix

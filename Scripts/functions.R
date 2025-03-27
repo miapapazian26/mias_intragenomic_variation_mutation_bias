@@ -65,9 +65,9 @@ for (i in seq_along(gene_names)) {
     row_index <- row_index + 1
   }
 }
-
 #combine all rows into one data frame
 loglik_df <- do.call(rbind, loglik_list)
+
 
 ##
 #LOOP: log-likelihood loop analysis (original)
