@@ -3,8 +3,6 @@
 ##
 lm_fit <- lm(LogLikelihood ~ Gene + Sample, data = loglik_df)
 
-
-
 ##
 # FUNCTION: compute log-likelihood for one gene
 # takes one sample's worth of parameters and one gene's codon counts
@@ -45,24 +43,42 @@ LLikAA <- function(dM, dE, phi, codon_counts) {
 ##
 # LOOP: log-likelihood loop analysis (updated)
 ##
+#if using a subset: creating a subset of genes (genes 25-75)
+subset_gene_names <- gene_names[25:75]
+
 #create an empty list to store results
 loglik_list <- list()
 
 #start counter for rows
 row_index <- 1
 
-for (i in seq_along(gene_names)) {
-  gene <- gene_names[i]
-  counts <- codon_counts[gene, ]
+# loop over subset of genes
+for (gene in subset_gene_names) {
+  counts <- as.numeric(codon_counts[gene, , drop = TRUE])
+  names(counts) <- colnames(codon_counts)
   
-  for (s in 1:ncol(phi_trace)) {
-    phi <- phi_trace[i, s]
+  # get the index of the gene in phi_trace
+  gene_index <- which(gene_names == gene)
+  
+  for (s in 1:100) {
+    phi <- as.numeric(phi_trace[gene_index, as.character(s-1)])
+    gene_codons <- names(counts)
     
-    dM <- sapply(dM_trace, `[`, s)[names(counts)]
-    dE <- sapply(dE_trace, `[`, s)[names(counts)]
+    # get dM and dE from csp_long for this sample
+    dM <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Mutation)
     
+    dE <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Selection)
+    
+    # compute log-likelihood
     ll_result <- LLikGene(gene, dM, dE, phi, counts)
     
+    # store result
     loglik_list[[row_index]] <- data.frame(
       Gene = gene,
       Sample = s,
@@ -72,24 +88,9 @@ for (i in seq_along(gene_names)) {
     row_index <- row_index + 1
   }
 }
-#combine all rows into one data frame
+
+# combine results into one data frame
 loglik_df <- do.call(rbind, loglik_list)
-
-
-##
-#LOOP: log-likelihood loop analysis (original)
-##
-for(i in gene_index) {
-  phi <- phi_trace[i, ]
-  cc <- genome$getCodonCountsPerGene(i)
-  
-  for(s in samples) {
-    dM <- dM_trace[mix][[s]]
-    dE <- dE_trace[mix][[s]]
-    p <- phi[[s]]
-    llik[[index,s]] = LLik(cc, dM, dE, p)
-  }
-}
 
 ##
 # LOOP: codon usage analysis
