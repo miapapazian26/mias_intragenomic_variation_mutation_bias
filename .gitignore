@@ -58,3 +58,9 @@ predicting_phi.pdf
 # Ignore system files
 .DS_Store
 
+# Ignore big ass file
+Results/candida_tenuis_run.info.Rda
+
+# Ignore results 
+Results/
+
