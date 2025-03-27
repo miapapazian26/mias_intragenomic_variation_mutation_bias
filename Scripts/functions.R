@@ -38,9 +38,11 @@ LLikAA <- function(dM, dE, phi, codon_counts) {
 ##
 # LOOP: log-likelihood loop analysis (updated)
 ##
-log_likelihood_matrix <- matrix(NA, nrow = length(gene_names), ncol = ncol(phi_trace))
-rownames(log_likelihood_matrix) <- gene_names
-colnames(log_likelihood_matrix) <- paste0("Sample_", 1:ncol(phi_trace))
+#create an empty list to store results
+loglik_list <- list()
+
+#start counter for rows
+row_index <- 1
 
 for (i in seq_along(gene_names)) {
   gene <- gene_names[i]
@@ -48,13 +50,24 @@ for (i in seq_along(gene_names)) {
   
   for (s in 1:ncol(phi_trace)) {
     phi <- phi_trace[i, s]
-    dM <- dM_trace[[s]][names(counts)]
-    dE <- dE_trace[[s]][names(counts)]
     
-    result <- LLikGene(gene, dM, dE, phi, counts)
-    log_likelihood_matrix[i, s] <- result$LogLikelihood
+    dM <- sapply(dM_trace, `[`, s)[names(counts)]
+    dE <- sapply(dE_trace, `[`, s)[names(counts)]
+    
+    ll_result <- LLikGene(gene, dM, dE, phi, counts)
+    
+    loglik_list[[row_index]] <- data.frame(
+      Gene = gene,
+      Sample = s,
+      LogLikelihood = ll_result$LogLikelihood
+    )
+    
+    row_index <- row_index + 1
   }
 }
+
+#combine all rows into one data frame
+loglik_df <- do.call(rbind, loglik_list)
 
 ##
 #LOOP: log-likelihood loop analysis (original)
