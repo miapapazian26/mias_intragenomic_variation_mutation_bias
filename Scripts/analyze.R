@@ -48,7 +48,7 @@ synth_trace <- trace_to_tibble(synth_trace_list,
 head(synth_trace) # check first few rows
 dim(synth_trace) # check number of columns
 
-#old code 
+#USE SYNTH TRACE MIX IF INDEXING BY ROW/SAMPLE NUMBER
 synth_trace_mix <- do.call(rbind, synth_trace_list[[1]])
 head(synth_trace_mix) # check first few rows
 length(synth_trace_mix) # check number of columns

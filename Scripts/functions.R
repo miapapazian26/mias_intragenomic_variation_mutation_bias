@@ -1,4 +1,11 @@
 ##
+#FUNCTION: linear model function
+##
+lm_fit <- lm(LogLikelihood ~ Gene + Sample, data = loglik_df)
+
+
+
+##
 # FUNCTION: compute log-likelihood for one gene
 # takes one sample's worth of parameters and one gene's codon counts
 # returns the log-likelihood for that gene under that sample

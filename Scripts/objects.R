@@ -18,11 +18,18 @@ gene_names <- getNames(genome, FALSE)
 #creating gene indexes 
 gene_index <- 1:length(gene_names)
 
-#creating a subset of genes (genes 25-75)
-subset_genes <- gene_names[gene_index[25:75]]
-
 #creating phi values 
 phi_trace <- synth_trace #changing from synth_trace_mix to synth_trace
+#reshaping into a tidy format
+phi_long <- phi_trace %>%
+  pivot_longer(
+    cols = -id_names,
+    names_to = "Sample",
+    values_to = "Phi"
+  ) %>%
+  mutate(
+    Sample = as.integer(Sample) + 1  # convert from "0" to 1-based integer
+  )
 
 #getting codon names 
 codon_names <- csp_codons
