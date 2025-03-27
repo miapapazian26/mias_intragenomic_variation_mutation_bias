@@ -97,18 +97,6 @@ csp_long <- left_join(csp_long_list$Mutation,
 )
 
 
-#old code below 
-csp_trace_data <- csp_trace$getCodonSpecificParameterTrace(0)
-csp_trace_1 <- csp_trace_data[[1]]
-csp_trace_df1 <- as.data.frame(csp_trace_1)
-
-# reshape the data into long format
-csp_trace_long1 <- csp_trace_df1 %>%
-  pivot_longer(cols = everything(), names_to = "Parameter", values_to = "Value")
-
-head(csp_trace_long1)
-summary(csp_trace_long1) # summary stats 
-
 #code not being used currently 
 ##
 # mutation/selection trace
