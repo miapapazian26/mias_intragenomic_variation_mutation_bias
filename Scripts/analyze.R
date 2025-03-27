@@ -48,6 +48,7 @@ synth_trace <- trace_to_tibble(synth_trace_list,
 head(synth_trace) # check first few rows
 dim(synth_trace) # check number of columns
 
+#old code 
 synth_trace_mix <- do.call(rbind, synth_trace_list[[1]])
 head(synth_trace_mix) # check first few rows
 length(synth_trace_mix) # check number of columns
@@ -64,7 +65,6 @@ head(csp_mat)
 csp_codons <- csp_est$Mutation %>%
   filter(Mean !=0) %>%
   select("Codon")
-
 
 # get csp traces
 csp_cat <- c("Mutation", "Selection")
@@ -108,8 +108,6 @@ csp_trace_long1 <- csp_trace_df1 %>%
 
 head(csp_trace_long1)
 summary(csp_trace_long1) # summary stats 
-
-
 
 #code not being used currently 
 ##

@@ -28,11 +28,12 @@ gz_file <- file.path("fasta", "revisit_cds_data",
 
 #unzip file
 gunzip(gz_file, remove=FALSE, temp=TRUE, skip = TRUE)  #unzips fasta to tempdir() output
+
+#initialize genome object
 genome <- initializeGenomeObject(file = file.path(tempdir(), fasta_file))
 
 # initialize parameter object
 parameter <- initializeParameterObject(genome = genome, sphi = 1, num.mixtures = 1, gene.assignment = rep(1, length(genome)))
-
 
 # initialize mcmc object
 mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)

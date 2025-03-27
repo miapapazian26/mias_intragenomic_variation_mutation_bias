@@ -12,25 +12,25 @@ delta_eta <- selectionTrace[[1]] #40 codon vectors
 #renaming selection trace 
 dE_trace <- delta_eta 
 
-#getting codon names 
-codon_names <- c()
-for (aa in aminoAcids()) {
-  if (aa %in% c("M", "W", "X")) next
-  codons <- AAToCodon(aa, TRUE)  # TRUE = excludes reference codon
-  codon_names <- c(codon_names, codons)
-}
-
 #creating gene names 
 gene_names <- getNames(genome, FALSE)
 
 #creating gene indexes 
 gene_index <- 1:length(gene_names)
 
+#creating a subset of genes (genes 25-75)
+subset_genes <- gene_names[gene_index[25:75]]
+
 #creating phi values 
-phi_trace <- synth_trace_mix
+phi_trace <- synth_trace #changing from synth_trace_mix to synth_trace
+
+#getting codon names 
+codon_names <- csp_codons
+#getting rid of the loop and using csp_codons
 
 #getting codon counts and gene ids
-codon_counts <- codon_counts[, codon_names] #filtered 40
+codon_names_vec <- codon_names$Codon
+codon_counts <- full_codon_counts[, codon_names_vec] #filtered 40
 
 #full 64-codon count
 full_codon_counts <- getCodonCounts(genome)
