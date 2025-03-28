@@ -5,6 +5,7 @@ output: html_document
 this report validates that the codon-specific parameter estimates and log-likelihood values generated from AnaCoDa’s ROC model agree with values computed independently from model output.
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = TRUE, message = TRUE)
 library(R.utils) ## need for gunzipping of fasta files.
 ## mike's path to the development version
 ## library(AnaCoDa, lib.loc="~/R/lib/4.4-AnaCoDa/upstream-develop/")
@@ -29,12 +30,14 @@ model <- initializeModelObject(parameter = parameter, model = "ROC")
 run MCMC simulation
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = TRUE, message = TRUE)
 # run mcmc (modifies 'mcmc' in place)
 runMCMC(mcmc = mcmc, genome = genome, model = model)
 ```
 save MCMC run
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = TRUE, message = TRUE)
 #save mcmc_file into results 
 mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
@@ -46,7 +49,7 @@ writeParameterObject(parameter = parameter, file = param_file)
 ```
 retrieving necessary objects
 
-```{r}
+```{r message=TRUE, warning=TRUE, paged.print=TRUE}
 #creating gene names 
 gene_names <- getNames(genome, FALSE)
 head(gene_names)
