@@ -1,0 +1,148 @@
+title: "Codon Usage Bias Project"
+output: html_document
+
+# GOAL
+this report validates that the codon-specific parameter estimates and log-likelihood values generated from AnaCoDa’s ROC model agree with values computed independently from model output.
+
+```{r setup, include=FALSE}
+library(R.utils) ## need for gunzipping of fasta files.
+## mike's path to the development version
+## library(AnaCoDa, lib.loc="~/R/lib/4.4-AnaCoDa/upstream-develop/")
+## path to use if using r-cran version
+library(AnaCoDa)
+library(tidyr)
+library(dplyr)
+
+# initialize genome object
+genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/candida_tenuis.max.cds")
+##COPY FILES INTO THE REPO. THIS LINK ONLY WORKS FOR ME 
+
+# initialize parameter object
+parameter <- initializeParameterObject(genome = genome, sphi = 1, num.mixtures = 1, gene.assignment = rep(1, length(genome)))
+
+# initialize mcmc object
+mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
+
+# initialize model
+model <- initializeModelObject(parameter = parameter, model = "ROC")
+```
+run MCMC simulation
+
+```{r setup, include=FALSE}
+# run mcmc (modifies 'mcmc' in place)
+runMCMC(mcmc = mcmc, genome = genome, model = model)
+```
+save MCMC run
+
+```{r setup, include=FALSE}
+#save mcmc_file into results 
+mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
+writeMCMCObject(mcmc = mcmc, file = mcmc_file)
+
+# save and load parameter object - move to after run is complete
+param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
+writeParameterObject(parameter = parameter, file = param_file)
+
+```
+retrieving necessary objects
+
+```{r}
+#creating gene names 
+gene_names <- getNames(genome, FALSE)
+head(gene_names)
+#creating gene indexes 
+gene_index <- 1:length(gene_names)
+head(gene_index)
+
+#creating phi values 
+phi_trace <- synth_trace #changing from synth_trace_mix to synth_trace
+#reshaping into a tidy format
+phi_long <- phi_trace %>%
+  pivot_longer(
+    cols = -id_names,
+    names_to = "Sample",
+    values_to = "Phi"
+  ) %>%
+  mutate(
+    Sample = as.integer(Sample) + 1  # convert from "0" to 1-based integer
+  )
+head(phi_long)
+
+#getting codon names 
+codon_names <- csp_codons
+head(codon_names)
+#getting rid of the loop and using csp_codons
+
+#getting codon counts and gene ids
+codon_names_vec <- codon_names$Codon
+codon_counts <- full_codon_counts[, codon_names_vec] #filtered 40
+head(codon_counts)
+
+#full 64-codon count
+full_codon_counts <- getCodonCounts(genome)
+head(full_codon_counts)
+
+#getting trace object
+trace <- parameter$getTraceObject()
+
+#getting phi trace (synthesis rate)
+synth_trace_list <- trace$getSynthesisRateTrace()[[1]]
+trace_to_tibble <- function(list_trace, id_names) {
+  ## convert list of traces into a matrix
+  matrix <- do.call(rbind, list_trace)
+  sample_n <- 1:ncol(matrix)-1
+  colnames(matrix) <- sample_n
+  ## create trace tibble
+  tibble <- as_tibble(matrix) %>% 
+    bind_cols(tibble(id_names), .)
+  return(tibble)
+}
+
+synth_trace <- trace_to_tibble(synth_trace_list,
+                               id_names = getNames(genome))
+head(synth_trace) # check first few rows
+dim(synth_trace) # check number of columns
+
+#getting csp estimates
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+head(csp_mat)
+
+#filtering out reference codons which have a mean of 0
+csp_codons <- csp_est$Mutation %>%
+  filter(Mean !=0) %>%
+  select("Codon")
+head(csp_codons)
+
+# get csp traces
+csp_cat <- c("Mutation", "Selection")
+csp_wide_list <- list()
+
+for(i in 1:2) {
+  param = csp_cat[i] ## don't need double [] because already atomic object
+  trace_list <- trace$getCodonSpecificParameterTrace((i-1))[[1]]
+  csp_wide_list[[i]] <- trace_to_tibble(trace_list, csp_codons)  %>%
+    rowwise() %>%  #use rowwise because codonToAA isn't vectorized.
+    mutate(AA = codonToAA(Codon), .before = "Codon")
+  
+}
+names(csp_wide_list) <- csp_cat
+
+csp_long_list <- list()
+for(i in 1:2) {
+  param = csp_cat[i] ## don't need double [] because already atomic object
+  csp_long_list[[i]] <- pivot_longer(csp_wide_list[[i]],
+                                     cols = !c("AA", "Codon"),
+                                     values_to = param,
+                                     names_to = "Sample") %>%
+    mutate(Sample = as.numeric(Sample))
+}
+names(csp_long_list) <- csp_cat
+
+csp_long <- left_join(csp_long_list$Mutation,
+                      csp_long_list$Selection,
+                      by = join_by(AA, Codon, Sample)
+)
+
+head(csp_long)
+```
+

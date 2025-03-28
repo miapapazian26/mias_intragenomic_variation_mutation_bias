@@ -43,10 +43,10 @@ LLikAA <- function(dM, dE, phi, codon_counts) {
 ##
 # LOOP: log-likelihood loop analysis (updated)
 ##
-#if using a subset: creating a subset of genes (genes 25-75)
-subset_gene_names <- gene_names[25:75]
+#if using a subset: creating a subset of random genes
+num_genes <- getGenomeSize(genome)
 
-#create an empty list to store results
+#create an empty list to store resgenome#create an empty list to store results
 loglik_list <- list()
 
 #start counter for rows

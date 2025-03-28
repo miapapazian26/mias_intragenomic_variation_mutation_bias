@@ -48,14 +48,12 @@ model <- initializeModelObject(parameter = parameter, model = "ROC")
 # run mcmc (modifies 'mcmc' in place)
 runMCMC(mcmc = mcmc, genome = genome, model = model)
 
-# save updated mcmc and parameter object 
-mcmc_file <- file.path(tempdir(), "mcmc_results.Rda")
 #save mcmc_file into results 
 mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
 # save and load parameter object - move to after run is complete
-param_file <- file.path(tempdir(), "parameter.Rda")
+param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
 writeParameterObject(parameter = parameter, file = param_file)
 
 #saving all non-model related objects 
