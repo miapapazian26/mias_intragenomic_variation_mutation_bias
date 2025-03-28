@@ -46,3 +46,11 @@ full_codon_counts <- getCodonCounts(genome)
 names(delta_M) <- codon_names
 names(delta_eta) <- codon_names
 
+#getting genes that fit the model badly (or well) by looking at effect sizes 
+#extracting the coefficients which are the additive effects of each gene on the predicted log-likelihood
+gene_effects <- coef(llik_lm)[grep("^Gene", names(coef(llik_lm)))]
+gene_effects <- sort(gene_effects)  # sort for ranking - smallest to largest
+head(gene_effects)  # lowest fit genes
+tail(gene_effects)  # best fit genes
+
+
