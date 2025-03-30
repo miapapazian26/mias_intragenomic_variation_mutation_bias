@@ -95,7 +95,7 @@ csp_long <- left_join(csp_long_list$Mutation,
                       csp_long_list$Selection,
                       by = join_by(AA, Codon, Sample)
 )
-
+head(csp_long)
 
 #code not being used currently 
 ##
