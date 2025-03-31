@@ -1,0 +1,448 @@
+---
+title: "Codon Usage Bias Analysis Project with AnaCoDa"
+author: "Mia Papazian"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = TRUE, message = TRUE)
+knitr::opts_knit$set(root.dir = "~/repositories/mias_intragenomic_variation_mutation_bias")
+library(AnaCoDa)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(tibble)
+```
+
+# 1. data preparation
+
+## load genome
+```{r genome, eval=FALSE}
+genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/candida_tenuis.max.cds")
+```
+
+## initialize parameters
+```{r parameter, eval=FALSE}
+parameter <- initializeParameterObject(
+  genome = genome, 
+  sphi = 1, 
+  num.mixtures = 1, 
+  gene.assignment = rep(1, length(genome))
+)
+```
+
+## initialize MCMC and model
+```{r mcmc_model, eval=FALSE}
+mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
+model <- initializeModelObject(parameter = parameter, model = "ROC")
+```
+
+# 2. run MCMC
+
+```{r run_mcmc, eval=FALSE}
+runMCMC(mcmc = mcmc, genome = genome, model = model)
+```
+
+# 3. save/load results
+
+```{r save_results, eval=FALSE}
+species <- "candida_tenuis"
+dir.create("Results", showWarnings = FALSE)
+
+mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
+writeMCMCObject(mcmc = mcmc, file = mcmc_file)
+
+param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
+writeParameterObject(parameter = parameter, file = param_file)
+```
+
+```{r load_results}
+#working on this section
+```
+
+# 4. trace analysis
+
+## extract trace object
+```{r trace}
+trace <- parameter$getTraceObject()
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
+```
+
+## synthesis rate trace (φ)
+```{r synthesis_trace}
+synth_trace_list <- trace$getSynthesisRateTrace()[[1]]
+
+trace_to_tibble <- function(list_trace, id_names) {
+  matrix <- do.call(rbind, list_trace)
+  sample_n <- 1:ncol(matrix) - 1
+  colnames(matrix) <- sample_n
+  tibble <- as_tibble(matrix) %>% bind_cols(tibble(id_names), .)
+  return(tibble)
+}
+
+synth_trace <- trace_to_tibble(synth_trace_list, id_names = getNames(genome))
+head(synth_trace)
+dim(synth_trace)
+```
+
+# 5. codon-specific parameters
+
+## extract CSP estimates
+```{r csp_estimates}
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
+str(csp_codons)
+print(csp_codons)
+```
+
+## extract codon-specific traces
+```{r csp_trace}
+csp_cat <- c("Mutation", "Selection")
+csp_wide_list <- list()
+
+for (i in 1:2) {
+  param = csp_cat[i]
+  trace_list <- trace$getCodonSpecificParameterTrace((i - 1))[[1]]
+  csp_wide_list[[i]] <- trace_to_tibble(trace_list, csp_codons) %>%
+    rowwise() %>%
+    mutate(AA = codonToAA(Codon), .before = "Codon")
+}
+
+names(csp_wide_list) <- csp_cat
+```
+
+## pivot traces to long format
+```{r csp_long}
+csp_long_list <- list()
+
+for (i in 1:2) {
+  param = csp_cat[i]
+  csp_long_list[[i]] <- pivot_longer(csp_wide_list[[i]],
+                                     cols = !c("AA", "Codon"),
+                                     values_to = param,
+                                     names_to = "Sample") %>%
+    mutate(Sample = as.numeric(Sample))
+}
+
+names(csp_long_list) <- csp_cat
+
+csp_long <- left_join(csp_long_list$Mutation,
+                      csp_long_list$Selection,
+                      by = join_by(AA, Codon, Sample))
+head(csp_long)
+```
+
+#CSP parameter comparison
+```{r csp_comparison}
+#get anacoda’s estimates
+csp_estimates <- getCSPEstimates(parameter, mixture = 1, samples = 100)
+
+#combine mutation and selection estimates
+csp_summary_ac <- full_join(csp_estimates$Mutation %>% rename(Mutation_mean = Mean),
+                            csp_estimates$Selection %>% rename(Selection_mean = Mean),
+                            by = c("AA", "Codon"))
+
+#now calculate my means from the trace tibble
+csp_summary_tibble <- csp_long %>%
+  group_by(AA, Codon) %>%
+  summarize(Mutation_calc = mean(Mutation), Selection_calc = mean(Selection), .groups = "drop")
+
+# join the two
+csp_comparison <- inner_join(csp_summary_ac, csp_summary_tibble, by = c("AA", "Codon"))
+
+# plot: Mutation
+ggplot(csp_comparison, aes(x = Mutation_mean, y = Mutation_calc)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Mutation Parameter: AnaCoDa vs. Calculated from Trace",
+       x = "AnaCoDa Mean", y = "Tibble Mean")
+
+# plot: Selection
+ggplot(csp_comparison, aes(x = Selection_mean, y = Selection_calc)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "blue") +
+  labs(title = "Selection Parameter: AnaCoDa vs. Calculated from Trace",
+       x = "AnaCoDa Mean", y = "Tibble Mean")
+
+```
+to validate the accuracy of my trace extraction, i compared codon-specific parameter estimates derived manually from the MCMC traces (csp_long) against AnaCoDa’s built-in summary statistics from getCSPEstimates(). the first figure displays a scatterplot comparing mutation parameters across codons, while the second shows the same comparison for selection parameters.
+
+# 6. double checking codons
+```{r correct_codons}
+#filter out reference codons which have a mean of 0
+csp_codons <- csp_est$Mutation %>%
+  filter(Mean !=0) %>%
+  select("Codon")
+print(csp_codons)
+
+# convert to character vector
+csp_codon_list <- csp_codons$Codon
+trace_codon_list <- unique(csp_long$Codon)
+```
+
+```{r correct_codons_check}
+# check: are they exactly the same set?
+setequal(csp_codon_list, trace_codon_list)
+```
+
+```{r codon_counts}
+#getting codon names 
+codon_names <- csp_codons
+#using csp_codons
+
+#full 64-codon count
+full_codon_counts <- getCodonCounts(genome)
+
+#getting codon counts and gene ids
+codon_names_vec <- codon_names$Codon
+codon_counts <- full_codon_counts[, codon_names_vec] #filtered 40
+str(codon_counts)
+```
+
+# 7. double checking objects 
+
+```{r double_check_str_synth, echo=TRUE, message=TRUE, warning=TRUE}
+# structure and data previews for key objects
+str(synth_trace)
+```
+
+```{r double_check_idnames_synth, echo=TRUE, message=TRUE, warning=TRUE}
+head(synth_trace$id_names)
+```
+
+```{r double_check_colnames_synth, echo=TRUE, message=TRUE, warning=TRUE}
+colnames(synth_trace)[2:6]
+```
+
+```{r double_check_cc, echo=TRUE, message=TRUE, warning=TRUE}
+str(codon_counts)
+```
+
+```{r double_check_rownames_cc, echo=TRUE, message=TRUE, warning=TRUE}
+rownames(codon_counts)[1:3]
+```
+
+```{r double_check_colnames_cc, echo=TRUE, message=TRUE, warning=TRUE}
+colnames(codon_counts)[1:6]
+```
+
+```{r double_check_length_genenames, echo=TRUE, message=TRUE, warning=TRUE}
+length(gene_names)
+```
+
+```{r double_check_genenames, echo=TRUE, message=TRUE, warning=TRUE}
+head(gene_names)
+```
+
+
+```{r double_check_str_csplong, echo=TRUE, message=TRUE, warning=TRUE}
+str(csp_long)
+```
+
+
+```{r double_check_csplong, echo=TRUE, message=TRUE, warning=TRUE}
+head(csp_long)
+```
+
+
+```{r double_check_first_sample_ids, echo=TRUE, message=TRUE, warning=TRUE}
+unique(csp_long$Sample)[1:5]
+```
+
+# 8. log likelihood loop 
+```{r random_subset}
+#retrieve random subset of 300 genes 
+#convert csp_codons tibble to character vector
+csp_codon_list <- csp_codons$Codon
+
+#filter: keep only genes that have non-zero counts for at least one modeled codon
+valid_gene_mask <- apply(codon_counts[, csp_codon_list], 1, function(x) any(x > 0))
+valid_gene_names <- rownames(codon_counts)[valid_gene_mask]
+
+#sample: select 300 random valid genes
+set.seed(42)  # reproducibility
+subset_gene_names <- sample(valid_gene_names, size = 300)
+head(subset_gene_names)
+
+#full subset of 4945 genes
+# gene_names
+# str(gene_names)
+```
+
+```{r llik_loop, message=TRUE, warning=TRUE}
+loglik_list <- list()
+row_index <- 1
+
+for (gene in subset_gene_names) {
+  # get codon counts for this gene
+  counts <- as.numeric(codon_counts[gene, , drop = TRUE])
+  gene_codons <- colnames(codon_counts)
+  names(counts) <- gene_codons
+  
+  for (s in 0:100) {
+    # get φ (synthesis rate) for this gene and sample
+    phi <- synth_trace %>%
+      filter(id_names == gene) %>%
+      pull(as.character(s)) %>%
+      as.numeric()
+    
+    # get mutation and selection params for this gene/sample
+    dM <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Mutation)
+    
+    dE <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Selection)
+    
+    # compute log-likelihood
+    ll_result <- LLikGene(gene, dM, dE, phi, counts)
+    
+    # store result
+    loglik_list[[row_index]] <- data.frame(
+      Gene = gene,
+      Sample = s,
+      LogLikelihood = ll_result$LogLikelihood
+    )
+    
+    row_index <- row_index + 1
+  }
+}
+
+# combine results into a tibble
+loglik_df <- dplyr::bind_rows(loglik_list)
+
+print(loglik_df)
+```
+
+# 9. for each sample, sum log-likelihoods across all genes 
+```{r sum_llik, message=TRUE, warning=TRUE}
+loglik_summary <- loglik_df %>%
+  group_by(Sample) %>%
+  summarise(LL_sum = sum(LogLikelihood), .groups = "drop") 
+#get rid of grouping to avoid issues
+
+head(loglik_summary)
+#now i have one total log-likelihood value per sample
+```
+
+# 10. get anacodas loglikelihood trace 
+```{r anacoda_llik_trace, message=TRUE, warning=TRUE}
+# extract anacodas log likelihood trace from the MCMC object
+logLikeTrace <- mcmc$getLogLikelihoodTrace()
+
+#create tibble for comparison
+logLikeTrace_df <- tibble(
+  Sample = 1:100,
+  AnaCoDa_LL = logLikeTrace[-1] # drop the first zero
+)
+#check
+head(logLikeTrace_df)
+```
+
+# 11. plotting my ll vs. anacoda ll
+```{r myll_vs_anacodall, message=TRUE, warning=TRUE}
+# load full per-gene log-likelihood dataframe
+loglik_df_full <- readRDS("loglik_df_fullgenome.rds")
+
+# 1. summarize total log-likelihood per sample from full genome data
+# (this happens after adjustment now — see step 7)
+
+# 2. build AnaCoDa LL tibble (drop burn-in)
+logLikeTrace_df <- tibble(
+  Sample = 1:100,
+  AnaCoDa_LL = logLikeTrace[-1]
+)
+
+# 3. compute multinomial constant per gene (only depends on codon counts)
+log_multinomial_constant <- function(counts) {
+  total <- sum(counts)
+  if (total == 0) return(0)
+  lgamma(total + 1) - sum(lgamma(counts + 1))
+}
+
+gene_constants <- tibble(
+  Gene = rownames(codon_counts),
+  Constant = apply(codon_counts, 1, log_multinomial_constant)
+)
+
+# 4. join constants into your existing log-likelihoods and adjust
+loglik_df_adjusted <- loglik_df_full %>%
+  left_join(gene_constants, by = "Gene") %>%
+  mutate(AdjustedLogLikelihood = LogLikelihood + Constant)
+
+# 5. re-summarize per sample using adjusted values
+loglik_full_summary <- loglik_df_adjusted %>%
+  group_by(Sample) %>%
+  summarise(LL_sum = sum(AdjustedLogLikelihood), .groups = "drop")
+
+# 6. compare to AnaCoDa's LL trace
+comparison <- left_join(logLikeTrace_df, loglik_full_summary, by = "Sample")
+
+# 7. plot adjusted LLs vs AnaCoDa LLs
+ggplot(comparison, aes(x = AnaCoDa_LL, y = LL_sum)) +
+  geom_point(alpha = 0.6) +
+  geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
+  labs(
+    title = "Adjusted Custom Log-Likelihood vs AnaCoDa Log-Likelihood",
+    subtitle = "After Adding Multinomial Constants (Per Gene)",
+    x = "AnaCoDa Log-Likelihood",
+    y = "Custom (Adjusted) Log-Likelihood"
+  ) +
+  theme_minimal()
+
+```
+
+```{r myll_vs_anacodall_cortest, message=TRUE, warning=TRUE}
+# 8. correlation test
+cor.test(comparison$AnaCoDa_LL, comparison$LL_sum)
+```
+
+# 13. fitting a linear model 
+```{r fitting_lm, message=TRUE, warning=TRUE}
+lm_fit <- lm(LogLikelihood ~ Gene + Sample, data = loglik_df)
+
+summary(lm_fit)
+```
+
+# 14. extract coefficients 
+```{r extract_coefs, message=TRUE, warning=TRUE}
+coefs <- coef(lm_fit)
+
+#extract gene level coefs 
+gene_coefs <- coefs[grep("^Gene", names(coefs))]
+```
+
+# get worst 25 genes in the subset 
+```{r worst_25, message=TRUE, warning=TRUE}
+worst_genes <- sort(gene_coefs)[1:25]
+print(worst_genes)
+```
+# making into a df
+```{r worst_df, message=TRUE, warning=TRUE}
+worst_df <- enframe(gene_coefs, name = "Gene", value = "Estimate") %>%
+  arrange(Estimate) %>%
+  slice_head(n = 25)
+print(worst_df)
+```
+
+#example plot for the 25 worst fitting genes 
+```{r worst_plot, message=TRUE, warning=TRUE}
+ggplot(worst_df, aes(x = reorder(Gene, Estimate), y = Estimate)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "25 Worst-Fitting Genes by Log-Likelihood",
+    x = "Gene",
+    y = "Effect on Log-Likelihood"
+  ) +
+  theme_minimal(base_size = 12)
+
+```
+

@@ -43,28 +43,23 @@ LLikAA <- function(dM, dE, phi, codon_counts) {
 ##
 # LOOP: log-likelihood loop analysis (updated)
 ##
-#if using a subset: creating a subset of random genes
-num_genes <- getGenomeSize(genome)
-
-#create an empty list to store resgenome#create an empty list to store results
 loglik_list <- list()
-
-#start counter for rows
 row_index <- 1
 
-# loop over subset of genes
-for (gene in subset_gene_names) {
+for (gene in gene_names) {
+  # get codon counts for this gene
   counts <- as.numeric(codon_counts[gene, , drop = TRUE])
-  names(counts) <- colnames(codon_counts)
-  
-  # get the index of the gene in phi_trace
-  gene_index <- which(gene_names == gene)
+  gene_codons <- colnames(codon_counts)
+  names(counts) <- gene_codons
   
   for (s in 1:100) {
-    phi <- as.numeric(phi_trace[gene_index, as.character(s-1)])
-    gene_codons <- names(counts)
+    # get φ (synthesis rate) for this gene and sample
+    phi <- synth_trace %>%
+      filter(id_names == gene) %>%
+      pull(as.character(s - 1)) %>%
+      as.numeric()
     
-    # get dM and dE from csp_long for this sample
+    # get mutation and selection params for this gene/sample
     dM <- csp_long %>%
       filter(Codon %in% gene_codons, Sample == s) %>%
       arrange(match(Codon, gene_codons)) %>%
@@ -89,8 +84,8 @@ for (gene in subset_gene_names) {
   }
 }
 
-# combine results into one data frame
-loglik_df <- do.call(rbind, loglik_list)
+# Combine results into a tibble
+loglik_df <- dplyr::bind_rows(loglik_list)
 
 ##
 # LOOP: codon usage analysis
@@ -114,7 +109,6 @@ for (gene in gene_names) {
     }
   }
 }
-
 
 ##
 #CALLING
