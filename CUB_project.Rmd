@@ -374,7 +374,7 @@ comparison <- comparison %>%
 ggplot(comparison, aes(x = AnaCoDa_LL, y = LL_sum_flipped)) +
   geom_point(alpha = 0.6) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
-  labs(title = "Log-Likelihood Comparison (Flipped)",
+  labs(title = "Log-Likelihood Comparison",
        x = "AnaCoDa", y = "Custom (Flipped)")
 ```
 
