@@ -24,6 +24,33 @@ LLikGene <- function(gene_name, dM, dE, phi, codon_counts) {
 }
 
 ##
+#FUNCTION: compute one LL value per gene per sample based on amino acid group level
+##
+LLikGene <- function(gene_name, dM, dE, phi, codon_counts, aa_by_codon) {
+  # ensure all inputs are properly named
+  names(dM) <- names(dE) <- names(codon_counts)
+  
+  # group codons by their associated amino acid
+  codon_groups <- split(names(codon_counts), aa_by_codon[names(codon_counts)])
+  
+  LL_total <- 0
+  
+  for (aa in names(codon_groups)) {
+    codons <- codon_groups[[aa]]
+    counts <- codon_counts[codons]
+    if (sum(counts) == 0) next
+    
+    dM_aa <- dM[codons]
+    dE_aa <- dE[codons]
+    
+    # add amino acid–level log-likelihood
+    LL_total <- LL_total + LLikAA(dM_aa, dE_aa, phi, counts)
+  }
+  
+  return(list(Gene = gene_name, LogLikelihood = LL_total))
+}
+
+##
 # FUNCTION: loglikelihood amino acid function 
 ##
 LLikAA <- function(dM, dE, phi, codon_counts) {

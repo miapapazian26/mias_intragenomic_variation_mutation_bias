@@ -42,13 +42,11 @@ model <- initializeModelObject(parameter = parameter, model = "ROC")
 ```
 
 # 2. run MCMC
-
 ```{r run_mcmc, eval=FALSE}
 runMCMC(mcmc = mcmc, genome = genome, model = model)
 ```
 
 # 3. save/load results
-
 ```{r save_results, eval=FALSE}
 species <- "candida_tenuis"
 dir.create("Results", showWarnings = FALSE)
@@ -65,7 +63,6 @@ writeParameterObject(parameter = parameter, file = param_file)
 ```
 
 # 4. trace analysis
-
 ## extract trace object
 ```{r trace}
 trace <- parameter$getTraceObject()
@@ -90,7 +87,6 @@ dim(synth_trace)
 ```
 
 # 5. codon-specific parameters
-
 ## extract CSP estimates
 ```{r csp_estimates}
 csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
@@ -204,7 +200,6 @@ str(codon_counts)
 ```
 
 # 7. double checking objects 
-
 ```{r double_check_str_synth, echo=TRUE, message=TRUE, warning=TRUE}
 # structure and data previews for key objects
 str(synth_trace)
@@ -271,6 +266,12 @@ head(subset_gene_names)
 #full subset of 4945 genes
 # gene_names
 # str(gene_names)
+
+#creating codon -> amino acid mapping
+aa_by_codon <- csp_long %>%
+  select(Codon, AA) %>%
+  distinct() %>%
+  deframe()
 ```
 
 ```{r llik_loop, message=TRUE, warning=TRUE}
@@ -302,7 +303,7 @@ for (gene in subset_gene_names) {
       pull(Selection)
     
     # compute log-likelihood
-    ll_result <- LLikGene(gene, dM, dE, phi, counts)
+    ll_result <- LLikGene(gene, dM, dE, phi, counts, aa_by_codon)
     
     # store result
     loglik_list[[row_index]] <- data.frame(
@@ -348,66 +349,42 @@ head(logLikeTrace_df)
 
 # 11. plotting my ll vs. anacoda ll
 ```{r myll_vs_anacodall, message=TRUE, warning=TRUE}
-# load full per-gene log-likelihood dataframe
+# 1. load full per-gene log-likelihood dataframe
 loglik_df_full <- readRDS("loglik_df_fullgenome.rds")
 
-# 1. summarize total log-likelihood per sample from full genome data
-# (this happens after adjustment now — see step 7)
+# 2. summarize total log-likelihood per sample
+loglik_full_summary <- loglik_df_full %>%
+  group_by(Sample) %>%
+  summarise(LL_sum = sum(LogLikelihood), .groups = "drop")
 
-# 2. build AnaCoDa LL tibble (drop burn-in)
+# 3. build AnaCoDa LL trace (drop burn-in = sample 0)
 logLikeTrace_df <- tibble(
   Sample = 1:100,
   AnaCoDa_LL = logLikeTrace[-1]
 )
 
-# 3. compute multinomial constant per gene (only depends on codon counts)
-log_multinomial_constant <- function(counts) {
-  total <- sum(counts)
-  if (total == 0) return(0)
-  lgamma(total + 1) - sum(lgamma(counts + 1))
-}
-
-gene_constants <- tibble(
-  Gene = rownames(codon_counts),
-  Constant = apply(codon_counts, 1, log_multinomial_constant)
-)
-
-# 4. join constants into your existing log-likelihoods and adjust
-loglik_df_adjusted <- loglik_df_full %>%
-  left_join(gene_constants, by = "Gene") %>%
-  mutate(AdjustedLogLikelihood = LogLikelihood + Constant)
-
-# 5. re-summarize per sample using adjusted values
-loglik_full_summary <- loglik_df_adjusted %>%
-  group_by(Sample) %>%
-  summarise(LL_sum = sum(AdjustedLogLikelihood), .groups = "drop")
-
-# 6. compare to AnaCoDa's LL trace
+# 4. join AnaCoDa and custom LLs by sample
 comparison <- left_join(logLikeTrace_df, loglik_full_summary, by = "Sample")
+comparison <- comparison %>%
+  mutate(LL_sum_flipped = -LL_sum)
+#flip the sign before comparing 
 
-# 7. plot adjusted LLs vs AnaCoDa LLs
-ggplot(comparison, aes(x = AnaCoDa_LL, y = LL_sum)) +
+# 5. plot comparison
+ggplot(comparison, aes(x = AnaCoDa_LL, y = LL_sum_flipped)) +
   geom_point(alpha = 0.6) +
-  geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
-  labs(
-    title = "Adjusted Custom Log-Likelihood vs AnaCoDa Log-Likelihood",
-    subtitle = "After Adding Multinomial Constants (Per Gene)",
-    x = "AnaCoDa Log-Likelihood",
-    y = "Custom (Adjusted) Log-Likelihood"
-  ) +
-  theme_minimal()
-
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Log-Likelihood Comparison (Flipped)",
+       x = "AnaCoDa", y = "Custom (Flipped)")
 ```
 
 ```{r myll_vs_anacodall_cortest, message=TRUE, warning=TRUE}
 # 8. correlation test
-cor.test(comparison$AnaCoDa_LL, comparison$LL_sum)
+cor.test(comparison$AnaCoDa_LL, comparison$LL_sum_flipped)
 ```
 
 # 13. fitting a linear model 
 ```{r fitting_lm, message=TRUE, warning=TRUE}
 lm_fit <- lm(LogLikelihood ~ Gene + Sample, data = loglik_df)
-
 summary(lm_fit)
 ```
 
