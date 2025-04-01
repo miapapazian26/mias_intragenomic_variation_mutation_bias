@@ -365,9 +365,10 @@ logLikeTrace_df <- tibble(
 
 # 4. join AnaCoDa and custom LLs by sample
 comparison <- left_join(logLikeTrace_df, loglik_full_summary, by = "Sample")
+
+#flip the sign before comparing to scale to AnaCoDa values
 comparison <- comparison %>%
   mutate(LL_sum_flipped = -LL_sum)
-#flip the sign before comparing 
 
 # 5. plot comparison
 ggplot(comparison, aes(x = AnaCoDa_LL, y = LL_sum_flipped)) +
