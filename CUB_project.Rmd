@@ -253,7 +253,7 @@ unique(csp_long$Sample)[1:5]
 #convert csp_codons tibble to character vector
 csp_codon_list <- csp_codons$Codon
 
-#filter: keep only genes that have non-zero counts for at least one modeled codon
+#filter: keep only genes that have non-zero counts for at least one modeled codon (avoiding computing log(0))
 valid_gene_mask <- apply(codon_counts[, csp_codon_list], 1, function(x) any(x > 0))
 valid_gene_names <- rownames(codon_counts)[valid_gene_mask]
 

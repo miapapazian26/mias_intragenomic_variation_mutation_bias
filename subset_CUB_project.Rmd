@@ -42,7 +42,7 @@ create_random_subset_fasta(
 )
 ```
 # 1. load into anacoda 
-```{r}
+```{r message=TRUE, warning=TRUE}
 library(AnaCoDa)
 genome <- initializeGenomeObject("fasta/cleaned_random_500.fasta")
 ```
@@ -56,7 +56,7 @@ print(str(genome))
 ```
 
 # 3. initialize parameters
-```{r}
+```{r message=TRUE, warning=TRUE}
 parameter <- initializeParameterObject(
   genome = genome, 
   sphi = 1, 
@@ -215,7 +215,6 @@ ggplot(csp_comparison, aes(x = Mutation_mean, y = Mutation_calc)) +
        x = "AnaCoDa Mean", y = "Tibble Mean")
 ```
 
-
 ```{r}
 # plot: selection
 ggplot(csp_comparison, aes(x = Selection_mean, y = Selection_calc)) +
@@ -226,6 +225,130 @@ ggplot(csp_comparison, aes(x = Selection_mean, y = Selection_calc)) +
 
 ```
 
+# configuring codons
+```{r}
+subset_codon_counts <- getCodonCounts(genome)
+print(subset_codon_counts)
+```
+
+# log likelihood loop 
+```{r}
+#getting gene names
+gene_names = getNames(genome)
+
+#creating codon -> amino acid mapping
+aa_by_codon <- csp_long %>%
+  select(Codon, AA) %>%
+  distinct() %>%
+  deframe()
+
+loglik_list <- list()
+row_index <- 1
+
+# Use the filtered codon list for consistency
+gene_codons <- csp_codons$Codon
+
+for (gene in gene_names) {
+  # get codon counts for this gene, using only the modeled codons
+  counts <- as.numeric(codon_counts[gene, gene_codons, drop = TRUE])
+  names(counts) <- gene_codons
+  
+  for (s in 0:100) {
+    # get φ (synthesis rate) for this gene and sample
+    phi <- synth_trace %>%
+      filter(id_names == gene) %>%
+      pull(as.character(s)) %>%
+      as.numeric()
+    
+    # get mutation and selection params for the modeled codons at this sample
+    dM <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Mutation)
+    
+    dE <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Selection)
+    
+    # compute log-likelihood for this gene and sample
+    ll_result <- LLikGene(gene, dM, dE, phi, counts, aa_by_codon)
+    
+    # store result
+    loglik_list[[row_index]] <- data.frame(
+      Gene = gene,
+      Sample = s,
+      LogLikelihood = ll_result$LogLikelihood
+    )
+    
+    row_index <- row_index + 1
+  }
+}
+
+# combine results into a tibble for further analysis
+loglik_df <- dplyr::bind_rows(loglik_list)
+print(loglik_df)
 
 
+loglik_summary <- loglik_df %>%
+  group_by(Sample) %>%
+  summarise(LL_sum = sum(LogLikelihood), .groups = "drop") 
+#get rid of grouping to avoid issues
+
+head(loglik_summary)
+#summing across samples for one total log-likelihood value per gene
+```
+
+# get anacodas llik trace 
+```{r}
+# extract anacodas log likelihood trace from the MCMC object
+logLikeTrace <- mcmc$getLogLikelihoodTrace()
+head(logLikeTrace)
+
+acLL_summary <- tibble(
+  Sample = 1:length(logLikeTrace[-1]),  # if you want to drop the first (burn-in) sample
+  AnaCoDa_LL = logLikeTrace[-1]
+)
+head(acLL_summary)
+
+#subtract constant of 267,100
+acLL_summary <- acLL_summary %>%
+  mutate(AnaCoDa_LL_adjusted = AnaCoDa_LL - 267100)
+head(acLL_summary)
+
+```
+
+# create separate tibble with just adjusted value and sample
+```{r}
+acLL_adjusted <- acLL_summary %>%
+  mutate(Adjusted = AnaCoDa_LL - 267100) %>%
+  select(Sample, Adjusted)
+head(acLL_adjusted)
+```
+
+#plotting my values with ac
+```{r}
+comparison <- left_join(loglik_summary, acLL_adjusted, by = "Sample")
+head(comparison)
+
+comparison_filtered <- comparison %>% filter(Sample != 0)
+
+ggplot(comparison_filtered, aes(x = Adjusted, y = LL_sum)) +
+  geom_point(alpha = 0.6) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "Custom vs. Adjusted AnaCoDa Log-Likelihood Comparison",
+    x = "Adjusted AnaCoDa LL",
+    y = "Custom Total LL"
+  ) +
+  theme_minimal()
+
+
+
+```
+#correlation test 
+```{r}
+cor_test <- cor.test(comparison_filtered$Adjusted, comparison_filtered$LL_sum)
+print(cor_test)
+```
 
