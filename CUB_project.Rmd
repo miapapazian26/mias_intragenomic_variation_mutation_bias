@@ -38,6 +38,7 @@ parameter <- initializeParameterObject(
 ## initialize MCMC and model
 ```{r mcmc_model, eval=FALSE}
 mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
+
 model <- initializeModelObject(parameter = parameter, model = "ROC")
 ```
 
@@ -56,6 +57,10 @@ writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
 param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
 writeParameterObject(parameter = parameter, file = param_file)
+
+#save objects 
+parameter <- loadParameterObject(param_file)
+mcmc <- loadMCMCObject(mcmc_file)
 ```
 
 ```{r load_results}

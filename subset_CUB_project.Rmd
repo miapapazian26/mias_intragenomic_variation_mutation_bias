@@ -81,10 +81,10 @@ runMCMC(mcmc = mcmc, genome = genome, model = model)
 species <- "candida_tenuis"
 dir.create("Results", showWarnings = FALSE)
 
-mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
+mcmc_file <- file.path("Results", paste0(species, "_mcmc_subset.Rda"))
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
-param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
+param_file <- file.path("Results", paste0(species, "_parameter_subset.Rda"))
 writeParameterObject(parameter = parameter, file = param_file)
 ```
 
@@ -110,8 +110,12 @@ trace_to_tibble <- function(list_trace, id_names) {
 }
 
 synth_trace <- trace_to_tibble(synth_trace_list, id_names = getNames(genome))
-head(synth_trace)
-dim(synth_trace)
+
+{
+print(head(synth_trace))
+print(dim(synth_trace))
+}
+
 ```
 
 # 7. retrieving codon specific parameters 

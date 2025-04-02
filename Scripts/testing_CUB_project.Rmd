@@ -1,0 +1,15 @@
+#PURPOSE: to test my original project 
+
+# 1. does the order of my gene ids in my fasta file match up with the order that they are being extracted for analysis?   
+```{r}
+library(Biostrings)
+fasta <- readDNAStringSet("~/repositories/mias_intragenomic_variation_mutation_bias/fasta/cleaned_random_500.fasta")
+{
+gene_ids_fasta <- names(fasta)
+print(head(gene_ids))
+
+id_names_genome = getNames(genome)
+print(head(id_names_genome))
+}
+```
+
