@@ -1,0 +1,200 @@
+# checking to make sure that my CUB project is calculating everything in the way i think it is
+#creating a function that ensures valid cds, a random subset of 500 genes, loads into anacoda
+```{r function_random_subset}
+
+library(Biostrings)
+
+create_random_subset_fasta <- function(
+  input_fasta,
+  output_fasta = "cleaned_random_500.fasta",
+  n = 500,
+  seed = 42
+) {
+  # load full fasta
+  message("loading fasta...")
+  fasta <- readDNAStringSet(input_fasta)
+
+  # filter valid cds (length % 3 == 0 and only a/c/g/t)
+  message("filtering valid cds...")
+  valid_fasta <- fasta[width(fasta) %% 3 == 0 & !grepl("[^ACGTacgt]", as.character(fasta))]
+
+  # check if there are enough genes to sample
+  if (length(valid_fasta) < n) {
+    stop("not enough valid genes to sample ", n, " (found only ", length(valid_fasta), ").")
+  }
+
+  # randomly sample subset
+  set.seed(seed)
+  message("sampling ", n, " random genes...")
+  subset_indices <- sample(seq_along(valid_fasta), n)
+  subset_fasta <- valid_fasta[subset_indices]
+
+  # save to new fasta
+  message("saving to: ", output_fasta)
+  writeXStringSet(subset_fasta, filepath = output_fasta)
+
+  message("✅ done! file saved: ", output_fasta)
+}
+
+create_random_subset_fasta(
+  input_fasta = "fasta/revisit_cds_data/candida_tenuis.max.cds",
+  output_fasta = "fasta/cleaned_random_500.fasta"
+)
+```
+# 1. load into anacoda 
+```{r}
+library(AnaCoDa)
+genome <- initializeGenomeObject("fasta/cleaned_random_500.fasta")
+```
+
+# 2. check if its working
+```{r}
+{
+print(length(genome)) #should be 500
+print(str(genome))
+}
+```
+
+# 3. initialize parameters
+```{r}
+parameter <- initializeParameterObject(
+  genome = genome, 
+  sphi = 1, 
+  num.mixtures = 1, 
+  gene.assignment = rep(1, length(genome))
+)
+```
+
+# initialize MCMC and model
+```{r}
+mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
+model <- initializeModelObject(parameter = parameter, model = "ROC")
+```
+
+# run MCMC
+```{r}
+runMCMC(mcmc = mcmc, genome = genome, model = model)
+```
+
+# 4. save results 
+```{r}
+species <- "candida_tenuis"
+dir.create("Results", showWarnings = FALSE)
+
+mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
+writeMCMCObject(mcmc = mcmc, file = mcmc_file)
+
+param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
+writeParameterObject(parameter = parameter, file = param_file)
+```
+
+# 5. trace retrieving and plotting
+```{r}
+# extract trace object
+trace <- parameter$getTraceObject()
+
+# plot expression trace for a single gene (gene 1, mixture 1)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
+```
+
+# 6. retrieving synthesis rate trace 
+```{r message=TRUE, warning=TRUE}
+synth_trace_list <- trace$getSynthesisRateTrace()[[1]]
+
+trace_to_tibble <- function(list_trace, id_names) {
+  matrix <- do.call(rbind, list_trace)
+  sample_n <- 1:ncol(matrix) - 1
+  colnames(matrix) <- sample_n
+  tibble <- as_tibble(matrix) %>% bind_cols(tibble(id_names), .)
+  return(tibble)
+}
+
+synth_trace <- trace_to_tibble(synth_trace_list, id_names = getNames(genome))
+head(synth_trace)
+dim(synth_trace)
+```
+
+# 7. retrieving codon specific parameters 
+```{r csp_estimates, message=TRUE, warning=TRUE}
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+
+csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
+
+str(csp_codons)
+print(csp_codons)
+```
+
+# extract csp traces
+```{r message=TRUE, warning=TRUE}
+csp_cat <- c("Mutation", "Selection")
+csp_wide_list <- list()
+
+for (i in 1:2) {
+  param = csp_cat[i]
+  trace_list <- trace$getCodonSpecificParameterTrace((i - 1))[[1]]
+  csp_wide_list[[i]] <- trace_to_tibble(trace_list, csp_codons) %>%
+    rowwise() %>%
+    mutate(AA = codonToAA(Codon), .before = "Codon")
+}
+
+names(csp_wide_list) <- csp_cat
+
+```
+
+# pivot traces to long format 
+```{r}
+csp_long_list <- list()
+
+for (i in 1:2) {
+  param = csp_cat[i]
+  csp_long_list[[i]] <- pivot_longer(csp_wide_list[[i]],
+                                     cols = !c("AA", "Codon"),
+                                     values_to = param,
+                                     names_to = "Sample") %>%
+    mutate(Sample = as.numeric(Sample))
+}
+
+names(csp_long_list) <- csp_cat
+
+csp_long <- left_join(csp_long_list$Mutation,
+                      csp_long_list$Selection,
+                      by = join_by(AA, Codon, Sample))
+head(csp_long)
+```
+
+#compare between mine and anacoda's
+```{r}
+#get anacoda’s estimates
+csp_estimates <- getCSPEstimates(parameter, mixture = 1, samples = 100)
+
+#combine mutation and selection estimates
+csp_summary_ac <- full_join(csp_estimates$Mutation %>% rename(Mutation_mean = Mean),
+                            csp_estimates$Selection %>% rename(Selection_mean = Mean),
+                            by = c("AA", "Codon"))
+
+#now calculate my means from the trace tibble
+csp_summary_tibble <- csp_long %>%
+  group_by(AA, Codon) %>%
+  summarize(Mutation_calc = mean(Mutation), Selection_calc = mean(Selection), .groups = "drop")
+
+# join the two
+csp_comparison <- inner_join(csp_summary_ac, csp_summary_tibble, by = c("AA", "Codon"))
+
+# plot: Mutation
+ggplot(csp_comparison, aes(x = Mutation_mean, y = Mutation_calc)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Mutation Parameter: AnaCoDa vs. Calculated from Trace",
+       x = "AnaCoDa Mean", y = "Tibble Mean")
+
+# plot: Selection
+ggplot(csp_comparison, aes(x = Selection_mean, y = Selection_calc)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "blue") +
+  labs(title = "Selection Parameter: AnaCoDa vs. Calculated from Trace",
+       x = "AnaCoDa Mean", y = "Tibble Mean")
+```
+
+
+
+

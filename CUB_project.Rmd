@@ -233,16 +233,13 @@ length(gene_names)
 head(gene_names)
 ```
 
-
 ```{r double_check_str_csplong, echo=TRUE, message=TRUE, warning=TRUE}
 str(csp_long)
 ```
 
-
 ```{r double_check_csplong, echo=TRUE, message=TRUE, warning=TRUE}
 head(csp_long)
 ```
-
 
 ```{r double_check_first_sample_ids, echo=TRUE, message=TRUE, warning=TRUE}
 unique(csp_long$Sample)[1:5]
@@ -366,24 +363,39 @@ logLikeTrace_df <- tibble(
 # 4. join AnaCoDa and custom LLs by sample
 comparison <- left_join(logLikeTrace_df, loglik_full_summary, by = "Sample")
 
-#flip the sign before comparing to scale to AnaCoDa values
+# 5. flip the sign before comparing to scale to AnaCoDa values
 comparison <- comparison %>%
   mutate(LL_sum_flipped = -LL_sum)
 
-# 5. plot comparison
-ggplot(comparison, aes(x = AnaCoDa_LL, y = LL_sum_flipped)) +
+# 6. compute delta log-likelihoods relative to first sample
+comparison <- comparison %>%
+  mutate(
+    DeltaLL_Custom = LL_sum_flipped - LL_sum_flipped[1],
+    DeltaLL_AnaCoDa = AnaCoDa_LL - AnaCoDa_LL[1]
+  )
+
+# 7. plot delta comparison
+ggplot(comparison, aes(x = DeltaLL_AnaCoDa, y = DeltaLL_Custom)) +
   geom_point(alpha = 0.6) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
-  labs(title = "Log-Likelihood Comparison",
-       x = "AnaCoDa", y = "Custom (Flipped)")
+  labs(
+    title = "Delta Log-Likelihood Comparison",
+    x = expression(Delta~LogL[AnaCoDa]),
+    y = expression(Delta~LogL[Custom])
+  ) +
+  theme_minimal()
+
 ```
 
-```{r myll_vs_anacodall_cortest, message=TRUE, warning=TRUE}
-# 8. correlation test
-cor.test(comparison$AnaCoDa_LL, comparison$LL_sum_flipped)
+# 12. correlation test pre delta
+```{r predelta_cor}
+cor(comparison$LL_sum_flipped, comparison$AnaCoDa_LL)
+```
+```{r postdelta_cor}
+cor(comparison$DeltaLL_Custom, comparison$DeltaLL_AnaCoDa)
 ```
 
-# 13. fitting a linear model 
+# 13. fitting linear model
 ```{r fitting_lm, message=TRUE, warning=TRUE}
 lm_fit <- lm(LogLikelihood ~ Gene + Sample, data = loglik_df)
 summary(lm_fit)

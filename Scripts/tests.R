@@ -39,3 +39,42 @@ all(sapply(dE_trace, length) == 101)  # should be TRUE
 
 #checking phi_trace is a 4945 x 101 matrix 
 dim(phi_trace)  # should return c(4945, 101)
+
+# Test: Check if there are any missing values (NA) in Mutation and Selection traces
+mutation_na_count <- sum(is.na(csp_wide_list$Mutation[, -1]))  # Exclude Codon column
+selection_na_count <- sum(is.na(csp_wide_list$Selection[, -1]))  # Exclude Codon column
+
+cat("Missing values in Mutation trace:", mutation_na_count, "\n")
+cat("Missing values in Selection trace:", selection_na_count, "\n")
+
+if (mutation_na_count > 0 | selection_na_count > 0) {
+  cat("Warning: There are missing values in the traces.\n")
+} else {
+  cat("No missing values detected.\n")
+}
+
+
+# Test: Check if Mutation and Selection parameters are within expected biological ranges
+# For example, mutation rates should typically be between 0 and 1, and selection coefficients might range from -1 to 1.
+
+mutation_range_check <- all(csp_wide_list$Mutation[, -1] >= 0 & csp_wide_list$Mutation[, -1] <= 1)
+selection_range_check <- all(csp_wide_list$Selection[, -1] >= -1 & csp_wide_list$Selection[, -1] <= 1)
+
+if (!mutation_range_check) {
+  cat("Warning: Some Mutation values are out of expected range [0, 1].\n")
+} else {
+  cat("Mutation values are within the expected range [0, 1].\n")
+}
+
+if (!selection_range_check) {
+  cat("Warning: Some Selection values are out of expected range [-1, 1].\n")
+} else {
+  cat("Selection values are within the expected range [-1, 1].\n")
+}
+
+# Test: Pick a specific codon (e.g., "GCA") and calculate the mean manually
+specific_codon_data <- filter(csp_long, Codon == "GCA")  # Replace with codon of interest
+mean_mutation_manual <- mean(specific_codon_data$Mutation)
+
+cat("Manual Mutation mean for GCA:", mean_mutation_manual, "\n")
+
