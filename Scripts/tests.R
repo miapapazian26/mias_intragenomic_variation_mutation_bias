@@ -78,3 +78,6 @@ mean_mutation_manual <- mean(specific_codon_data$Mutation)
 
 cat("Manual Mutation mean for GCA:", mean_mutation_manual, "\n")
 
+
+
+

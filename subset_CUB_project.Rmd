@@ -1,6 +1,6 @@
 # checking to make sure that my CUB project is calculating everything in the way i think it is
 #creating a function that ensures valid cds, a random subset of 500 genes, loads into anacoda
-```{r function_random_subset}
+```{r function_random_subset, eval=FALSE}
 
 library(Biostrings)
 
@@ -66,7 +66,7 @@ parameter <- initializeParameterObject(
 ```
 
 # initialize MCMC and model
-```{r}
+```{r message=TRUE, warning=TRUE}
 mcmc <- initializeMCMCObject(samples = 100, thinning = 10, adaptive.width = 50)
 model <- initializeModelObject(parameter = parameter, model = "ROC")
 ```
@@ -102,10 +102,10 @@ plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1)
 synth_trace_list <- trace$getSynthesisRateTrace()[[1]]
 
 trace_to_tibble <- function(list_trace, id_names) {
-  matrix <- do.call(rbind, list_trace)
+  matrix <- do.call(rbind, list_trace) #converts list of traces into a matrix
   sample_n <- 1:ncol(matrix) - 1
   colnames(matrix) <- sample_n
-  tibble <- as_tibble(matrix) %>% bind_cols(tibble(id_names), .)
+  tibble <- as_tibble(matrix) %>% bind_cols(tibble(id_names), .) #create trace tibble
   return(tibble)
 }
 
@@ -115,17 +115,22 @@ synth_trace <- trace_to_tibble(synth_trace_list, id_names = getNames(genome))
 print(head(synth_trace))
 print(dim(synth_trace))
 }
-
 ```
 
 # 7. retrieving codon specific parameters 
-```{r csp_estimates, message=TRUE, warning=TRUE}
-csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+```{r codon specific parameters, message=TRUE, warning=TRUE}
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100, relative.to.optimal.codon = FALSE)
 
-csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
+csp_codons <- csp_est$Mutation %>%
+  filter(Mean !=0) %>%
+  select("Codon")
 
-str(csp_codons)
+codon_vector <- csp_codons$Codon #extracting codon names as a vector
+
+{
+print(str(csp_codons))
 print(csp_codons)
+}
 ```
 
 # extract csp traces
@@ -133,48 +138,63 @@ print(csp_codons)
 csp_cat <- c("Mutation", "Selection")
 csp_wide_list <- list()
 
-for (i in 1:2) {
-  param = csp_cat[i]
-  trace_list <- trace$getCodonSpecificParameterTrace((i - 1))[[1]]
-  csp_wide_list[[i]] <- trace_to_tibble(trace_list, csp_codons) %>%
-    rowwise() %>%
+for(i in 1:2) {
+  param = csp_cat[i] ## don't need double [] because already atomic object, mutation for i = 1 and selection for i = 2
+  trace_list <- trace$getCodonSpecificParameterTrace((i-1))[[1]]
+  csp_wide_list[[i]] <- trace_to_tibble(trace_list, id_names = csp_codons)  %>%
+    rowwise() %>%  #use rowwise because codonToAA isn't vectorized.
     mutate(AA = codonToAA(Codon), .before = "Codon")
+  
 }
-
 names(csp_wide_list) <- csp_cat
 
-```
-
-# pivot traces to long format 
-```{r}
 csp_long_list <- list()
-
-for (i in 1:2) {
-  param = csp_cat[i]
+for(i in 1:2) {
+  param = csp_cat[i] ## don't need double [] because already atomic object
   csp_long_list[[i]] <- pivot_longer(csp_wide_list[[i]],
-                                     cols = !c("AA", "Codon"),
-                                     values_to = param,
-                                     names_to = "Sample") %>%
+               cols = !c("AA", "Codon"),
+               values_to = param,
+               names_to = "Sample") %>%
     mutate(Sample = as.numeric(Sample))
 }
-
 names(csp_long_list) <- csp_cat
 
 csp_long <- left_join(csp_long_list$Mutation,
                       csp_long_list$Selection,
-                      by = join_by(AA, Codon, Sample))
-head(csp_long)
+                      by = join_by(AA, Codon, Sample)
+)
+
+
+{print(head(csp_long))
+  print(str(csp_long))
+}
 ```
 
 #compare between mine and anacoda's
 ```{r}
 #get anacoda’s estimates
-csp_estimates <- getCSPEstimates(parameter, mixture = 1, samples = 100)
+anacoda_csp_estimates <- getCSPEstimates(parameter, mixture = 1, samples = 100)
+
+#get full 59 codons including reference for comparison sake
+full_csp_codons <- csp_est$Mutation %>% select("Codon")
+str(full_csp_codons)
 
 #combine mutation and selection estimates
-csp_summary_ac <- full_join(csp_estimates$Mutation %>% rename(Mutation_mean = Mean),
-                            csp_estimates$Selection %>% rename(Selection_mean = Mean),
-                            by = c("AA", "Codon"))
+csp_mutation <- anacoda_csp_estimates$Mutation %>% 
+  mutate(order = row_number()) %>% 
+  dplyr::rename(Mutation_mean = Mean)
+
+csp_selection <- anacoda_csp_estimates$Selection %>% 
+  dplyr::rename(Selection_mean = Mean)
+
+#left join using the mutation table as the left side to preserve its order
+csp_summary_ac <- left_join(csp_mutation, csp_selection, by = c("AA", "Codon"))
+
+#then, if needed, sort by the order column
+csp_summary_ac <- csp_summary_ac %>% arrange(order)
+
+print(head(csp_summary_ac))
+print(dim(csp_summary_ac))
 
 #now calculate my means from the trace tibble
 csp_summary_tibble <- csp_long %>%
@@ -183,20 +203,27 @@ csp_summary_tibble <- csp_long %>%
 
 # join the two
 csp_comparison <- inner_join(csp_summary_ac, csp_summary_tibble, by = c("AA", "Codon"))
+```
 
-# plot: Mutation
+
+```{r}
+# plot: mutation
 ggplot(csp_comparison, aes(x = Mutation_mean, y = Mutation_calc)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
   labs(title = "Mutation Parameter: AnaCoDa vs. Calculated from Trace",
        x = "AnaCoDa Mean", y = "Tibble Mean")
+```
 
-# plot: Selection
+
+```{r}
+# plot: selection
 ggplot(csp_comparison, aes(x = Selection_mean, y = Selection_calc)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "blue") +
   labs(title = "Selection Parameter: AnaCoDa vs. Calculated from Trace",
        x = "AnaCoDa Mean", y = "Tibble Mean")
+
 ```
 
 

@@ -57,10 +57,6 @@ writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
 param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
 writeParameterObject(parameter = parameter, file = param_file)
-
-#save objects 
-parameter <- loadParameterObject(param_file)
-mcmc <- loadMCMCObject(mcmc_file)
 ```
 
 ```{r load_results}
@@ -95,6 +91,7 @@ dim(synth_trace)
 ## extract CSP estimates
 ```{r csp_estimates}
 csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+
 csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
 str(csp_codons)
 print(csp_codons)
@@ -379,7 +376,7 @@ comparison <- comparison %>%
     DeltaLL_AnaCoDa = AnaCoDa_LL - AnaCoDa_LL[1]
   )
 
-# 7. plot delta comparison
+# 7. plot comparison
 ggplot(comparison, aes(x = DeltaLL_AnaCoDa, y = DeltaLL_Custom)) +
   geom_point(alpha = 0.6) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +

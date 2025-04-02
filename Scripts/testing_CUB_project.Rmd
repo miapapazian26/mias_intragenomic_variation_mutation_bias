@@ -1,6 +1,6 @@
 #PURPOSE: to test my original project 
 
-# 1. does the order of my gene ids in my fasta file match up with the order that they are being extracted for analysis?   
+# does the order of my gene ids in my fasta file match up with the order that they are being extracted for analysis?   
 ```{r}
 library(Biostrings)
 fasta <- readDNAStringSet("~/repositories/mias_intragenomic_variation_mutation_bias/fasta/cleaned_random_500.fasta")
@@ -12,4 +12,62 @@ id_names_genome = getNames(genome)
 print(head(id_names_genome))
 }
 ```
+
+# check that every row in the tibble has the correct codon
+```{r}
+all(csp_wide_list[[1]]$Codon == csp_codons)
+```
+
+# check that amino acid conversion is correct 
+```{r}
+{
+print((csp_wide_list[[1]]$AA))
+  print((csp_wide_list[[1]]$Codon))
+  print((csp_wide_list[[2]]$AA))
+  print((csp_wide_list[[2]]$Codon))
+}
+```
+
+# checking codons 
+```{r}
+library(Biostrings)
+cds <- readDNAStringSet("~/repositories/mias_intragenomic_variation_mutation_bias/fasta/cleaned_random_500.fasta")
+codon_matrix <- DNAStringSet(cds)  # creates a matrix of codons
+print(str(codon_matrix))
+custom_codon_counts <- table(as.vector(codon_matrix))
+print(head(custom_codon_counts))
+print(str(custom_codon_counts))
+```
+
+#comparing mutaiton and selection 
+#re-calculating csp_long with full 59 codons 
+```{r}
+{
+full_csp_codons <- csp_est$Mutation %>% select("Codon")
+print(str(full_csp_codons))
+}
+
+csp_cat <- c("Mutation", "Selection")
+full_csp_long_list <- list()
+
+for(i in 1:2) {
+  param <- csp_cat[i]  # "Mutation" for i=1 and "Selection" for i=2
+  trace_list <- trace$getCodonSpecificParameterTrace(i - 1)[[1]]
+  full_csp_long_list[[i]] <- trace_to_tibble(trace_list, 
+                                             id_names = full_csp_codons$Codon) %>%
+    rowwise() %>%  # use rowwise because codonToAA isn't vectorized
+    mutate(AA = codonToAA(Codon), .before = "Codon")
+}
+names(full_csp_long_list) <- csp_cat
+
+full_csp_long <- left_join(full_csp_long_list$Mutation,
+                           full_csp_long_list$Selection,
+                           by = join_by(AA, Codon, Sample))
+
+print(head(full_csp_long))
+print(str(full_csp_long))
+
+```
+
+
 
