@@ -352,3 +352,77 @@ cor_test <- cor.test(comparison_filtered$Adjusted, comparison_filtered$LL_sum)
 print(cor_test)
 ```
 
+#plotting deltas 
+```{r}
+
+# Compute delta values relative to the first valid sample (Sample 1)
+delta_values <- comparison_filtered %>% 
+  arrange(Sample) %>%
+  mutate(
+    Delta_LL_AnaCoDa = Adjusted - Adjusted[1],
+    Delta_LL_Custom  = LL_sum - LL_sum[1]
+  )
+
+# check the resulting data
+head(delta_values)
+
+# plot the delta values
+ggplot(delta_values, aes(x = Delta_LL_AnaCoDa, y = Delta_LL_Custom)) +
+  geom_point(alpha = 0.7) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "Delta Log-Likelihood Comparison",
+    x = expression(Delta~LogL[AnaCoDa]),
+    y = expression(Delta~LogL[Custom])
+  ) +
+  theme_minimal()
+```
+
+#delta cor test
+```{r}
+delta_cor_test_result <- cor.test(delta_values$Delta_LL_AnaCoDa, delta_values$Delta_LL_Custom, method = "pearson")
+print(delta_cor_test_result)
+
+```
+
+#fitting linear model 
+```{r}
+lm_fit <- lm(LogLikelihood ~ Gene + Sample, data = loglik_df)
+summary(lm_fit)
+```
+
+#extract coefficients
+```{r}
+coefs <- coef(lm_fit)
+
+#extract gene level coefs 
+gene_coefs <- coefs[grep("^Gene", names(coefs))]
+```
+
+#get worst 25 genes 
+```{r}
+worst_genes <- sort(gene_coefs)[1:25]
+print(worst_genes)
+```
+
+#making into a df
+```{r}
+worst_df <- enframe(gene_coefs, name = "Gene", value = "Estimate") %>%
+  arrange(Estimate) %>%
+  slice_head(n = 25)
+print(worst_df)
+```
+
+#plotting for the 25 worst fitting genes
+```{r}
+ggplot(worst_df, aes(x = reorder(Gene, Estimate), y = Estimate)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "25 Worst-Fitting Genes by Log-Likelihood",
+    x = "Gene",
+    y = "Effect on Log-Likelihood"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
