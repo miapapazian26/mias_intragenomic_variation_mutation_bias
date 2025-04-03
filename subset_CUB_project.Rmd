@@ -1,9 +1,9 @@
 # checking to make sure that my CUB project is calculating everything in the way i think it is
 #creating a function that ensures valid cds, a random subset of 500 genes, loads into anacoda
 ```{r function_random_subset, eval=FALSE}
-
 library(Biostrings)
 
+#function for 500 random
 create_random_subset_fasta <- function(
   input_fasta,
   output_fasta = "cleaned_random_500.fasta",
@@ -41,16 +41,69 @@ create_random_subset_fasta(
   output_fasta = "fasta/cleaned_random_500.fasta"
 )
 ```
+
+
+```{r function_random_subset, eval=FALSE}
+#function for 1000 random 
+create_random_subset_fasta <- function(
+  input_fasta,
+  output_fasta = "cleaned_random_1000.fasta",
+  n = 1000,
+  seed = 123
+) {
+  # load full fasta
+  message("loading fasta...")
+  fasta <- readDNAStringSet(input_fasta)
+
+  # filter valid cds (length % 3 == 0 and only a/c/g/t)
+  message("filtering valid cds...")
+  valid_fasta <- fasta[width(fasta) %% 3 == 0 & !grepl("[^ACGTacgt]", as.character(fasta))]
+
+  # check if there are enough genes to sample
+  if (length(valid_fasta) < n) {
+    stop("not enough valid genes to sample ", n, " (found only ", length(valid_fasta), ").")
+  }
+
+  # randomly sample subset
+  set.seed(seed)
+  message("sampling ", n, " random genes...")
+  subset_indices <- sample(seq_along(valid_fasta), n)
+  subset_fasta <- valid_fasta[subset_indices]
+
+  # save to new fasta
+  message("saving to: ", output_fasta)
+  writeXStringSet(subset_fasta, filepath = output_fasta)
+
+  message("✅ done! file saved: ", output_fasta)
+}
+
+create_random_subset_fasta(
+  input_fasta = "fasta/revisit_cds_data/candida_tenuis.max.cds",
+  output_fasta = "fasta/cleaned_random_1000.fasta"
+)
+```
+
+
+
 # 1. load into anacoda 
 ```{r message=TRUE, warning=TRUE}
 library(AnaCoDa)
-genome <- initializeGenomeObject("fasta/cleaned_random_500.fasta")
+genome <- initializeGenomeObject("fasta/cleaned_random_1000.fasta")
 ```
+
+#load other necessary libraries
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(tibble)
+```
+
 
 # 2. check if its working
 ```{r}
 {
-print(length(genome)) #should be 500
+print(length(genome)) #should be exact same number of genes in fasta file
 print(str(genome))
 }
 ```
@@ -125,7 +178,7 @@ csp_codons <- csp_est$Mutation %>%
   filter(Mean !=0) %>%
   select("Codon")
 
-codon_vector <- csp_codons$Codon #extracting codon names as a vector
+#codon_vector <- csp_codons$Codon #extracting codon names as a vector
 
 {
 print(str(csp_codons))
@@ -233,6 +286,7 @@ print(subset_codon_counts)
 
 # log likelihood loop 
 ```{r}
+#make sure correct LLikGene is loaded
 #getting gene names
 gene_names = getNames(genome)
 
@@ -250,7 +304,7 @@ gene_codons <- csp_codons$Codon
 
 for (gene in gene_names) {
   # get codon counts for this gene, using only the modeled codons
-  counts <- as.numeric(codon_counts[gene, gene_codons, drop = TRUE])
+  counts <- as.numeric(subset_codon_counts[gene, gene_codons, drop = TRUE])
   names(counts) <- gene_codons
   
   for (s in 0:100) {
@@ -355,7 +409,7 @@ print(cor_test)
 #plotting deltas 
 ```{r}
 
-# Compute delta values relative to the first valid sample (Sample 1)
+# compute delta values relative to the first valid sample (sample 1)
 delta_values <- comparison_filtered %>% 
   arrange(Sample) %>%
   mutate(
@@ -425,4 +479,34 @@ ggplot(worst_df, aes(x = reorder(Gene, Estimate), y = Estimate)) +
   ) +
   theme_minimal(base_size = 12)
 ```
+
+#identifying genes whos llik dropped considerably between a reasonable midpoint and the final point 
+```{r}
+# determine your midpoint and final sample numbers
+mid_sample <- floor(max(loglik_df$Sample) / 2)
+final_sample <- max(loglik_df$Sample)
+
+# extract log-likelihood values at the midpoint for each gene
+mid_loglik <- loglik_df %>% 
+  filter(Sample == mid_sample) %>% 
+  select(Gene, LogLikelihood) %>% 
+  rename(LogLikelihood_mid = LogLikelihood)
+
+# extract log-likelihood values at the final sample for each gene
+final_loglik <- loglik_df %>% 
+  filter(Sample == final_sample) %>% 
+  select(Gene, LogLikelihood) %>% 
+  rename(LogLikelihood_final = LogLikelihood)
+
+# join the two data frames by Gene and compute the drop in log-likelihood
+gene_drop <- inner_join(mid_loglik, final_loglik, by = "Gene") %>%
+  mutate(LLik_drop = LogLikelihood_mid - LogLikelihood_final)
+
+# flag genes with a drop greater than or equal to the threshold (2 units based on bolker)
+threshold <- 2
+genes_with_drop <- gene_drop %>% filter(LLik_drop >= threshold)
+
+print(genes_with_drop)
+```
+
 
