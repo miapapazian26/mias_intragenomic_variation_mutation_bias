@@ -509,4 +509,36 @@ genes_with_drop <- gene_drop %>% filter(LLik_drop >= threshold)
 print(genes_with_drop)
 ```
 
+#sort by size of drop
+```{r}
+worst_drops <- genes_with_drop %>%
+  arrange(desc(LLik_drop))
+
+#view top ten worst fitting genes
+head(worst_drops, 10)
+```
+
+#get top ten worst fitting genes (largest llik drops)
+```{r}
+top_10_worst <- genes_with_drop %>%
+  arrange(desc(LLik_drop)) %>%
+  slice_head(n = 10)
+```
+
+#plot ten worst fitting genes 
+```{r}
+ggplot(top_10_worst, aes(x = reorder(Gene, LLik_drop), y = LLik_drop)) +
+  geom_col(fill = "firebrick") +
+  geom_text(aes(label = round(LLik_drop, 2)),
+            hjust = -0.1, size = 3.5, color = "black") +
+  coord_flip() +
+  ylim(0, max(top_10_worst$LLik_drop) + 1.5) +
+  labs(
+    title = "Top 10 Worst-Fitting Genes by Log-Likelihood Drop",
+    x = "Gene",
+    y = "LLik Drop (Midpoint − Final)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title.position = "plot")
+```
 
