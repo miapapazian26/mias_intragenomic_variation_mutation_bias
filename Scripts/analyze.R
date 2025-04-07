@@ -466,7 +466,20 @@ if (i == 1){
       codonSpecificParameterTraceSel[[j]][[k]] <- tempEnv$selectionTrace[[j]][[k]][1:max]
     }
 }}
-  
+
+
+#found in RibModelFramework/R/plotTraceObject.R
+pdf("LKs5000trace_plot_mutation.pdf", width = 12, height = 16)
+par(mar = c(1, 1, 1, 1))  # Set minimal margins
+plot(trace, what = "Mutation", mixture = 1)  # replace with specific plot call
+dev.off()
+
+pdf("LKs5000trace_plot_selection.pdf", width = 12, height = 16)
+par(mar = c(1, 1, 1, 1))  # Set minimal margins
+plot(trace, what = "Selection", mixture = 1)  # replace with specific plot call
+dev.off()
+
+#documented code   
 #Intended to combine 2D traces (vector of vectors) read in from C++. The firs
 #element of the second trace is omited since it should be the same as the 
     #last value of the first trace.
@@ -598,4 +611,9 @@ if (i == 1){
       rownames(f.mat) <- getNames(genome, FALSE)
       return(f.mat)
     }    
+    }
+
+    
+
+    
     

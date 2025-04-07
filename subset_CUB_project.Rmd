@@ -1,6 +1,6 @@
 # checking to make sure that my CUB project is calculating everything in the way i think it is
 #creating a function that ensures valid cds, a random subset of a number of genes, loads into anacoda
-```{r function_random_subset, eval=FALSE}
+```{r function_random_subset, eval=FALSE, message=TRUE, warning=FALSE}
 library(Biostrings)
 
 #function for 500 random
@@ -49,7 +49,7 @@ create_random_subset_fasta <- function(
   input_fasta,
   output_fasta = "cleaned_random_1000.fasta",
   n = 1000,
-  seed = 123
+  seed = 333
 ) {
   # load full fasta
   message("loading fasta...")
@@ -83,8 +83,6 @@ create_random_subset_fasta(
   output_fasta = "fasta/cleaned_random_1000.fasta"
 )
 ```
-
-
 
 # 1. load into anacoda 
 ```{r message=TRUE, warning=TRUE}
@@ -121,7 +119,7 @@ parameter <- initializeParameterObject(
 
 # initialize MCMC and model
 ```{r message=TRUE, warning=TRUE}
-mcmc <- initializeMCMCObject(samples = 10000, thinning = 10, adaptive.width = 50) #4/5 changing samples to 10000
+mcmc <- initializeMCMCObject(samples = 5000, thinning = 10, adaptive.width = 50) #4/6 changing samples to 5000
 model <- initializeModelObject(parameter = parameter, model = "ROC")
 ```
 
@@ -135,10 +133,10 @@ runMCMC(mcmc = mcmc, genome = genome, model = model)
 species <- "lachancea_kluyveri"
 dir.create("Results", showWarnings = FALSE)
 
-mcmc_file <- file.path("Results", paste0(species, "_mcmc_subset_s10000.Rda")) #change name based on samples
+mcmc_file <- file.path("Results", paste0(species, "_mcmc_subset_s5000.Rda")) #change name based on samples
 writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
-param_file <- file.path("Results", paste0(species, "_parameter_subset_s10000.Rda")) #change name based on samples
+param_file <- file.path("Results", paste0(species, "_parameter_subset_s5000.Rda")) #change name based on samples
 writeParameterObject(parameter = parameter, file = param_file)
 ```
 
@@ -148,7 +146,7 @@ writeParameterObject(parameter = parameter, file = param_file)
 trace <- parameter$getTraceObject()
 
 # plot expression trace for a single gene (gene 1, mixture 1)
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = 500)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 200)
 ```
 
 # 6. retrieving synthesis rate trace 
@@ -173,7 +171,7 @@ print(dim(synth_trace))
 
 # 7. retrieving codon specific parameters 
 ```{r codon specific parameters, message=TRUE, warning=TRUE}
-csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 10000, relative.to.optimal.codon = FALSE)
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 5000, relative.to.optimal.codon = FALSE)
 
 csp_codons <- csp_est$Mutation %>%
   filter(Mean !=0) %>%
@@ -227,7 +225,7 @@ csp_long <- left_join(csp_long_list$Mutation,
 #compare between mine and anacoda's
 ```{r}
 #get anacoda’s estimates
-anacoda_csp_estimates <- getCSPEstimates(parameter, mixture = 1, samples = 10000)
+anacoda_csp_estimates <- getCSPEstimates(parameter, mixture = 1, samples = 5000, relative.to.optimal.codon = FALSE)
 
 #get full 59 codons including reference for comparison sake
 full_csp_codons <- csp_est$Mutation %>% select("Codon")
@@ -265,7 +263,7 @@ csp_comparison <- inner_join(csp_summary_ac, csp_summary_tibble, by = c("AA", "C
 ggplot(csp_comparison, aes(x = Mutation_mean, y = Mutation_calc)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
-  labs(title = "Mutation Parameter: AnaCoDa vs. Calculated from Trace",
+  labs(title = "Mutation Parameter: \nAnaCoDa vs. Calculated from Trace",
        x = "AnaCoDa Mean", y = "Tibble Mean")
 ```
 
@@ -274,7 +272,7 @@ ggplot(csp_comparison, aes(x = Mutation_mean, y = Mutation_calc)) +
 ggplot(csp_comparison, aes(x = Selection_mean, y = Selection_calc)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "blue") +
-  labs(title = "Selection Parameter: AnaCoDa vs. Calculated from Trace",
+  labs(title = "Selection Parameter: \nAnaCoDa vs. Calculated from Trace",
        x = "AnaCoDa Mean", y = "Tibble Mean")
 ```
 
@@ -286,8 +284,13 @@ print(subset_codon_counts)
 
 #creating samples_eval sequence
 ```{r}
-samples_max <- 10000
+samples_max <- 5000
 samples_eval <- seq(0, samples_max, length.out = 11)
+print(samples_eval)
+
+#for the sake of time, hard coding this 
+samples_eval <- c(10, 100, 200, 500, 1000, 5000)
+
 ```
 
 
@@ -350,7 +353,7 @@ for (gene in gene_names) {
 # combine results into a tibble for further analysis
 loglik_df <- dplyr::bind_rows(loglik_list)
 print(loglik_df)
-saveRDS(loglik_df, "loglik_df_10000s_lachkluv.rds")
+saveRDS(loglik_df, "loglik_df_5000s_lachkluv_5.rds")
 
 loglik_summary <- loglik_df %>%
   group_by(Sample) %>%
@@ -359,6 +362,25 @@ loglik_summary <- loglik_df %>%
 
 head(loglik_summary)
 #summing across samples for one total log-likelihood value per gene
+```
+
+#load saved RDS file
+```{r}
+loglik_df <- readRDS("loglik_df_5000s_lachkluv_5.rds")
+```
+
+
+#plotting overall LL stabilization 
+```{r}
+ggplot(loglik_summary, aes(x = Sample, y = LL_sum)) +
+  geom_line(color = "darkblue") +
+  geom_point(color = "darkblue") +
+  labs(
+    title = "Total Log-Likelihood Over MCMC Samples",
+    x = "Sample",
+    y = "Total Log-Likelihood"
+  ) +
+  theme_minimal()
 ```
 
 # get anacodas llik trace 
@@ -373,23 +395,23 @@ acLL_summary <- tibble(
 )
 head(acLL_summary)
 
-#subtract constant of 267,100
-acLL_summary <- acLL_summary %>%
-  mutate(AnaCoDa_LL_adjusted = AnaCoDa_LL - 267100)
-head(acLL_summary)
+#fix constant if necessary
+#acLL_summary <- acLL_summary %>%
+#  mutate(AnaCoDa_LL_adjusted = AnaCoDa_LL - ###)
+#head(acLL_summary)
 ```
 
-# create separate tibble with just adjusted value and sample
+# create separate tibble with just ac value and sample
 ```{r}
-acLL_adjusted <- acLL_summary %>%
+acLL <- acLL_summary %>%
   mutate(Adjusted = AnaCoDa_LL) %>%
   select(Sample, Adjusted)
-head(acLL_adjusted)
+head(acLL)
 ```
 
-#plotting my values with ac
+#plotting my values with ac, need to fix bc not subsetted w same samples 
 ```{r}
-comparison <- left_join(loglik_summary, acLL_adjusted, by = "Sample")
+comparison <- left_join(loglik_summary, acLL, by = "Sample")
 head(comparison)
 
 comparison_filtered <- comparison %>% filter(Sample != 0)
@@ -398,7 +420,7 @@ ggplot(comparison_filtered, aes(x = Adjusted, y = LL_sum)) +
   geom_point(alpha = 0.6) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
   labs(
-    title = "Custom vs. Adjusted AnaCoDa Log-Likelihood Comparison",
+    title = "Custom vs. AnaCoDa Log-Likelihood Comparison",
     x = "Adjusted AnaCoDa LL",
     y = "Custom Total LL"
   ) +
@@ -513,7 +535,7 @@ print(genes_with_drop)
 
 #sort by size of drop
 ```{r}
-worst_drops <- genes_with_drop %>%
+worst_drops <- gene_drop %>%
   arrange(desc(LLik_drop))
 
 #view top ten worst fitting genes
@@ -522,9 +544,10 @@ head(worst_drops, 10)
 
 #get top ten worst fitting genes (largest llik drops)
 ```{r}
-top_10_worst <- genes_with_drop %>%
+top_10_worst <- gene_drop %>%
   arrange(desc(LLik_drop)) %>%
   slice_head(n = 10)
+print(top_10_worst)
 ```
 
 #plot ten worst fitting genes 
@@ -557,15 +580,15 @@ ggplot(gene_drop_hist, aes(x = LogLik_change)) +
     x = "Log-Likelihood Change",
     y = "Number of Genes"
   ) +
-  coord_cartesian(xlim = c(-8,8)) +
+  coord_cartesian(xlim = c(-10,10)) +
   theme_minimal(base_size = 14)
 ```
 
-#working with larger subset
+#working with larger subset - e.g. 5000s
 ```{r}
 ggplot(loglik_df, aes(x = LogLikelihood)) +
   geom_histogram(bins = 30, fill = "steelblue", color = "white") +
-  facet_wrap(~ Sample, scales = "free_y") +
+  facet_wrap(~ Sample, scales = "free_x") +
   labs(
     title = "Distribution of Gene Log-Likelihoods at Each Checkpoint",
     x = "Log-Likelihood",
@@ -576,50 +599,305 @@ ggplot(loglik_df, aes(x = LogLikelihood)) +
 
 #calculating drops 
 ```{r}
-# Create a tibble with each consecutive sample pair from your samples_eval vector
+# create a tibble with each consecutive sample pair from  samples_eval vector
 sample_pairs <- tibble(
   sample_start = samples_eval[-length(samples_eval)],
   sample_end   = samples_eval[-1]
 )
 
-# For each pair, compute the log-likelihood drop per gene
+# for each pair, compute the log-likelihood drop per gene
 loglik_drop_df <- sample_pairs %>%
   rowwise() %>%
   mutate(drop_df = list({
-    # Get log-likelihoods at the starting checkpoint
+    # get log-likelihoods at the starting checkpoint
     start_df <- loglik_df %>% 
       filter(Sample == sample_start) %>% 
       select(Gene, LogLikelihood) %>%
       rename(LogLikelihood_start = LogLikelihood)
     
-    # Get log-likelihoods at the ending checkpoint
+    # get log-likelihoods at the ending checkpoint
     end_df <- loglik_df %>% 
       filter(Sample == sample_end) %>% 
       select(Gene, LogLikelihood) %>%
       rename(LogLikelihood_end = LogLikelihood)
     
-    # Join by gene and compute the drop (start - end)
+    # join by gene and compute the drop (start - end)
     inner_join(start_df, end_df, by = "Gene") %>%
       mutate(LLik_drop = LogLikelihood_start - LogLikelihood_end)
   })) %>%
   ungroup() %>%
   unnest(cols = c(drop_df)) %>%
   mutate(pair = paste0(sample_start, "→", sample_end))
-
-
 ```
 
 
-#plot
+#plot distributions at specific checkpoints 
 ```{r}
-ggplot(loglik_drop_df, aes(x = LLik_drop)) +
-  geom_histogram(bins = 30, fill = "mediumpurple", color = "white") +
-  facet_wrap(~ pair, scales = "free_x") +
+samples_eval_specific <- c(0, 10, 100, 500, 1000, 2500, 5000)
+
+loglik_eval <- loglik_df %>% filter(Sample %in% samples_eval_specific)
+
+ggplot(loglik_eval, aes(x = LogLikelihood)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  facet_wrap(~ Sample, scales = "free_x") +
   labs(
-    title = "Distribution of Log-Likelihood Drops Between Consecutive Checkpoints",
-    x = "Log-Likelihood Drop (positive = worsening fit)",
+    title = "Gene Log-Likelihood Distributions \nat Selected Samples",
+    x = "Log-Likelihood",
     y = "Number of Genes"
   ) +
   theme_minimal()
 ```
+
+#adding log liks for samples 
+```{r}
+# run this after loading loglik_df (if you want to append to it)
+samples_to_add <- c(10, 100, 200)
+loglik_list_new <- list()
+row_index <- 1
+
+for (gene in gene_names) {
+  counts <- as.numeric(subset_codon_counts[gene, gene_codons, drop = TRUE])
+  names(counts) <- gene_codons
+
+  for (s in samples_to_add) {
+    phi <- synth_trace %>%
+      filter(id_names == gene) %>%
+      pull(as.character(s)) %>%
+      as.numeric()
+
+    dM <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Mutation)
+
+    dE <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Selection)
+
+    ll_result <- LLikGene(gene, dM, dE, phi, counts, aa_by_codon)
+
+    loglik_list_new[[row_index]] <- data.frame(
+      Gene = gene,
+      Sample = s,
+      LogLikelihood = ll_result$LogLikelihood
+    )
+
+    row_index <- row_index + 1
+  }
+}
+
+# create the new entries
+new_entries <- bind_rows(loglik_list_new)
+
+# only add truly new rows (avoid duplicate Gene+Sample)
+loglik_df <- bind_rows(
+  loglik_df,
+  anti_join(new_entries, loglik_df, by = c("Gene", "Sample"))
+)
+
+# optional: save the updated loglik_df
+saveRDS(loglik_df, "loglik_df_CLEAN.rds")
+
+str(loglik_df)
+unique(loglik_df$Sample)
+```
+
+
+#FOR PRESENTATION. START HERE.
+#looking at new loglikdf
+```{r}
+library(stringr)
+loglik_df <- readRDS("loglik_df_5000s_lachkluv_5.rds") %>%
+  mutate(
+    chrom = str_extract(Gene, "SAKL0[A-Z]"),     # pulls out "SAKL0C"
+    chrom = str_extract(chrom, "[A-Z]$")         # pulls out just "C"
+  ) %>%
+  filter(Sample != 0) 
+
+str(loglik_df)
+names(loglik_df)
+head(loglik_df)
+print(loglik_df)
+```
+
+#calculate and plot
+```{r}
+new_pairs <- tibble(
+  sample_start = c(100, 200, 500, 1000),
+  sample_end = c(5000, 5000, 5000, 5000)
+)
+
+new_drop_df <- new_pairs %>%
+  rowwise() %>%
+  mutate(drop_df = list({
+    start_df <- loglik_df %>%
+      filter(Sample == sample_start) %>%
+      select(Gene, LogLikelihood, chrom) %>%
+      rename(LogLikelihood_start = LogLikelihood)
+
+    end_df <- loglik_df %>%
+      filter(Sample == sample_end) %>%
+      select(Gene, LogLikelihood) %>%
+      rename(LogLikelihood_end = LogLikelihood)
+
+    inner_join(start_df, end_df, by = "Gene") %>%
+      mutate(LLik_drop = LogLikelihood_end - LogLikelihood_start)
+  })) %>%
+  ungroup() %>%
+  unnest(cols = c(drop_df)) %>%
+  mutate(pair = paste0(sample_start, "→", sample_end))
+
+str(new_drop_df)
+unique(new_drop_df$pair)
+```
+
+#replot histogram
+```{r}
+histograms <- ggplot(new_drop_df, aes(x = LLik_drop)) +
+  geom_histogram(bins = 80, fill = "mediumpurple", color = "white") +
+  geom_vline(xintercept = -2, linetype = "dashed", color = "red", size = 0.3) +
+  facet_wrap(~ sample_start) +
+  coord_cartesian(xlim = c(-10, 10)) +
+  scale_y_log10() +
+  labs(
+    title = "Distribution of Log-Likelihood Drops \nBetween Checkpoints",
+    x = "Log-Likelihood Drop (negative = worsening fit, end - start)",
+    y = "Number of Genes (Log Scale)"
+  ) +
+  theme_minimal(base_size = 14) +  # global font size base
+  theme(
+    plot.title = element_text(size = 18, face = "bold"),
+    plot.subtitle = element_text(size = 14),
+    axis.title = element_text(size = 15),
+    axis.text = element_text(size = 13),
+    strip.text = element_text(size = 14, face = "bold")  # facet labels
+  )
+
+plot(histograms)
+#save it
+ggsave("loglik_drop_histogram.png", histograms, width = 10, height = 10, dpi = 300, bg = "white")
+```
+
+#200 -> 5000 focus
+```{r}
+drop_200_df <- new_drop_df %>%
+  filter(sample_start == 200, sample_end == 5000)
+
+str(drop_200_df)
+drop_200_df <- drop_200_df %>%
+  mutate(outlier = LLik_drop > 0)
+
+pr_drop_by_chrom <- drop_200_df %>%
+  group_by(chrom) %>%
+  summarise(
+    total_genes = n(),
+    num_drops = sum(outlier),
+    PrDrop = num_drops / total_genes
+  ) %>%
+  mutate(highlight = chrom == "C")
+
+proofforchromc <- ggplot(pr_drop_by_chrom, aes(x = reorder(chrom, -PrDrop), y = PrDrop, fill = highlight)) +
+  geom_col(color = "black", width = 0.75) +
+  scale_fill_manual(values = c("TRUE" = "firebrick", "FALSE" = "gray80")) +
+  labs(
+    title = "Proportion of Genes with LLik Drop \n> 2 by Chromosome (200 → 5000)",
+    subtitle = "Chromosome C highlighted in red",
+    x = "Chromosome",
+    y = "P(Drop > 2)",
+    fill = NULL
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank(),
+    axis.text = element_text(size = 12),
+    plot.title = element_text(face = "bold", size = 15),
+    plot.subtitle = element_text(size = 12)
+  )
+
+ggsave("proof_chromosome_c.png", plot = proofforchromc, width = 8, height = 6, dpi = 300, bg = "white")
+
+```
+
+#creating overlapping chrom figure
+```{r}
+overlappingchrom <- ggplot(drop_200_df, aes(x = LLik_drop, color = chrom)) +
+  geom_density(alpha = 0.3) +
+  coord_cartesian(xlim = c(-2, 10)) +
+  labs(
+    title = "Δ Log-Likelihoods (200 → 5000) \nby Chromosome",
+    x = "LLik Drop",
+    y = "Density"
+  ) +
+  theme_minimal(base_size = 13)
+
+ggsave("overlappingchrom.png", plot = overlappingchrom, width = 8, height = 6, dpi = 300, bg = "white")
+
+```
+
+#plot all genes showing full distrib of llik_drop in drop 200 df
+```{r}
+fulldistrib200 <- ggplot(drop_200_df, aes(x = LLik_drop)) +
+  # gray rectangle for LLik_drop > 0
+  annotate("rect", xmin = 0, xmax = Inf, ymin = -Inf, ymax = Inf, 
+           fill = "gray90", alpha = 0.5) +
+  
+  # histogram
+  geom_histogram(bins = 60, fill = "steelblue", color = "white") +
+  
+  # red dashed line at threshold
+  geom_vline(xintercept = 0, linetype = "dashed", color = "red", size = 0.6) +
+  
+  # zoom in on relevant range
+  coord_cartesian(xlim = c(-5, 10)) +
+  
+  labs(
+    title = "Distribution of Δ Log-Likelihoods (200 → 5000)",
+    subtitle = "Red dashed line = deviance threshold (Δ < 0)\nShaded region = improved fit (Δ > 0)",
+    x = "LLik Drop",
+    y = "Number of Genes"
+  ) +
+  
+  theme_minimal(base_size = 14)
+
+ggsave("fulldistrib200.png", plot = fulldistrib200, width = 8, height = 6, dpi = 300, bg = "white")
+```
+
+#zoomed in plot 
+```{r}
+drop_200_df <- drop_200_df %>%
+  mutate(outlier = LLik_drop > 0)
+
+pr_drop_neg_by_chrom <- drop_200_df %>%
+  group_by(chrom) %>%
+  summarise(
+    total_genes = n(),
+    num_drops = sum(outlier),
+    PrDrop = num_drops / total_genes
+  ) %>%
+  mutate(highlight = chrom == "C")
+
+deviant_plot <- ggplot(pr_drop_neg_by_chrom, aes(x = reorder(chrom, -PrDrop), y = PrDrop, fill = highlight)) +
+  geom_col(color = "black", width = 0.75) +
+  scale_fill_manual(values = c("TRUE" = "firebrick", "FALSE" = "gray80")) +
+  labs(
+    title = "Proportion of Genes with LLik Drop < 0\n by Chromosome (200 → 5000)",
+    subtitle = "Chromosome C highlighted in red",
+    x = "Chromosome",
+    y = "P(Drop < 0)",
+    fill = NULL
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank(),
+    axis.text = element_text(size = 12),
+    plot.title = element_text(face = "bold", size = 15),
+    plot.subtitle = element_text(size = 12)
+  )
+
+ggsave("zoomdeviantplot.png", plot = deviant_plot, width = 8, height = 6, dpi = 300, bg = "white")
+```
+
 
