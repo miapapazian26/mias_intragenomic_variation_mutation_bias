@@ -1,0 +1,44 @@
+```{r}
+simulateGenomeROC <- function(
+  genome.obj,
+  deta.file,
+  dM.file,
+  phi.file,
+  phi.column = "Mean"
+) {
+  #' Simulate a genome using parameter estimates from previous model fitting
+  #' @param genome.obj: your Genome object (from AnaCoDa)
+  #' @param deta.file: CSV file with estimated selection parameters (Δη)
+  #' @param dM.file: CSV file with estimated mutation parameters (ΔM)
+  #' @param phi.file: CSV file with estimated synthesis rates (ϕ)
+  #' @param phi.column: which column to use for phi (default "Mean")
+  
+  # Load phi estimates
+  phi.values <- read.csv(phi.file, header = TRUE)[, phi.column]
+  
+  # Initialize a new parameter object using your old phi values
+  parameter <- initializeParameterObject(
+    genome.obj,
+    sphi = c(0.01),  # small nonzero sphi (shouldn't matter much for simulation)
+    num.mixtures = 1,
+    gene.assignment = rep(1, length(genome.obj)),
+    mixture.definition = "allUnique",
+    initial.expression.values = phi.values,
+    split.serine = TRUE
+  )
+  
+  # Load estimated mutation and selection parameters
+  parameter$initSelectionCategories(deta.file, 1, FALSE)
+  parameter$initMutationCategories(dM.file, 1, FALSE)
+  
+  # Create a new model object without new phi estimation (fixed phi)
+  model <- initializeModelObject(parameter, model = "ROC", with.phi = FALSE)
+  
+  # Simulate a new genome based on the model parameters
+  model$simulateGenome(genome.obj)
+  
+  return(genome.obj)
+}
+```
+
+
