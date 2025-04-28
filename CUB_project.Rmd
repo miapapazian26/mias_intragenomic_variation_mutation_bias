@@ -85,6 +85,7 @@ trace_to_tibble <- function(list_trace, id_names) {
 synth_trace <- trace_to_tibble(synth_trace_list, id_names = getNames(genome))
 head(synth_trace)
 dim(synth_trace)
+str(synth_trace)
 ```
 
 # 5. codon-specific parameters
@@ -132,6 +133,7 @@ csp_long <- left_join(csp_long_list$Mutation,
                       csp_long_list$Selection,
                       by = join_by(AA, Codon, Sample))
 head(csp_long)
+str(csp_long)
 ```
 
 #CSP parameter comparison

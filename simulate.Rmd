@@ -1,3 +1,64 @@
+
+#initialize genome with old genome
+```{r}
+genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/lachancea_kluyveri.max.cds")
+```
+#follow steps in CUB project Rmd to retrieve csp_long and synth_trace from old genome
+
+#then extract phi values
+```{r}
+phi_sample_99 <- synth_trace %>%
+  select(id_names, `99`) %>%
+  rename(Mean = `99`)
+
+write.csv(phi_sample_99, "phi_estimates_sample99.csv", row.names = FALSE)
+```
+
+#extract mutation (dM) and selection (dEta) values
+```{r}
+csp_sample_99 <- csp_long %>%
+  filter(Sample == 99)
+
+dM_estimates_99 <- csp_sample_99 %>%
+  select(Codon, Mutation)
+
+dEta_estimates_99 <- csp_sample_99 %>%
+  select(Codon, Selection)
+
+write.csv(dM_estimates_99, "dM_estimates_sample99.csv", row.names = FALSE)
+write.csv(dEta_estimates_99, "dEta_estimates_sample99.csv", row.names = FALSE)
+```
+
+
+
+#checking step
+```{r}
+# Check if gene names match
+phi_ids <- phi_sample_99$id_names
+genome_ids <- getNames(genome)
+
+# Check for mismatches
+missing_in_phi <- setdiff(genome_ids, phi_ids)
+missing_in_genome <- setdiff(phi_ids, genome_ids)
+
+# Print mismatches if any
+if (length(missing_in_phi) > 0) {
+  cat("Genes missing in phi file:\n")
+  print(missing_in_phi)
+} else {
+  cat("✅ All genome genes are found in phi file!\n")
+}
+
+if (length(missing_in_genome) > 0) {
+  cat("Genes missing in genome object:\n")
+  print(missing_in_genome)
+} else {
+  cat("✅ All phi genes are found in genome object!\n")
+}
+
+```
+
+#simulate
 ```{r}
 simulateGenomeROC <- function(
   genome.obj,
@@ -41,4 +102,15 @@ simulateGenomeROC <- function(
 }
 ```
 
+#using sample 99 params
+```{r}
+# simulate the genome based on your sample 99 parameter estimates
+simulated_genome <- simulateGenomeROC(
+  genome.obj = genome,
+  deta.file = "dEta_estimates_sample99.csv",
+  dM.file = "dM_estimates_sample99.csv",
+  phi.file = "phi_estimates_sample99.csv",
+  phi.column = "Mean"
+)
+```
 
