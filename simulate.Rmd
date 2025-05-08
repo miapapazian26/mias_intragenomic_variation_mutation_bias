@@ -13,37 +13,143 @@ genome <- initializeGenomeObject(file = "fasta/cleaned_random_1000.fasta")
 ```
 
 #follow steps in CUB project Rmd to retrieve csp_long and synth_trace from old genome
+#initialize parameters
+```{r}
+parameter <- initializeParameterObject(
+  genome = genome, 
+  sphi = 1, 
+  num.mixtures = 1, 
+  gene.assignment = rep(1, length(genome))
+)
+```
 
+#initialize mcmc
+```{r}
+mcmc <- initializeMCMCObject(samples = 1000, thinning = 10, adaptive.width = 50)
+```
+
+#initialize model 
+```{r}
+model <- initializeModelObject(parameter = parameter, model = "ROC")
+```
+
+#run mcmc
+```{r}
+runMCMC(mcmc = mcmc, genome = genome, model = model)
+```
+
+#save/load results
+```{r}
+species <- "lachancea_kluyveri"
+dir.create("Results", showWarnings = FALSE)
+
+mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
+writeMCMCObject(mcmc = mcmc, file = mcmc_file)
+
+param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
+writeParameterObject(parameter = parameter, file = param_file)
+```
+
+#extract trace 
+```{r}
+trace <- parameter$getTraceObject()
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 700)
+```
+
+#get synthesis rate trace (φ)
+```{r synthesis_trace}
+synth_trace_list <- trace$getSynthesisRateTrace()[[1]]
+
+trace_to_tibble <- function(list_trace, id_names) {
+  matrix <- do.call(rbind, list_trace)
+  sample_n <- 1:ncol(matrix) - 1
+  colnames(matrix) <- sample_n
+  tibble <- as_tibble(matrix) %>% bind_cols(tibble(id_names), .)
+  return(tibble)
+}
+
+synth_trace <- trace_to_tibble(synth_trace_list, id_names = getNames(genome))
+head(synth_trace)
+dim(synth_trace)
+str(synth_trace)
+```
+
+#get codon-specific parameters
+#extract CSP estimates
+```{r csp_estimates}
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+
+csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
+str(csp_codons)
+print(csp_codons)
+```
+
+#extract codon-specific traces
+```{r csp_trace}
+csp_cat <- c("Mutation", "Selection")
+csp_wide_list <- list()
+
+for (i in 1:2) {
+  param = csp_cat[i]
+  trace_list <- trace$getCodonSpecificParameterTrace((i - 1))[[1]]
+  csp_wide_list[[i]] <- trace_to_tibble(trace_list, csp_codons) %>%
+    rowwise() %>%
+    mutate(AA = codonToAA(Codon), .before = "Codon")
+}
+
+names(csp_wide_list) <- csp_cat
+```
+
+## pivot traces to long format
+```{r csp_long}
+csp_long_list <- list()
+
+for (i in 1:2) {
+  param = csp_cat[i]
+  csp_long_list[[i]] <- pivot_longer(csp_wide_list[[i]],
+                                     cols = !c("AA", "Codon"),
+                                     values_to = param,
+                                     names_to = "Sample") %>%
+    mutate(Sample = as.numeric(Sample))
+}
+
+names(csp_long_list) <- csp_cat
+
+csp_long <- left_join(csp_long_list$Mutation,
+                      csp_long_list$Selection,
+                      by = join_by(AA, Codon, Sample))
+head(csp_long)
+str(csp_long)
+```
 
 #then extract phi value
 ```{r}
-phi_sample_49 <- synth_trace %>%
-  select(id_names, `49`) %>%
-  rename(Mean = `49`)
+phi_sample_700 <- synth_trace %>%
+  select(id_names, `700`) %>%
+  rename(Mean = `700`)
 
-write.csv(phi_sample_49, "phi_estimates_sample49.csv", row.names = FALSE)
+write.csv(phi_sample_700, "phi_estimates_sample700.csv", row.names = FALSE)
 ```
 
 #extract mutation (dM) and selection (dEta) values
 ```{r}
-csp_sample_49 <- csp_long %>%
-  filter(Sample == 49)
+csp_sample_700 <- csp_long %>%
+  filter(Sample == 700)
 
-dM_estimates_49 <- csp_sample_49 %>%
+dM_estimates_700 <- csp_sample_700 %>%
   select(Codon, Mutation)
 
-dEta_estimates_49 <- csp_sample_49 %>%
+dEta_estimates_700 <- csp_sample_700 %>%
   select(Codon, Selection)
 
-write.csv(dM_estimates_49, "dM_estimates_sample49.csv", row.names = FALSE)
-write.csv(dEta_estimates_49, "dEta_estimates_sample49.csv", row.names = FALSE)
+write.csv(dM_estimates_700, "dM_estimates_sample700.csv", row.names = FALSE)
+write.csv(dEta_estimates_700, "dEta_estimates_sample700.csv", row.names = FALSE)
 ```
-
 
 #checking step
 ```{r}
 # Check if gene names match
-phi_ids <- phi_sample_49$id_names
+phi_ids <- phi_sample_700$id_names
 genome_ids <- getNames(genome)
 
 # Check for mismatches
@@ -111,15 +217,27 @@ simulateGenomeROC <- function(
 }
 ```
 
-#using sample 49 params
+#using sample 700 params
 ```{r}
-# simulate the genome based on your sample 49 parameter estimates
+# simulate the genome based on your sample 700 parameter estimates
 simulated_genome <- simulateGenomeROC(
   genome.obj = genome,
-  deta.file = "dEta_estimates_sample49.csv",
-  dM.file = "dM_estimates_sample49.csv",
-  phi.file = "phi_estimates_sample49.csv",
+  deta.file = "dEta_estimates_sample700.csv",
+  dM.file = "dM_estimates_sample700.csv",
+  phi.file = "phi_estimates_sample700.csv",
   phi.column = "Mean"
 )
+print(simulated_genome)
 ```
+
+#comparing codon counts 
+```{r}
+#codon counts from both genomes
+getCodonCounts(genome)
+getCodonCounts(simulated_genome)
+```
+
+
+
+
 
