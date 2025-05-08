@@ -1,40 +1,49 @@
+#libraries
+```{r}
+library(AnaCoDa)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(tibble)
+```
 
 #initialize genome with old genome
 ```{r}
-genome <- initializeGenomeObject(file = "fasta/revisit_cds_data/lachancea_kluyveri.max.cds")
+genome <- initializeGenomeObject(file = "fasta/cleaned_random_1000.fasta")
 ```
+
 #follow steps in CUB project Rmd to retrieve csp_long and synth_trace from old genome
 
-#then extract phi values
-```{r}
-phi_sample_99 <- synth_trace %>%
-  select(id_names, `99`) %>%
-  rename(Mean = `99`)
 
-write.csv(phi_sample_99, "phi_estimates_sample99.csv", row.names = FALSE)
+#then extract phi value
+```{r}
+phi_sample_49 <- synth_trace %>%
+  select(id_names, `49`) %>%
+  rename(Mean = `49`)
+
+write.csv(phi_sample_49, "phi_estimates_sample49.csv", row.names = FALSE)
 ```
 
 #extract mutation (dM) and selection (dEta) values
 ```{r}
-csp_sample_99 <- csp_long %>%
-  filter(Sample == 99)
+csp_sample_49 <- csp_long %>%
+  filter(Sample == 49)
 
-dM_estimates_99 <- csp_sample_99 %>%
+dM_estimates_49 <- csp_sample_49 %>%
   select(Codon, Mutation)
 
-dEta_estimates_99 <- csp_sample_99 %>%
+dEta_estimates_49 <- csp_sample_49 %>%
   select(Codon, Selection)
 
-write.csv(dM_estimates_99, "dM_estimates_sample99.csv", row.names = FALSE)
-write.csv(dEta_estimates_99, "dEta_estimates_sample99.csv", row.names = FALSE)
+write.csv(dM_estimates_49, "dM_estimates_sample49.csv", row.names = FALSE)
+write.csv(dEta_estimates_49, "dEta_estimates_sample49.csv", row.names = FALSE)
 ```
-
 
 
 #checking step
 ```{r}
 # Check if gene names match
-phi_ids <- phi_sample_99$id_names
+phi_ids <- phi_sample_49$id_names
 genome_ids <- getNames(genome)
 
 # Check for mismatches
@@ -102,14 +111,14 @@ simulateGenomeROC <- function(
 }
 ```
 
-#using sample 99 params
+#using sample 49 params
 ```{r}
-# simulate the genome based on your sample 99 parameter estimates
+# simulate the genome based on your sample 49 parameter estimates
 simulated_genome <- simulateGenomeROC(
   genome.obj = genome,
-  deta.file = "dEta_estimates_sample99.csv",
-  dM.file = "dM_estimates_sample99.csv",
-  phi.file = "phi_estimates_sample99.csv",
+  deta.file = "dEta_estimates_sample49.csv",
+  dM.file = "dM_estimates_sample49.csv",
+  phi.file = "phi_estimates_sample49.csv",
   phi.column = "Mean"
 )
 ```

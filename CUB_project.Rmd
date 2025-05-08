@@ -49,7 +49,7 @@ runMCMC(mcmc = mcmc, genome = genome, model = model)
 
 # 3. save/load results
 ```{r save_results, eval=FALSE}
-species <- "candida_tenuis"
+species <- "lachancea_kluyveri"
 dir.create("Results", showWarnings = FALSE)
 
 mcmc_file <- file.path("Results", paste0(species, "_mcmc.Rda"))
