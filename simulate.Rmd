@@ -313,9 +313,56 @@ loglik_summary <- loglik_df %>%
   group_by(Sample) %>%
   summarise(LL_sum = sum(LogLikelihood), .groups = "drop") 
 
+#save all objects
 #saveRDS(loglik_summary, "loglik_summary_lk.rds")
 
-head(simulated_loglik_summary)
+head(loglik_summary)
 #summing across samples for one total log-likelihood value per gene
+```
+
+#loading both loglik summaries
+```{r}
+real_loglik <- readRDS("loglik_df_original_genome_lk.rds")
+sim_loglik <- readRDS("loglik_df_simulated_genome_lk.rds")
+```
+
+#filtering dfs to include specific samples
+```{r}
+real_filtered <- real_loglik %>% filter(Sample %in% samples_eval)
+sim_filtered  <- sim_loglik  %>% filter(Sample %in% samples_eval)
+
+#join by gene and sample 
+comparison_loglik <- real_filtered %>%
+  rename(Real_LL = LogLikelihood) %>%
+  inner_join(sim_filtered %>% rename(Sim_LL = LogLikelihood), 
+             by = c("Gene", "Sample")) %>%
+  mutate(LL_Difference = Real_LL - Sim_LL)
+```
+
+
+#organize log-likelihoods into a comparison table
+```{r}
+comparison_loglik <- tibble(
+  Gene = getNames(genome),
+  Real_LL = real_loglik,
+  Sim_LL = sim_loglik,
+  LL_Difference = real_loglik - sim_loglik
+)
+
+#using sample 1000:
+plot_data <- comparison_loglik %>%
+  filter(Sample == 1000)
+
+ggplot(plot_data, aes(x = Real_LL, y = Sim_LL)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "Simulated vs Real Log-Likelihood (Sample 1000)",
+    x = "Real Log-Likelihood",
+    y = "Simulated Log-Likelihood"
+  ) +
+  theme_minimal()
+
+ggsave("simulated_vs_real_LL.png", width = 8, height = 6, dpi = 300)
 ```
 
