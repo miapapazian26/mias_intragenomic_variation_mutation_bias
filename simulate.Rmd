@@ -53,7 +53,7 @@ writeParameterObject(parameter = parameter, file = param_file)
 #extract trace 
 ```{r}
 trace <- parameter$getTraceObject()
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = 700)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 650)
 ```
 
 #get synthesis rate trace (φ)
@@ -77,7 +77,7 @@ str(synth_trace)
 #get codon-specific parameters
 #extract CSP estimates
 ```{r csp_estimates}
-csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 100)
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 1000)
 
 csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
 str(csp_codons)
@@ -124,32 +124,32 @@ str(csp_long)
 
 #then extract phi value
 ```{r}
-phi_sample_700 <- synth_trace %>%
-  select(id_names, `700`) %>%
-  rename(Mean = `700`)
+phi_sample_650 <- synth_trace %>%
+  select(id_names, `650`) %>%
+  rename(Mean = `650`)
 
-write.csv(phi_sample_700, "phi_estimates_sample700.csv", row.names = FALSE)
+write.csv(phi_sample_650, "phi_estimates_sample650.csv", row.names = FALSE)
 ```
 
 #extract mutation (dM) and selection (dEta) values
 ```{r}
-csp_sample_700 <- csp_long %>%
-  filter(Sample == 700)
+csp_sample_650 <- csp_long %>%
+  filter(Sample == 650)
 
-dM_estimates_700 <- csp_sample_700 %>%
+dM_estimates_650 <- csp_sample_650 %>%
   select(Codon, Mutation)
 
-dEta_estimates_700 <- csp_sample_700 %>%
+dEta_estimates_650 <- csp_sample_650 %>%
   select(Codon, Selection)
 
-write.csv(dM_estimates_700, "dM_estimates_sample700.csv", row.names = FALSE)
-write.csv(dEta_estimates_700, "dEta_estimates_sample700.csv", row.names = FALSE)
+write.csv(dM_estimates_650, "dM_estimates_sample650.csv", row.names = FALSE)
+write.csv(dEta_estimates_650, "dEta_estimates_sample650.csv", row.names = FALSE)
 ```
 
 #checking step
 ```{r}
 # Check if gene names match
-phi_ids <- phi_sample_700$id_names
+phi_ids <- phi_sample_650$id_names
 genome_ids <- getNames(genome)
 
 # Check for mismatches
@@ -217,14 +217,14 @@ simulateGenomeROC <- function(
 }
 ```
 
-#using sample 700 params
+#using sample 650 params
 ```{r}
-# simulate the genome based on your sample 700 parameter estimates
+# simulate the genome based on your sample 650 parameter estimates
 simulated_genome <- simulateGenomeROC(
   genome.obj = genome,
-  deta.file = "dEta_estimates_sample700.csv",
-  dM.file = "dM_estimates_sample700.csv",
-  phi.file = "phi_estimates_sample700.csv",
+  deta.file = "dEta_estimates_sample650.csv",
+  dM.file = "dM_estimates_sample650.csv",
+  phi.file = "phi_estimates_sample650.csv",
   phi.column = "Mean"
 )
 print(simulated_genome)
@@ -233,11 +233,89 @@ print(simulated_genome)
 #comparing codon counts 
 ```{r}
 #codon counts from both genomes
-getCodonCounts(genome)
-getCodonCounts(simulated_genome)
+subset_codon_counts <- getCodonCounts(genome)
 ```
 
+```{r}
+subset_codon_counts <- getCodonCounts(simulated_genome)
+```
 
+#following steps in subset CUB 
+#creating samples_eval sequence
+```{r}
+samples_max <- 1000
+samples_eval <- seq(0, samples_max, length.out = 11)
+print(samples_eval)
+```
 
+#log likelihood loop 
+```{r}
+#make sure correct LLikGene is loaded**
+#getting gene names
+gene_names = getNames(simulated_genome)
 
+#creating codon -> amino acid mapping
+aa_by_codon <- csp_long %>%
+  select(Codon, AA) %>%
+  distinct() %>%
+  deframe()
+
+loglik_list <- list()
+row_index <- 1
+
+# use the filtered codon list for consistency
+gene_codons <- csp_codons$Codon
+  
+
+for (gene in gene_names) {
+  # get codon counts for this gene, using only the modeled codons
+  counts <- as.numeric(subset_codon_counts[gene, gene_codons, drop = TRUE])
+  names(counts) <- gene_codons
+   
+  for (s in rev(samples_eval)) {
+    # get φ (synthesis rate) for this gene
+    phi <- synth_trace %>%
+      filter(id_names == gene) %>%
+      pull(as.character(s)) %>%
+      as.numeric()
+    
+    # get mutation and selection params
+    dM <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Mutation)
+    
+    dE <- csp_long %>%
+      filter(Codon %in% gene_codons, Sample == s) %>%
+      arrange(match(Codon, gene_codons)) %>%
+      pull(Selection)
+    
+    # compute log-likelihood for this gene and sample
+    ll_result <- LLikGene(gene, dM, dE, phi, counts, aa_by_codon)
+    
+    # store result
+    loglik_list[[row_index]] <- data.frame(
+      Gene = gene,
+      Sample = s,
+      LogLikelihood = ll_result$LogLikelihood
+    )
+    
+    row_index <- row_index + 1
+  }
+}
+
+# combine results into a tibble for further analysis
+loglik_df <- dplyr::bind_rows(loglik_list)
+print(loglik_df)
+saveRDS(loglik_df, "loglik_df_genome_lk.rds")
+
+loglik_summary <- loglik_df %>%
+  group_by(Sample) %>%
+  summarise(LL_sum = sum(LogLikelihood), .groups = "drop") 
+
+#saveRDS(loglik_summary, "loglik_summary_lk.rds")
+
+head(simulated_loglik_summary)
+#summing across samples for one total log-likelihood value per gene
+```
 
