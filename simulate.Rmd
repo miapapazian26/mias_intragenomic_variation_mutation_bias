@@ -1,3 +1,4 @@
+##SIMULATE: second part of my CUB project
 #libraries
 ```{r}
 library(AnaCoDa)
