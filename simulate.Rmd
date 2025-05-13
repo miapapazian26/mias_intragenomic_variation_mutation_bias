@@ -367,3 +367,9 @@ ggplot(plot_data, aes(x = Real_LL, y = Sim_LL)) +
 ggsave("simulated_vs_real_LL.png", width = 8, height = 6, dpi = 300)
 ```
 
+#quantile calculations
+```{r}
+real_loglik$LogLikelihood |
+  mutate(percent_rank = sum(real_loglik$LogLikelihood>{})/length({}))
+```
+
