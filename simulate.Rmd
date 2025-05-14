@@ -369,7 +369,56 @@ ggsave("simulated_vs_real_LL.png", width = 8, height = 6, dpi = 300)
 
 #quantile calculations
 ```{r}
-real_loglik$LogLikelihood |
-  mutate(percent_rank = sum(real_loglik$LogLikelihood>{})/length({}))
+real_loglik %>%
+  mutate(percent_rank = sum(LogLikelihood>{})/length({}))
+```
+
+#extracting the final loglik values
+```{r}
+obs_df <- real_loglik %>% 
+  group_by(Gene) %>% 
+  slice_max(order_by = Sample, n = 1, with_ties = FALSE) %>% 
+  ungroup() %>% 
+  select(Gene, Obs_LL = LogLikelihood)
+
+head(obs_df)
+```
+
+#compute empirical quantile
+```{r}
+quant_df <- sim_loglik %>%                    # many rows per gene
+  inner_join(obs_df, by = "Gene") %>%         # bring Obs_LL onto every row
+  group_by(Gene) %>%                          # now each group has:
+                                              #   • Obs_LL (same for every row)
+                                              #   • LogLikelihood (simulated)
+  summarise(
+    Obs_LL   = first(Obs_LL),                 # pick the single observed value
+    Quantile = mean(LogLikelihood <= Obs_LL), # rank / fraction ≤ observed
+    .groups  = "drop"
+  )
+
+glimpse(quant_df)
+```
+
+#plotting quantiles 
+```{r}
+ggplot(quant_df, aes(x = Quantile)) +
+  geom_histogram(
+    binwidth = 0.05,              # 20 equal-width bins → easy to eyeball uniformity
+    boundary = 0, closed = "left",
+    colour = "black", fill = "white"
+  ) +
+  geom_hline(                      # dashed line = expected count per bin if uniform
+    yintercept = nrow(quant_df) / 20,
+    linetype = "dashed"
+  ) +
+  labs(
+    title    = "Empirical Quantiles of Observed LLik\nvs. Simulated Distribution",
+    x        = "Quantile (0 = lower tail, 1 = upper tail)",
+    y        = "Number of genes"
+  ) +
+  theme_bw()
+
+ggsave("quantile_histogram.png", width = 8, height = 6)
 ```
 
