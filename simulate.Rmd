@@ -26,7 +26,7 @@ parameter <- initializeParameterObject(
 
 #initialize mcmc
 ```{r}
-mcmc <- initializeMCMCObject(samples = 1000, thinning = 10, adaptive.width = 50)
+mcmc <- initializeMCMCObject(samples = 2000, thinning = 10, adaptive.width = 50)
 ```
 
 #initialize model 
@@ -54,7 +54,7 @@ writeParameterObject(parameter = parameter, file = param_file)
 #extract trace 
 ```{r}
 trace <- parameter$getTraceObject()
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = 650)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1000)
 ```
 
 #get synthesis rate trace (φ)
@@ -125,32 +125,47 @@ str(csp_long)
 
 #then extract phi value
 ```{r}
-phi_sample_650 <- synth_trace %>%
-  select(id_names, `650`) %>%
-  rename(Mean = `650`)
+phi_mean_df <- synth_trace |>
+  select(id_names, all_of(as.character(tail_samples))) |>
+  pivot_longer(
+    -id_names,
+    names_to  = "Sample",
+    values_to = "Phi"
+  ) |>
+  group_by(id_names) |>
+  summarise(Mean = mean(Phi), .groups = "drop")   # ← use median() if you want
 
-write.csv(phi_sample_650, "phi_estimates_sample650.csv", row.names = FALSE)
+write.csv(phi_mean_df, "phi_estimates_last1000_mean.csv", row.names = FALSE)
 ```
+
 
 #extract mutation (dM) and selection (dEta) values
 ```{r}
-csp_sample_650 <- csp_long %>%
-  filter(Sample == 650)
+csp_mean <- csp_long %>%                      # start with long trace
+  filter(Sample %in% tail_samples) %>%        # keep last 1 000 draws
+  group_by(Codon) %>%                         # one row per codon
+  summarise(
+    Mutation  = mean(Mutation),               # or median()
+    Selection = mean(Selection),
+    .groups   = "drop"
+  )
 
-dM_estimates_650 <- csp_sample_650 %>%
-  select(Codon, Mutation)
+dM_estimates_mean <- csp_est$Mutation |>
+  select(Codon, Mutation = Mean)
 
-dEta_estimates_650 <- csp_sample_650 %>%
-  select(Codon, Selection)
+dEta_estimates_mean <- csp_est$Selection |>
+  select(Codon, Selection = Mean)
 
-write.csv(dM_estimates_650, "dM_estimates_sample650.csv", row.names = FALSE)
-write.csv(dEta_estimates_650, "dEta_estimates_sample650.csv", row.names = FALSE)
+#write.csv(select(csp_mean, Codon, Mutation ),  "dM_estimates_mean.csv",  row.names = FALSE)
+#write.csv(select(csp_mean, Codon, Selection), "dEta_estimates_mean.csv", row.names = FALSE)
+write.csv(dM_estimates_mean,  "dM_estimates_mean.csv",  row.names = FALSE)
+write.csv(dEta_estimates_mean, "dEta_estimates_mean.csv", row.names = FALSE)
 ```
 
 #checking step
 ```{r}
 # Check if gene names match
-phi_ids <- phi_sample_650$id_names
+phi_ids <- phi_mean_df$id_names
 genome_ids <- getNames(genome)
 
 # Check for mismatches
@@ -218,35 +233,41 @@ simulateGenomeROC <- function(
 }
 ```
 
-#using sample 650 params
+#using sample means 
 ```{r}
 # simulate the genome based on your sample 650 parameter estimates
 simulated_genome <- simulateGenomeROC(
   genome.obj = genome,
-  deta.file = "dEta_estimates_sample650.csv",
-  dM.file = "dM_estimates_sample650.csv",
-  phi.file = "phi_estimates_sample650.csv",
+  deta.file  = "dEta_estimates_mean.csv",      # from csp_mean chunk
+  dM.file    = "dM_estimates_mean.csv",
+  phi.file   = "phi_estimates_last1000_mean.csv",
   phi.column = "Mean"
 )
-print(simulated_genome)
+simulated_genome
 ```
 
 #comparing codon counts 
 ```{r}
 #codon counts from both genomes
-subset_codon_counts <- getCodonCounts(genome)
+real_codon_counts <- getCodonCounts(genome)
+real_codon_counts
 ```
 
 ```{r}
-subset_codon_counts <- getCodonCounts(simulated_genome)
+sim_codon_counts <- getCodonCounts(simulated_genome)
+sim_codon_counts
 ```
 
 #following steps in subset CUB 
 #creating samples_eval sequence
 ```{r}
-samples_max <- 1000
-samples_eval <- seq(0, samples_max, length.out = 11)
-print(samples_eval)
+#samples_max <- 1000
+#samples_eval <- seq(0, samples_max, length.out = 11)
+#print(samples_eval)
+
+sample_ids <- as.numeric(                 # 0, 1, 2, …, 999  2000 columns)
+  setdiff(colnames(synth_trace), "id_names")
+)
 ```
 
 #log likelihood loop 
@@ -273,7 +294,7 @@ for (gene in gene_names) {
   counts <- as.numeric(subset_codon_counts[gene, gene_codons, drop = TRUE])
   names(counts) <- gene_codons
    
-  for (s in rev(samples_eval)) {
+  for (s in sample_ids) {
     # get φ (synthesis rate) for this gene
     phi <- synth_trace %>%
       filter(id_names == gene) %>%
@@ -308,7 +329,7 @@ for (gene in gene_names) {
 # combine results into a tibble for further analysis
 loglik_df <- dplyr::bind_rows(loglik_list)
 print(loglik_df)
-saveRDS(loglik_df, "loglik_df_genome_lk.rds")
+saveRDS(loglik_df, "sim_loglik_df_genome_lk.rds")
 
 loglik_summary <- loglik_df %>%
   group_by(Sample) %>%
@@ -420,5 +441,27 @@ ggplot(quant_df, aes(x = Quantile)) +
   theme_bw()
 
 ggsave("quantile_histogram.png", width = 8, height = 6)
+```
+
+#log scale 
+```{r}
+ggplot(quant_df |> filter(Quantile > 0), aes(x = Quantile)) +
+  geom_histogram(
+    binwidth = .05,
+    boundary = 0, closed = "left",
+    colour = "black", fill = "white"
+  ) +
+  geom_hline(
+    yintercept = nrow(quant_df) / 20,
+    linetype = "dashed"
+  ) +
+  scale_x_log10() +                             # ← makes the x-axis log-scaled
+  labs(
+    title = "Empirical Quantiles of Observed LLik\nvs. Simulated Distribution",
+    x     = "Quantile (log10 scale)",
+    y     = "Number of genes"
+  ) +
+  theme_bw()
+
 ```
 
