@@ -39,7 +39,7 @@ model <- initializeModelObject(parameter = parameter, model = "ROC")
 runMCMC(mcmc = mcmc, genome = genome, model = model)
 ```
 
-#save/load results
+#save results
 ```{r}
 species <- "lachancea_kluyveri"
 dir.create("Results", showWarnings = FALSE)
@@ -49,12 +49,22 @@ writeMCMCObject(mcmc = mcmc, file = mcmc_file)
 
 param_file <- file.path("Results", paste0(species, "_parameter.Rda"))
 writeParameterObject(parameter = parameter, file = param_file)
+
+model_file <- file.path("Results", paste0(species, "_model.Rda"))
+writeModelObject(model = model, file = model_file)
+```
+
+#load results
+```{r}
+parameter <- loadParameterObject(file = file.path("Results", paste0(species, "_parameter.Rda")))
+model     <- loadModelObject(file = file.path("Results", paste0(species, "_model.Rda")), parameter)
+mcmc      <- loadMCMCObject(file = file.path("Results", paste0(species, "_mcmc.Rda")))
 ```
 
 #extract trace 
 ```{r}
 trace <- parameter$getTraceObject()
-plot(x = trace, what = "Expression", mixture = 1, geneIndex = 1000)
+plot(x = trace, what = "Expression", mixture = 1, geneIndex = 4)
 ```
 
 #get synthesis rate trace (φ)
@@ -78,7 +88,7 @@ str(synth_trace)
 #get codon-specific parameters
 #extract CSP estimates
 ```{r csp_estimates}
-csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 1000)
+csp_est <- getCSPEstimates(parameter = parameter, mixture = 1, samples = 2000)
 
 csp_codons <- csp_est$Mutation %>% filter(Mean != 0) %>% select("Codon")
 str(csp_codons)
@@ -125,6 +135,15 @@ str(csp_long)
 
 #then extract phi value
 ```{r}
+# get sample column names (excluding "id_names")
+sample_ids <- as.numeric(setdiff(colnames(synth_trace), "id_names"))
+
+# sort and find the last 1000 sample numbers
+tail_sample_ids <- sort(sample_ids, decreasing = TRUE)[1:1000]
+
+# convert them to character since column names are strings
+tail_samples <- as.character(sort(tail_sample_ids))
+
 phi_mean_df <- synth_trace |>
   select(id_names, all_of(as.character(tail_samples))) |>
   pivot_longer(
@@ -135,7 +154,7 @@ phi_mean_df <- synth_trace |>
   group_by(id_names) |>
   summarise(Mean = mean(Phi), .groups = "drop")   # ← use median() if you want
 
-write.csv(phi_mean_df, "phi_estimates_last1000_mean.csv", row.names = FALSE)
+write.csv(phi_mean_df, "phi_estimates_last1000_mean_realgenome.csv", row.names = FALSE)
 ```
 
 
@@ -235,7 +254,7 @@ simulateGenomeROC <- function(
 
 #using sample means 
 ```{r}
-# simulate the genome based on your sample 650 parameter estimates
+# simulate the genome based on means
 simulated_genome <- simulateGenomeROC(
   genome.obj = genome,
   deta.file  = "dEta_estimates_mean.csv",      # from csp_mean chunk
@@ -243,7 +262,13 @@ simulated_genome <- simulateGenomeROC(
   phi.file   = "phi_estimates_last1000_mean.csv",
   phi.column = "Mean"
 )
-simulated_genome
+
+#save 
+#save to .Rda file
+save(simulated_genome, file = "Results/simulated_genome.Rda")
+
+#reload later
+#load("Results/simulated_genome.Rda")
 ```
 
 #comparing codon counts 
@@ -261,22 +286,27 @@ sim_codon_counts
 #following steps in subset CUB 
 #creating samples_eval sequence
 ```{r}
-#samples_max <- 1000
-#samples_eval <- seq(0, samples_max, length.out = 11)
-#print(samples_eval)
+#make sure LLikGene and LLikAA are loaded
 
-sample_ids <- as.numeric(                 # 0, 1, 2, …, 999  2000 columns)
-  setdiff(colnames(synth_trace), "id_names")
+library(progress)  # make sure this is loaded
+
+# settings
+verbose <- TRUE
+gene_names <- getNames(genome)
+gene_codons <- csp_codons$Codon
+subset_codon_counts <- getCodonCounts(genome)
+tail_samples_1000 <- as.numeric(tail_samples)
+
+# setup progress bar
+n_total <- length(gene_names) * length(tail_samples_1000)
+pb <- progress_bar$new(
+  format = "  Calculating [:bar] :percent ETA: :eta | Gene: :gene Sample: :sample",
+  total = n_total,
+  clear = FALSE,
+  width = 80
 )
-```
 
-#log likelihood loop 
-```{r}
-#make sure correct LLikGene is loaded**
-#getting gene names
-gene_names = getNames(simulated_genome)
-
-#creating codon -> amino acid mapping
+# mapping from codon to amino acid
 aa_by_codon <- csp_long %>%
   select(Codon, AA) %>%
   distinct() %>%
@@ -285,43 +315,46 @@ aa_by_codon <- csp_long %>%
 loglik_list <- list()
 row_index <- 1
 
-# use the filtered codon list for consistency
-gene_codons <- csp_codons$Codon
-  
-
 for (gene in gene_names) {
-  # get codon counts for this gene, using only the modeled codons
+  # get codon counts for this gene
   counts <- as.numeric(subset_codon_counts[gene, gene_codons, drop = TRUE])
   names(counts) <- gene_codons
-   
-  for (s in sample_ids) {
-    # get φ (synthesis rate) for this gene
+
+  for (s in tail_samples_1000) {
+    if (verbose && (s %% 100) == 0) {
+      message(glue::glue("Processing gene: {gene} | sample: {s}"))
+    }
+
+    # update progress bar
+    pb$tick(tokens = list(gene = gene, sample = s))
+
+    # extract phi
     phi <- synth_trace %>%
       filter(id_names == gene) %>%
       pull(as.character(s)) %>%
       as.numeric()
-    
-    # get mutation and selection params
+
+    # get mutation and selection parameters
     dM <- csp_long %>%
       filter(Codon %in% gene_codons, Sample == s) %>%
       arrange(match(Codon, gene_codons)) %>%
       pull(Mutation)
-    
+
     dE <- csp_long %>%
       filter(Codon %in% gene_codons, Sample == s) %>%
       arrange(match(Codon, gene_codons)) %>%
       pull(Selection)
-    
-    # compute log-likelihood for this gene and sample
+
+    # compute log-likelihood
     ll_result <- LLikGene(gene, dM, dE, phi, counts, aa_by_codon)
-    
+
     # store result
     loglik_list[[row_index]] <- data.frame(
       Gene = gene,
       Sample = s,
       LogLikelihood = ll_result$LogLikelihood
     )
-    
+
     row_index <- row_index + 1
   }
 }
@@ -329,7 +362,9 @@ for (gene in gene_names) {
 # combine results into a tibble for further analysis
 loglik_df <- dplyr::bind_rows(loglik_list)
 print(loglik_df)
-saveRDS(loglik_df, "sim_loglik_df_genome_lk.rds")
+str(loglik_df)
+#saveRDS(loglik_df, "sim_loglik_df_genome_lk.rds")
+#saveRDS(loglik_df, "real_loglik_df_genome_lk.rds")
 
 loglik_summary <- loglik_df %>%
   group_by(Sample) %>%

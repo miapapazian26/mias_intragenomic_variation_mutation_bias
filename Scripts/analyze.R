@@ -498,7 +498,7 @@ dev.off()
         trace1[[size]]<- c(trace1[[size]], trace2[[size]][start:end])
       }
       return(trace1)
-    })
+    }
 
 #Intended to combine 3D traces (vector of vectors of vectors) read in from C++. The first
     #element of the second trace is omited since it should be the same as the 
