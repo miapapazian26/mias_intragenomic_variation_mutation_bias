@@ -284,7 +284,6 @@ sim_codon_counts
 ```
 
 #following steps in subset CUB 
-#creating samples_eval sequence
 ```{r}
 #make sure LLikGene and LLikAA are loaded
 
@@ -377,50 +376,17 @@ head(loglik_summary)
 #summing across samples for one total log-likelihood value per gene
 ```
 
-#loading both loglik summaries
+#loading both loglik data frames
 ```{r}
-real_loglik <- readRDS("loglik_df_original_genome_lk.rds")
-sim_loglik <- readRDS("loglik_df_simulated_genome_lk.rds")
+real_loglik <- readRDS("real_loglik_df_genome_lk.rds")
+sim_loglik <- readRDS("sim_loglik_df_genome_lk.rds")
 ```
 
-#filtering dfs to include specific samples
+#mean of real llks across all samples
 ```{r}
-real_filtered <- real_loglik %>% filter(Sample %in% samples_eval)
-sim_filtered  <- sim_loglik  %>% filter(Sample %in% samples_eval)
-
-#join by gene and sample 
-comparison_loglik <- real_filtered %>%
-  rename(Real_LL = LogLikelihood) %>%
-  inner_join(sim_filtered %>% rename(Sim_LL = LogLikelihood), 
-             by = c("Gene", "Sample")) %>%
-  mutate(LL_Difference = Real_LL - Sim_LL)
-```
-
-
-#organize log-likelihoods into a comparison table
-```{r}
-comparison_loglik <- tibble(
-  Gene = getNames(genome),
-  Real_LL = real_loglik,
-  Sim_LL = sim_loglik,
-  LL_Difference = real_loglik - sim_loglik
-)
-
-#using sample 1000:
-plot_data <- comparison_loglik %>%
-  filter(Sample == 1000)
-
-ggplot(plot_data, aes(x = Real_LL, y = Sim_LL)) +
-  geom_point(alpha = 0.5) +
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
-  labs(
-    title = "Simulated vs Real Log-Likelihood (Sample 1000)",
-    x = "Real Log-Likelihood",
-    y = "Simulated Log-Likelihood"
-  ) +
-  theme_minimal()
-
-ggsave("simulated_vs_real_LL.png", width = 8, height = 6, dpi = 300)
+obs_df <- real_loglik %>%
+  group_by(Gene) %>%
+  summarise(Obs_LL = mean(LogLikelihood), .groups = "drop")
 ```
 
 #quantile calculations
@@ -429,53 +395,48 @@ real_loglik %>%
   mutate(percent_rank = sum(LogLikelihood>{})/length({}))
 ```
 
-#extracting the final loglik values
-```{r}
-obs_df <- real_loglik %>% 
-  group_by(Gene) %>% 
-  slice_max(order_by = Sample, n = 1, with_ties = FALSE) %>% 
-  ungroup() %>% 
-  select(Gene, Obs_LL = LogLikelihood)
-
-head(obs_df)
-```
 
 #compute empirical quantile
 ```{r}
-quant_df <- sim_loglik %>%                    # many rows per gene
-  inner_join(obs_df, by = "Gene") %>%         # bring Obs_LL onto every row
-  group_by(Gene) %>%                          # now each group has:
-                                              #   • Obs_LL (same for every row)
-                                              #   • LogLikelihood (simulated)
+# Get final real value per gene
+obs_df <- real_loglik %>%
+  group_by(Gene) %>%
+  slice_max(order_by = Sample, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(Gene, Obs_LL = LogLikelihood)
+
+# Compare against all simulated values
+quant_df <- sim_loglik %>%
+  inner_join(obs_df, by = "Gene") %>%
+  group_by(Gene) %>%
   summarise(
-    Obs_LL   = first(Obs_LL),                 # pick the single observed value
-    Quantile = mean(LogLikelihood <= Obs_LL), # rank / fraction ≤ observed
+    Obs_LL   = dplyr::first(Obs_LL),
+    Quantile = mean(LogLikelihood <= Obs_LL),
     .groups  = "drop"
   )
 
-glimpse(quant_df)
+summary(quant_df$Quantile)
 ```
 
 #plotting quantiles 
 ```{r}
 ggplot(quant_df, aes(x = Quantile)) +
   geom_histogram(
-    binwidth = 0.05,              # 20 equal-width bins → easy to eyeball uniformity
+    binwidth = 0.05,
     boundary = 0, closed = "left",
-    colour = "black", fill = "white"
+    color = "black", fill = "white"
   ) +
-  geom_hline(                      # dashed line = expected count per bin if uniform
-    yintercept = nrow(quant_df) / 20,
-    linetype = "dashed"
-  ) +
+  geom_hline(yintercept = nrow(quant_df) / 20, linetype = "dashed") +
   labs(
-    title    = "Empirical Quantiles of Observed LLik\nvs. Simulated Distribution",
-    x        = "Quantile (0 = lower tail, 1 = upper tail)",
-    y        = "Number of genes"
+    title = "Empirical Quantiles of Observed LLik\nvs. Simulated Distribution",
+    x = "Quantile (0 = lower tail, 1 = upper tail)",
+    y = "Number of genes"
   ) +
   theme_bw()
 
-ggsave("quantile_histogram.png", width = 8, height = 6)
+
+ggsave("quantile_histogram_all_samples.png", width = 8, height = 6, dpi = 300)
+
 ```
 
 #log scale 
@@ -498,5 +459,11 @@ ggplot(quant_df |> filter(Quantile > 0), aes(x = Quantile)) +
   ) +
   theme_bw()
 
+```
+
+#labeling genes in the tails
+```{r}
+tail_genes <- quant_df %>% filter(Quantile <= 0.05 | Quantile >= 0.95)
+print(tail_genes)
 ```
 
