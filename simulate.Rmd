@@ -441,29 +441,33 @@ ggsave("quantile_histogram_all_samples.png", width = 8, height = 6, dpi = 300)
 
 #log scale 
 ```{r}
-ggplot(quant_df |> filter(Quantile > 0), aes(x = Quantile)) +
+ggplot(quant_df, aes(x = Quantile)) +
   geom_histogram(
-    binwidth = .05,
+    binwidth = 0.05,
     boundary = 0, closed = "left",
-    colour = "black", fill = "white"
+    color = "black", fill = "white"
   ) +
-  geom_hline(
-    yintercept = nrow(quant_df) / 20,
-    linetype = "dashed"
-  ) +
-  scale_x_log10() +                             # ← makes the x-axis log-scaled
+  geom_hline(yintercept = nrow(quant_df) / 20, linetype = "dashed") +
   labs(
     title = "Empirical Quantiles of Observed LLik\nvs. Simulated Distribution",
-    x     = "Quantile (log10 scale)",
-    y     = "Number of genes"
+    x = "Quantile (0 = lower tail, 1 = upper tail)",
+    y = "Number of genes"
   ) +
+  scale_x_log10() +
   theme_bw()
-
 ```
 
+#
 #labeling genes in the tails
 ```{r}
 tail_genes <- quant_df %>% filter(Quantile <= 0.05 | Quantile >= 0.95)
 print(tail_genes)
+```
+
+#dr. g graph 
+```{r}
+ggplot(quant_df, aes(sample = Quantile)) +
+  stat_qq(distribution = stats::qunif) + stat_qq_line(distribution = stats::qunif) +
+  scale_x_log10() + scale_y_log10()
 ```
 
