@@ -457,7 +457,6 @@ ggplot(quant_df, aes(x = Quantile)) +
   theme_bw()
 ```
 
-#
 #labeling genes in the tails
 ```{r}
 tail_genes <- quant_df %>% filter(Quantile <= 0.05 | Quantile >= 0.95)
@@ -481,31 +480,31 @@ quant_df <- quant_df %>%
 #sample one gene per bin 
 ```{r}
 target_quantiles <- seq(0.05, 0.95, by = 0.1)
-selected_genes <- character(0)        # To track genes already picked
-sampled_genes <- list()               # To store selected rows
+selected_genes <- character(0)        # to track genes already picked
+sampled_genes <- list()               # to store selected rows
 
 for (q in target_quantiles) {
   gene_row <- quant_df %>%
     mutate(diff = abs(Quantile - q)) %>%
     arrange(diff) %>%
-    filter(!Gene %in% selected_genes) %>%  # Only pick genes not already chosen
+    filter(!Gene %in% selected_genes) %>%  # only pick genes not already chosen
     slice(1) %>%
     select(Gene, Obs_LL, Quantile)
 
-  selected_genes <- c(selected_genes, gene_row$Gene)  # Update gene tracker
-  sampled_genes[[as.character(q)]] <- gene_row        # Store result
+  selected_genes <- c(selected_genes, gene_row$Gene)  # update gene tracker
+  sampled_genes[[as.character(q)]] <- gene_row        # store result
 }
 
-sampled_genes <- dplyr::bind_rows(sampled_genes)      # Combine all into one tibble
+sampled_genes <- dplyr::bind_rows(sampled_genes)      # combine all into one tibble
 ```
 
 #faceted histogram w quantile in title 
 ```{r}
 sim_with_obs <- sim_loglik %>%
   filter(Gene %in% sampled_genes$Gene) %>%
-  left_join(sampled_genes, by = "Gene") %>%
-  filter(is.finite(LogLikelihood), is.finite(Obs_LL)) %>%
-  mutate(Gene = factor(Gene, levels = sampled_genes$Gene[order(sampled_genes$Quantile)]))
+  left_join(sampled_genes %>% mutate(label = paste0(Gene, "\nQuantile: ", round(Quantile, 3))),
+            by = "Gene") %>%
+  filter(is.finite(LogLikelihood), is.finite(Obs_LL))
 
 label_df <- sampled_genes %>%
   mutate(label = paste0(Gene, "\nQuantile: ", round(Quantile, 3))) %>%
@@ -515,13 +514,15 @@ label_df <- sampled_genes %>%
 ggplot(sim_with_obs, aes(x = LogLikelihood)) +
   geom_histogram(binwidth = 0.1, fill = "gray80", color = "black") +
   geom_vline(aes(xintercept = Obs_LL), color = "red", linetype = "dashed") +
-  facet_wrap(~ Gene, scales = "free", labeller = labeller(Gene = label_df)) +
+  facet_wrap(~ label, scales = "free") +
   labs(
     title = "Simulated vs. Observed Log-Likelihoods\n(1 Gene per Quantile Decile)",
     x = "Simulated Log-Likelihood",
     y = "Count"
   ) +
   theme_bw(base_size = 12) +
-  theme(strip.text = element_text(size = 8))
+  theme(strip.text = element_text(size = 5))
+
+ggsave("faceted_plot_1geneperquant.png", width = 15, height = 10, dpi = 300)
 ```
 
