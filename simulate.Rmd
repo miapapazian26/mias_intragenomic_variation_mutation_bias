@@ -398,14 +398,14 @@ real_loglik %>%
 
 #compute empirical quantile
 ```{r}
-# Get final real value per gene
+# get final real value per gene
 obs_df <- real_loglik %>%
   group_by(Gene) %>%
   slice_max(order_by = Sample, n = 1, with_ties = FALSE) %>%
   ungroup() %>%
   select(Gene, Obs_LL = LogLikelihood)
 
-# Compare against all simulated values
+# compare against all simulated values
 quant_df <- sim_loglik %>%
   inner_join(obs_df, by = "Gene") %>%
   group_by(Gene) %>%
@@ -481,15 +481,22 @@ quant_df <- quant_df %>%
 #sample one gene per bin 
 ```{r}
 target_quantiles <- seq(0.05, 0.95, by = 0.1)
+selected_genes <- character(0)        # To track genes already picked
+sampled_genes <- list()               # To store selected rows
 
-sampled_genes <- purrr::map_dfr(target_quantiles, function(q) {
-  quant_df %>%
+for (q in target_quantiles) {
+  gene_row <- quant_df %>%
     mutate(diff = abs(Quantile - q)) %>%
     arrange(diff) %>%
-    filter(!Gene %in% sampled_genes$Gene) %>%  # ensure uniqueness
+    filter(!Gene %in% selected_genes) %>%  # Only pick genes not already chosen
     slice(1) %>%
     select(Gene, Obs_LL, Quantile)
-})
+
+  selected_genes <- c(selected_genes, gene_row$Gene)  # Update gene tracker
+  sampled_genes[[as.character(q)]] <- gene_row        # Store result
+}
+
+sampled_genes <- dplyr::bind_rows(sampled_genes)      # Combine all into one tibble
 ```
 
 #faceted histogram w quantile in title 
@@ -516,6 +523,5 @@ ggplot(sim_with_obs, aes(x = LogLikelihood)) +
   ) +
   theme_bw(base_size = 12) +
   theme(strip.text = element_text(size = 8))
-
 ```
 
