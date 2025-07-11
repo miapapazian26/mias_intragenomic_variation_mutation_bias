@@ -479,7 +479,7 @@ quant_df <- quant_df %>%
 
 #sample one gene per bin 
 ```{r}
-target_quantiles <- seq(0.05, 0.95, by = 0.1)
+target_quantiles <- seq(0, 1, by = 0.1)
 selected_genes <- character(0)        # to track genes already picked
 sampled_genes <- list()               # to store selected rows
 
@@ -512,7 +512,7 @@ label_df <- sampled_genes %>%
   deframe()
 
 ggplot(sim_with_obs, aes(x = LogLikelihood)) +
-  geom_histogram(binwidth = 0.1, fill = "gray80", color = "black") +
+  geom_histogram(bins = 50, fill = "gray80", color = "black") +
   geom_vline(aes(xintercept = Obs_LL), color = "red", linetype = "dashed") +
   facet_wrap(~ label, scales = "free") +
   labs(
@@ -523,6 +523,6 @@ ggplot(sim_with_obs, aes(x = LogLikelihood)) +
   theme_bw(base_size = 12) +
   theme(strip.text = element_text(size = 5))
 
-ggsave("faceted_plot_1geneperquant.png", width = 15, height = 10, dpi = 300)
+ggsave("faceted_plot_1geneperquant_bins.png", width = 15, height = 10, dpi = 300)
 ```
 
