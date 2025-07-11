@@ -8,22 +8,33 @@ date: "2025-07-11"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r five percent cutoff}
+#observed value = posterior mean 
+obs_df <- real_loglik %>%
+  group_by(Gene) %>%
+  summarise(Obs_LL = mean(LogLikelihood), .groups = "drop")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#gene-specific 5% lower-tail cutoff from the simulated distribution
+cutoff_df <- sim_loglik %>%
+  group_by(Gene) %>%
+  summarise(Cutoff_05 = quantile(LogLikelihood, 0.05), .groups = "drop")
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#join and flag 
+ll_screen_mean <- obs_df %>%
+  inner_join(cutoff_df, by = "Gene") %>%
+  mutate(Below_05 = Obs_LL <= Cutoff_05)
 
-```{r cars}
-summary(cars)
+#summary 
+ll_screen_mean %>%
+  summarise(
+    Genes_total = n(),
+    Genes_below = sum(Below_05),
+    Prop_below = mean(Below_05)
+  )
 ```
 
-## Including Plots
+```{r, echo=FALSE}
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
